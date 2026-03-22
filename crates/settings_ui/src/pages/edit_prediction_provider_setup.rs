@@ -99,7 +99,7 @@ pub(crate) fn render_edit_prediction_setup_page(
                 IconName::AiOpenAiCompat,
                 "OpenAI Compatible API",
                 ApiKeyDocs::Custom {
-                    message: "The API key sent as Authorization: Bearer {key}.".into(),
+                    message: "API Key 会以 Authorization: Bearer {key} 的形式发送。".into(),
                 },
                 open_ai_compatible_api_token(cx),
                 |cx| open_ai_compatible_api_url(cx),
@@ -245,7 +245,7 @@ fn render_api_key_provider(
     let header = SettingsSectionHeader::new(title)
         .icon(icon)
         .no_padding(true);
-    let button_link_label = format!("{} dashboard", title);
+    let button_link_label = format!("{} 控制台", title);
     let description = match docs {
         ApiKeyDocs::Custom { message } => div().min_w_0().w_full().child(
             Label::new(message)
@@ -315,7 +315,7 @@ fn render_api_key_provider(
                         .when_some(env_var_name, |this, env_var_name| {
                             this.child({
                                 let label = format!(
-                                    "Or set the {} env var and restart Zed.",
+                                    "或者设置 {} 环境变量并重启 Zed。",
                                     env_var_name.as_ref()
                                 );
                                 Label::new(label).size(LabelSize::Small).color(Color::Muted)
@@ -347,8 +347,8 @@ fn render_api_key_provider(
 
 fn sweep_settings() -> Box<[SettingsPageItem]> {
     Box::new([SettingsPageItem::SettingItem(SettingItem {
-        title: "Privacy Mode",
-        description: "When enabled, Sweep will not store edit prediction inputs or outputs. When disabled, Sweep may collect data including buffer contents, diagnostics, file paths, and generated predictions to improve the service.",
+        title: "隐私模式",
+        description: "启用后，Sweep 不会存储编辑预测的输入或输出。关闭后，Sweep 可能会收集缓冲区内容、诊断信息、文件路径和生成的预测等数据，用于改进服务。",
         field: Box::new(SettingField {
             pick: |settings| {
                 settings
@@ -405,7 +405,7 @@ fn ollama_settings() -> Box<[SettingsPageItem]> {
     Box::new([
         SettingsPageItem::SettingItem(SettingItem {
             title: "API URL",
-            description: "The base URL of your Ollama server.",
+            description: "你的 Ollama 服务器基础 URL。",
             field: Box::new(SettingField {
                 pick: |settings| {
                     settings
@@ -437,8 +437,8 @@ fn ollama_settings() -> Box<[SettingsPageItem]> {
             files: USER,
         }),
         SettingsPageItem::SettingItem(SettingItem {
-            title: "Model",
-            description: "The Ollama model to use for edit predictions.",
+            title: "模型",
+            description: "用于编辑预测的 Ollama 模型。",
             field: Box::new(SettingField {
                 pick: |settings| {
                     settings
@@ -470,8 +470,8 @@ fn ollama_settings() -> Box<[SettingsPageItem]> {
             files: USER,
         }),
         SettingsPageItem::SettingItem(SettingItem {
-            title: "Prompt Format",
-            description: "The prompt format to use when requesting predictions. Set to Infer to have the format inferred based on the model name.",
+            title: "提示格式",
+            description: "请求预测时使用的提示格式。设为 Infer 时，会根据模型名称自动推断格式。",
             field: Box::new(SettingField {
                 pick: |settings| {
                     settings
@@ -500,8 +500,8 @@ fn ollama_settings() -> Box<[SettingsPageItem]> {
             metadata: None,
         }),
         SettingsPageItem::SettingItem(SettingItem {
-            title: "Max Output Tokens",
-            description: "The maximum number of tokens to generate.",
+            title: "最大输出 Tokens",
+            description: "生成的最大 token 数量。",
             field: Box::new(SettingField {
                 pick: |settings| {
                     settings
@@ -536,7 +536,7 @@ fn open_ai_compatible_settings() -> Box<[SettingsPageItem]> {
     Box::new([
         SettingsPageItem::SettingItem(SettingItem {
             title: "API URL",
-            description: "The URL of your OpenAI-compatible server's completions API.",
+            description: "你的 OpenAI Compatible API 服务器 completions API 的 URL。",
             field: Box::new(SettingField {
                 pick: |settings| {
                     settings
@@ -568,8 +568,8 @@ fn open_ai_compatible_settings() -> Box<[SettingsPageItem]> {
             files: USER,
         }),
         SettingsPageItem::SettingItem(SettingItem {
-            title: "Model",
-            description: "The model string to pass to the OpenAI-compatible server.",
+            title: "模型",
+            description: "传递给 OpenAI Compatible API 服务器的模型字符串。",
             field: Box::new(SettingField {
                 pick: |settings| {
                     settings
@@ -601,8 +601,8 @@ fn open_ai_compatible_settings() -> Box<[SettingsPageItem]> {
             files: USER,
         }),
         SettingsPageItem::SettingItem(SettingItem {
-            title: "Prompt Format",
-            description: "The prompt format to use when requesting predictions. Set to Infer to have the format inferred based on the model name.",
+            title: "提示格式",
+            description: "请求预测时使用的提示格式。设为 Infer 时，会根据模型名称自动推断格式。",
             field: Box::new(SettingField {
                 pick: |settings| {
                     settings
@@ -631,8 +631,8 @@ fn open_ai_compatible_settings() -> Box<[SettingsPageItem]> {
             metadata: None,
         }),
         SettingsPageItem::SettingItem(SettingItem {
-            title: "Max Output Tokens",
-            description: "The maximum number of tokens to generate.",
+            title: "最大输出 Tokens",
+            description: "生成的最大 token 数量。",
             field: Box::new(SettingField {
                 pick: |settings| {
                     settings
@@ -667,7 +667,7 @@ fn codestral_settings() -> Box<[SettingsPageItem]> {
     Box::new([
         SettingsPageItem::SettingItem(SettingItem {
             title: "API URL",
-            description: "The API URL to use for Codestral.",
+            description: "Codestral 使用的 API URL。",
             field: Box::new(SettingField {
                 pick: |settings| {
                     settings
@@ -699,8 +699,8 @@ fn codestral_settings() -> Box<[SettingsPageItem]> {
             files: USER,
         }),
         SettingsPageItem::SettingItem(SettingItem {
-            title: "Max Tokens",
-            description: "The maximum number of tokens to generate.",
+            title: "最大 Tokens",
+            description: "生成的最大 token 数量。",
             field: Box::new(SettingField {
                 pick: |settings| {
                     settings
@@ -729,8 +729,8 @@ fn codestral_settings() -> Box<[SettingsPageItem]> {
             files: USER,
         }),
         SettingsPageItem::SettingItem(SettingItem {
-            title: "Model",
-            description: "The Codestral model id to use.",
+            title: "模型",
+            description: "要使用的 Codestral 模型 ID。",
             field: Box::new(SettingField {
                 pick: |settings| {
                     settings

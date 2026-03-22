@@ -15,7 +15,7 @@ use util::shell::ShellKind;
 use crate::{SettingsWindow, components::SettingsInputField};
 
 const HARDCODED_RULES_DESCRIPTION: &str =
-    "`rm -rf` commands are always blocked when run on `$HOME`, `~`, `.`, `..`, or `/`";
+    "在 `$HOME`、`~`、`.`、`..` 或 `/` 上执行的 `rm -rf` 命令始终会被阻止。";
 const SETTINGS_DISCLAIMER: &str = "注意：自定义工具权限仅适用于 Zed 原生 agent，不适用于通过 Agent Client Protocol (ACP) 连接的外部 agent。";
 
 /// Tools that support permission rules
@@ -232,13 +232,13 @@ fn render_tool_list_item(
         let mut parts = Vec::new();
         if rule_count > 0 {
             if rule_count == 1 {
-                parts.push("1 rule".to_string());
+                parts.push("1 条规则".to_string());
             } else {
-                parts.push(format!("{} rules", rule_count));
+                parts.push(format!("{} 条规则", rule_count));
             }
         }
         if invalid_count > 0 {
-            parts.push(format!("{} invalid", invalid_count));
+            parts.push(format!("{} 条无效", invalid_count));
         }
         Some(parts.join(", "))
     } else {
@@ -324,7 +324,7 @@ pub(crate) fn render_tool_config_page(
     cx: &mut Context<SettingsWindow>,
 ) -> AnyElement {
     let rules = get_tool_rules(tool.id, cx);
-    let page_title = format!("{} Tool", tool.name);
+    let page_title = format!("{}工具", tool.name);
     let scroll_step = px(80.);
 
     v_flex()
@@ -394,8 +394,8 @@ pub(crate) fn render_tool_config_page(
                 .child(Divider::horizontal().color(ui::DividerColor::BorderFaded))
                 .child(render_rule_section(
                     tool.id,
-                    "Always Deny",
-                    "If any of these regexes match, the tool action will be denied.",
+                    "始终拒绝",
+                    "如果其中任一正则匹配，工具操作将被拒绝。",
                     ToolPermissionMode::Deny,
                     &rules.always_deny,
                     cx,
@@ -403,8 +403,8 @@ pub(crate) fn render_tool_config_page(
                 .child(Divider::horizontal().color(ui::DividerColor::BorderFaded))
                 .child(render_rule_section(
                     tool.id,
-                    "Always Allow",
-                    "If any of these regexes match, the action will be approved—unless an Always Confirm or Always Deny matches.",
+                    "始终允许",
+                    "如果其中任一正则匹配，操作将被允许，但若匹配“始终确认”或“始终拒绝”则例外。",
                     ToolPermissionMode::Allow,
                     &rules.always_allow,
                     cx,
@@ -412,8 +412,8 @@ pub(crate) fn render_tool_config_page(
                 .child(Divider::horizontal().color(ui::DividerColor::BorderFaded))
                 .child(render_rule_section(
                     tool.id,
-                    "Always Confirm",
-                    "If any of these regexes match, a confirmation will be shown unless an Always Deny regex matches.",
+                    "始终确认",
+                    "如果其中任一正则匹配，将显示确认，除非匹配“始终拒绝”正则。",
                     ToolPermissionMode::Confirm,
                     &rules.always_confirm,
                     cx,
@@ -460,7 +460,7 @@ fn render_verification_section(
 
     let editor = window.use_keyed_state(input_id, cx, |window, cx| {
         let mut editor = editor::Editor::single_line(window, cx);
-        editor.set_placeholder_text("Enter a tool input to test your rules…", window, cx);
+        editor.set_placeholder_text("输入工具内容以测试你的规则…", window, cx);
 
         let global_settings = ThemeSettings::get_global(cx);
         editor.set_text_style_refinement(TextStyleRefinement {
@@ -535,7 +535,7 @@ fn render_verification_section(
                 .border_color(color.border_variant)
                 .rounded_sm()
                 .child(
-                    Label::new("Test Your Rules")
+                    Label::new("测试你的规则")
                         .color(Color::Muted)
                         .size(LabelSize::Small),
                 )
@@ -555,7 +555,7 @@ fn render_verification_section(
                     this.when(patterns_agree, |this| {
                         if matched_patterns.is_empty() {
                             this.child(
-                                Label::new("No regex matches, using the default action.")
+                                Label::new("没有正则匹配，使用默认动作。")
                                     .size(LabelSize::Small)
                                     .color(Color::Muted),
                             )
@@ -568,14 +568,14 @@ fn render_verification_section(
                             this.child(render_hardcoded_rules(true, cx))
                         } else if let Some(reason) = &denial_reason {
                             this.child(
-                                Label::new(format!("Denied: {}", reason))
+                                Label::new(format!("已拒绝：{}", reason))
                                     .size(LabelSize::XSmall)
                                     .color(Color::Warning),
                             )
                         } else {
                             this.child(
                                 Label::new(
-                                    "Pattern preview differs from engine — showing authoritative result.",
+                                    "模式预览与引擎结果不一致，当前显示权威结果。",
                                 )
                                 .size(LabelSize::XSmall)
                                 .color(Color::Warning),
@@ -590,7 +590,7 @@ fn render_verification_section(
                         denial_reason.filter(|_| patterns_agree && !is_hardcoded_denial),
                         |this, reason| {
                             this.child(
-                                Label::new(format!("Reason: {}", reason))
+                                Label::new(format!("原因：{}", reason))
                                     .size(LabelSize::XSmall)
                                     .color(Color::Error),
                             )
@@ -684,9 +684,9 @@ fn render_matched_patterns(patterns: &[MatchedPattern], cx: &App) -> AnyElement 
         .gap_1()
         .children(patterns.iter().map(|pattern| {
             let (type_label, color) = match pattern.rule_type {
-                ToolPermissionMode::Deny => ("Always Deny", Color::Error),
-                ToolPermissionMode::Confirm => ("Always Confirm", Color::Warning),
-                ToolPermissionMode::Allow => ("Always Allow", Color::Success),
+                ToolPermissionMode::Deny => ("始终拒绝", Color::Error),
+                ToolPermissionMode::Confirm => ("始终确认", Color::Warning),
+                ToolPermissionMode::Allow => ("始终允许", Color::Success),
             };
 
             let type_color = if pattern.is_overridden {
@@ -784,6 +784,12 @@ fn verdict_color(mode: ToolPermissionMode) -> Color {
 }
 
 fn render_verdict_label(mode: ToolPermissionMode) -> AnyElement {
+    let verdict_label = match mode {
+        ToolPermissionMode::Allow => "允许",
+        ToolPermissionMode::Deny => "拒绝",
+        ToolPermissionMode::Confirm => "确认",
+    };
+
     h_flex()
         .gap_1()
         .child(
@@ -792,7 +798,7 @@ fn render_verdict_label(mode: ToolPermissionMode) -> AnyElement {
                 .color(Color::Muted),
         )
         .child(
-            Label::new(mode_display_label(mode))
+            Label::new(verdict_label)
                 .size(LabelSize::Small)
                 .color(verdict_color(mode)),
         )
@@ -817,12 +823,12 @@ fn render_invalid_patterns_section(
                         .size(IconSize::Small)
                         .color(Color::Error),
                 )
-                .child(Label::new("Invalid Patterns").color(Color::Error)),
+                .child(Label::new("无效模式").color(Color::Error)),
         )
         .child(
             Label::new(
-                "These patterns failed to compile as regular expressions. \
-                 The tool will be blocked until they are fixed or removed.",
+                "这些模式未能编译为正则表达式。\
+                 在修复或删除前，此工具将被阻止。",
             )
             .size(LabelSize::Small)
             .color(Color::Muted),
@@ -834,9 +840,9 @@ fn render_invalid_patterns_section(
                 .gap_1p5()
                 .children(invalid_patterns.iter().map(|invalid| {
                     let rule_type_label = match invalid.rule_type.as_str() {
-                        "always_allow" => "Always Allow",
-                        "always_deny" => "Always Deny",
-                        "always_confirm" => "Always Confirm",
+                        "always_allow" => "始终允许",
+                        "always_deny" => "始终拒绝",
+                        "always_confirm" => "始终确认",
                         other => other,
                     };
 
@@ -880,7 +886,7 @@ fn render_invalid_patterns_section(
                                     IconButton::new(delete_id, IconName::Trash)
                                         .icon_size(IconSize::Small)
                                         .icon_color(Color::Muted)
-                                        .tooltip(Tooltip::text("Delete Invalid Pattern"))
+                                        .tooltip(Tooltip::text("删除无效模式"))
                                         .on_click(cx.listener(move |_, _, _, cx| {
                                             delete_pattern(
                                                 &tool_id_for_delete,
@@ -892,7 +898,7 @@ fn render_invalid_patterns_section(
                                 ),
                         )
                         .child(
-                            Label::new(format!("Error: {}", invalid.error))
+                            Label::new(format!("错误：{}", invalid.error))
                                 .size(LabelSize::XSmall)
                                 .color(Color::Muted),
                         )
@@ -955,7 +961,7 @@ fn render_pattern_empty_state(cx: &mut Context<SettingsWindow>) -> AnyElement {
         .border_dashed()
         .border_color(cx.theme().colors().border_variant)
         .child(
-            Label::new("No patterns configured")
+            Label::new("尚未配置模式")
                 .size(LabelSize::Small)
                 .color(Color::Disabled),
         )
@@ -987,7 +993,7 @@ fn render_user_pattern_row(
             IconButton::new(delete_id, IconName::Trash)
                 .icon_size(IconSize::Small)
                 .icon_color(Color::Muted)
-                .tooltip(Tooltip::text("Delete Pattern"))
+                .tooltip(Tooltip::text("删除模式"))
                 .on_click(cx.listener(move |_, _, _, cx| {
                     delete_pattern(&tool_id_for_delete, rule_type, &pattern_for_delete, cx);
                 })),
@@ -1006,13 +1012,13 @@ fn render_user_pattern_row(
 
                     let validation_error = if !updated {
                         Some(
-                            "A pattern with that name already exists in this rule list."
+                            "此规则列表中已存在同名模式。"
                                 .to_string(),
                         )
                     } else {
                         match regex::Regex::new(&new_pattern) {
                             Err(err) => Some(format!(
-                                "Invalid regex: {err}. Pattern saved but will block this tool until fixed or removed."
+                                "正则无效：{err}。模式已保存，但在修复或删除前会阻止此工具。"
                             )),
                             Ok(_) => None,
                         }
@@ -1040,7 +1046,7 @@ fn render_add_pattern_input(
 
     SettingsInputField::new()
         .with_id(input_id)
-        .with_placeholder("Add regex pattern…")
+        .with_placeholder("添加正则模式…")
         .tab_index(0)
         .with_buffer_font()
         .display_clear_button()
@@ -1054,7 +1060,7 @@ fn render_add_pattern_input(
 
                     let validation_error = match regex::Regex::new(&trimmed) {
                         Err(err) => Some(format!(
-                            "Invalid regex: {err}. Pattern saved but will block this tool until fixed or removed."
+                            "正则无效：{err}。模式已保存，但在修复或删除前会阻止此工具。"
                         )),
                         Ok(_) => None,
                     };
@@ -1071,7 +1077,11 @@ fn render_add_pattern_input(
 }
 
 fn render_global_default_mode_section(current_mode: ToolPermissionMode) -> AnyElement {
-    let mode_label = current_mode.to_string();
+    let mode_label = match current_mode {
+        ToolPermissionMode::Allow => "允许",
+        ToolPermissionMode::Deny => "拒绝",
+        ToolPermissionMode::Confirm => "确认",
+    };
 
     h_flex()
         .my_4()
@@ -1081,10 +1091,10 @@ fn render_global_default_mode_section(current_mode: ToolPermissionMode) -> AnyEl
             v_flex()
                 .w_full()
                 .min_w_0()
-                .child(Label::new("Default Permission"))
+                .child(Label::new("默认权限"))
                 .child(
                     Label::new(
-                        "Controls the default behavior for all tool actions. Per-tool rules and patterns can override this.",
+                        "控制所有工具操作的默认行为。每个工具的规则和模式都可以覆盖该设置。",
                     )
                     .size(LabelSize::Small)
                     .color(Color::Muted),
@@ -1137,7 +1147,7 @@ fn render_default_mode_section(
             v_flex()
                 .w_full()
                 .min_w_0()
-                .child(Label::new("Default Action"))
+                .child(Label::new("默认动作"))
                 .child(
                     Label::new("没有模式匹配时要采取的动作。")
                         .size(LabelSize::Small)
