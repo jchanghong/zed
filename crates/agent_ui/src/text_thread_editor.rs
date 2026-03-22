@@ -1103,7 +1103,7 @@ impl TextThreadEditor {
                                 (animated_label, spinner, note)
                             }
                             Role::System => (
-                                Label::new("System")
+                                Label::new("系统")
                                     .color(Color::Warning)
                                     .into_any_element(),
                                 None,

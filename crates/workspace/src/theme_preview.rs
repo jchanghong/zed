@@ -136,7 +136,7 @@ impl ThemePreview {
 
         v_flex()
             .gap_1()
-            .child(Headline::new("Text").size(HeadlineSize::Small).color(Color::Muted))
+            .child(Headline::new("文本").size(HeadlineSize::Small).color(Color::Muted))
             .child(
                 h_flex()
                     .items_start()
@@ -144,132 +144,132 @@ impl ThemePreview {
                     .child(
                         v_flex()
                             .gap_1()
-                            .child(Headline::new("Headline Sizes").size(HeadlineSize::Small).color(Color::Muted))
-                            .child(Headline::new("XLarge Headline").size(HeadlineSize::XLarge))
-                            .child(Headline::new("Large Headline").size(HeadlineSize::Large))
-                            .child(Headline::new("Medium Headline").size(HeadlineSize::Medium))
-                            .child(Headline::new("Small Headline").size(HeadlineSize::Small))
-                            .child(Headline::new("XSmall Headline").size(HeadlineSize::XSmall)),
+                            .child(Headline::new("标题大小").size(HeadlineSize::Small).color(Color::Muted))
+                            .child(Headline::new("超大标题").size(HeadlineSize::XLarge))
+                            .child(Headline::new("大标题").size(HeadlineSize::Large))
+                            .child(Headline::new("中标题").size(HeadlineSize::Medium))
+                            .child(Headline::new("小标题").size(HeadlineSize::Small))
+                            .child(Headline::new("超小标题").size(HeadlineSize::XSmall)),
                     )
                     .child(
                         v_flex()
                             .gap_1()
-                            .child(Headline::new("Text Colors").size(HeadlineSize::Small).color(Color::Muted))
+                            .child(Headline::new("文本颜色").size(HeadlineSize::Small).color(Color::Muted))
                             .child(
                                 Label::new(label_with_contrast(
-                                    "Default Text",
+                                    "默认文本",
                                     Color::Default.color(cx),
                                 ))
                                 .color(Color::Default),
                             )
                             .child(
                                 Label::new(label_with_contrast(
-                                    "Accent Text",
+                                    "强调文本",
                                     Color::Accent.color(cx),
                                 ))
                                 .color(Color::Accent),
                             )
                             .child(
                                 Label::new(label_with_contrast(
-                                    "Conflict Text",
+                                    "冲突文本",
                                     Color::Conflict.color(cx),
                                 ))
                                 .color(Color::Conflict),
                             )
                             .child(
                                 Label::new(label_with_contrast(
-                                    "Created Text",
+                                    "创建文本",
                                     Color::Created.color(cx),
                                 ))
                                 .color(Color::Created),
                             )
                             .child(
                                 Label::new(label_with_contrast(
-                                    "Deleted Text",
+                                    "删除文本",
                                     Color::Deleted.color(cx),
                                 ))
                                 .color(Color::Deleted),
                             )
                             .child(
                                 Label::new(label_with_contrast(
-                                    "Disabled Text",
+                                    "禁用文本",
                                     Color::Disabled.color(cx),
                                 ))
                                 .color(Color::Disabled),
                             )
                             .child(
                                 Label::new(label_with_contrast(
-                                    "Error Text",
+                                    "错误文本",
                                     Color::Error.color(cx),
                                 ))
                                 .color(Color::Error),
                             )
                             .child(
                                 Label::new(label_with_contrast(
-                                    "Hidden Text",
+                                    "隐藏文本",
                                     Color::Hidden.color(cx),
                                 ))
                                 .color(Color::Hidden),
                             )
                             .child(
                                 Label::new(label_with_contrast(
-                                    "Hint Text",
+                                    "提示文本",
                                     Color::Hint.color(cx),
                                 ))
                                 .color(Color::Hint),
                             )
                             .child(
                                 Label::new(label_with_contrast(
-                                    "Ignored Text",
+                                    "忽略文本",
                                     Color::Ignored.color(cx),
                                 ))
                                 .color(Color::Ignored),
                             )
                             .child(
                                 Label::new(label_with_contrast(
-                                    "Info Text",
+                                    "信息文本",
                                     Color::Info.color(cx),
                                 ))
                                 .color(Color::Info),
                             )
                             .child(
                                 Label::new(label_with_contrast(
-                                    "Modified Text",
+                                    "修改文本",
                                     Color::Modified.color(cx),
                                 ))
                                 .color(Color::Modified),
                             )
                             .child(
                                 Label::new(label_with_contrast(
-                                    "Muted Text",
+                                    "弱化文本",
                                     Color::Muted.color(cx),
                                 ))
                                 .color(Color::Muted),
                             )
                             .child(
                                 Label::new(label_with_contrast(
-                                    "Placeholder Text",
+                                    "占位文本",
                                     Color::Placeholder.color(cx),
                                 ))
                                 .color(Color::Placeholder),
                             )
                             .child(
                                 Label::new(label_with_contrast(
-                                    "Selected Text",
+                                    "选中文本",
                                     Color::Selected.color(cx),
                                 ))
                                 .color(Color::Selected),
                             )
                             .child(
                                 Label::new(label_with_contrast(
-                                    "Success Text",
+                                    "成功文本",
                                     Color::Success.color(cx),
                                 ))
                                 .color(Color::Success),
                             )
                             .child(
                                 Label::new(label_with_contrast(
-                                    "Warning Text",
+                                    "警告文本",
                                     Color::Warning.color(cx),
                                 ))
                                 .color(Color::Warning),
@@ -278,10 +278,10 @@ impl ThemePreview {
                     .child(
                         v_flex()
                             .gap_1()
-                            .child(Headline::new("Wrapping Text").size(HeadlineSize::Small).color(Color::Muted))
+                            .child(Headline::new("换行文本").size(HeadlineSize::Small).color(Color::Muted))
                             .child(
                                 div().max_w(px(200.)).child(
-                                "This is a longer piece of text that should wrap to multiple lines. It demonstrates how text behaves when it exceeds the width of its container."
+                                "这是一段较长的文本，应该换行显示为多行。它演示了当文本超出容器宽度时的行为。"
                             ))
                     )
             )
@@ -377,18 +377,18 @@ impl ThemePreview {
             .size_full()
             .child(v_flex()
                 .gap_4()
-                .child(Headline::new("Headline 1").size(HeadlineSize::XLarge))
-                .child(Label::new("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."))
-                .child(Headline::new("Headline 2").size(HeadlineSize::Large))
-                .child(Label::new("Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."))
-                .child(Headline::new("Headline 3").size(HeadlineSize::Medium))
-                .child(Label::new("Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."))
-                .child(Headline::new("Headline 4").size(HeadlineSize::Small))
-                .child(Label::new("Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."))
-                .child(Headline::new("Headline 5").size(HeadlineSize::XSmall))
-                .child(Label::new("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."))
-                .child(Headline::new("Body Text").size(HeadlineSize::Small))
-                .child(Label::new("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."))
+                .child(Headline::new("标题 1").size(HeadlineSize::XLarge))
+                .child(Label::new("这是一段示例文本，用于展示标题和正文的排版效果。通过不同的字号和样式，可以创建层次分明的文档结构。"))
+                .child(Headline::new("标题 2").size(HeadlineSize::Large))
+                .child(Label::new("排版设计是用户界面设计的重要组成部分，良好的排版可以提升用户体验和阅读效率。"))
+                .child(Headline::new("标题 3").size(HeadlineSize::Medium))
+                .child(Label::new("通过合理使用标题层级，可以帮助用户快速定位和理解内容结构。"))
+                .child(Headline::new("标题 4").size(HeadlineSize::Small))
+                .child(Label::new("小标题通常用于细分章节或作为列表项的标题，保持简洁明了。"))
+                .child(Headline::new("标题 5").size(HeadlineSize::XSmall))
+                .child(Label::new("超小标题适用于注释、说明文字或次要信息，不宜过多使用以免干扰主内容。"))
+                .child(Headline::new("正文文本").size(HeadlineSize::Small))
+                .child(Label::new("正文是文档的主要内容部分，应当使用易于阅读的字号和行高。良好的正文排版可以提高阅读舒适度，减少视觉疲劳。主题预览功能可以帮助开发者检查不同主题下的文本显示效果。"))
             )
     }
 

@@ -160,7 +160,7 @@ impl Render for ClaudeCodeOnboardingModal {
                     .child(illustration_element(IconName::Stop, None, 0.15))
                     .child(illustration_element(
                         IconName::AiGemini,
-                        Some("New Gemini CLI Thread".into()),
+                        Some("新建 Gemini CLI 线程".into()),
                         0.3,
                     ))
                     .child(
@@ -178,11 +178,11 @@ impl Render for ClaudeCodeOnboardingModal {
                                     .size(IconSize::Small)
                                     .color(Color::Muted),
                             )
-                            .child(Label::new("New Claude Agent Thread").size(LabelSize::Small)),
+                            .child(Label::new("新建 Claude Agent 线程").size(LabelSize::Small)),
                     )
                     .child(illustration_element(
                         IconName::Stop,
-                        Some("Your Agent Here".into()),
+                        Some("你的 Agent".into()),
                         0.3,
                     ))
                     .child(illustration_element(IconName::Stop, None, 0.15)),

@@ -490,7 +490,7 @@ fn session_state(session: Entity<Session>, cx: &mut App) -> ReplMenuState {
         },
         Kernel::StartingKernel(_) => starting(),
         Kernel::ErroredLaunch(e) => ReplMenuState {
-            tooltip: format!("Error with kernel {}: {}", kernel_name, e).into(),
+            tooltip: format!("Kernel {} 错误: {}", kernel_name, e).into(),
             popover_disabled: false,
             indicator: Some(Indicator::dot().color(Color::Error)),
             status: session.kernel.status(),

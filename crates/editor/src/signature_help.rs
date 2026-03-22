@@ -436,7 +436,7 @@ impl SignatureHelpPopover {
                 .style(ButtonStyle::Subtle)
                 .icon_size(IconSize::Small)
                 .tooltip(move |_window, cx| {
-                    ui::Tooltip::for_action("Previous Signature", &crate::SignatureHelpPrevious, cx)
+                    ui::Tooltip::for_action("上一个签名", &crate::SignatureHelpPrevious, cx)
                 })
                 .on_click(cx.listener(|editor, _, window, cx| {
                     editor.signature_help_prev(&crate::SignatureHelpPrevious, window, cx);
@@ -447,7 +447,7 @@ impl SignatureHelpPopover {
                 .style(ButtonStyle::Subtle)
                 .icon_size(IconSize::Small)
                 .tooltip(move |_window, cx| {
-                    ui::Tooltip::for_action("Next Signature", &crate::SignatureHelpNext, cx)
+                    ui::Tooltip::for_action("下一个签名", &crate::SignatureHelpNext, cx)
                 })
                 .on_click(cx.listener(|editor, _, window, cx| {
                     editor.signature_help_next(&crate::SignatureHelpNext, window, cx);

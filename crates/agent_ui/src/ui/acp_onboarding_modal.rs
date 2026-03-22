@@ -95,7 +95,7 @@ impl Render for AcpOnboardingModal {
                 .map(|this| {
                     if label {
                         this.child(
-                            Label::new("Your Agent Here")
+                            Label::new("你的 Agent")
                                 .size(LabelSize::Small)
                                 .color(Color::Muted),
                         )

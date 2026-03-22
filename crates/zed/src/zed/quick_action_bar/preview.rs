@@ -90,7 +90,7 @@ impl QuickActionBar {
                     tooltip_text,
                     Some(open_action_for_tooltip),
                     format!(
-                        "{} to open in a split",
+                        "{} 在分屏中打开",
                         text_for_keystroke(&alt_click.modifiers, &alt_click.key, cx)
                     ),
                     cx,
