@@ -523,7 +523,7 @@ impl CommitView {
             )
             .when(self.stash.is_none(), |this| {
                 this.child(
-                    Button::new("sha", "Commit SHA")
+                    Button::new("sha", "提交 SHA")
                         .start_icon(
                             Icon::new(copy_icon)
                                 .size(IconSize::Small)
@@ -532,7 +532,7 @@ impl CommitView {
                         .tooltip({
                             let commit_sha = commit_sha.clone();
                             move |_, cx| {
-                                Tooltip::with_meta("Copy Commit SHA", None, commit_sha.clone(), cx)
+                                Tooltip::with_meta("复制提交 SHA", None, commit_sha.clone(), cx)
                             }
                         })
                         .on_click(move |_, _, cx| {
@@ -548,7 +548,7 @@ impl CommitView {
     fn apply_stash(workspace: &mut Workspace, window: &mut Window, cx: &mut App) {
         Self::stash_action(
             workspace,
-            "Apply",
+            "应用",
             window,
             cx,
             async move |repository, sha, stash, commit_view, workspace, cx| {
@@ -575,7 +575,7 @@ impl CommitView {
     fn pop_stash(workspace: &mut Workspace, window: &mut Window, cx: &mut App) {
         Self::stash_action(
             workspace,
-            "Pop",
+            "弹出",
             window,
             cx,
             async move |repository, sha, stash, commit_view, workspace, cx| {
@@ -602,7 +602,7 @@ impl CommitView {
     fn remove_stash(workspace: &mut Workspace, window: &mut Window, cx: &mut App) {
         Self::stash_action(
             workspace,
-            "Drop",
+            "删除",
             window,
             cx,
             async move |repository, sha, stash, commit_view, workspace, cx| {
@@ -1060,7 +1060,7 @@ impl Render for CommitViewToolbar {
                     .icon_size(IconSize::Small)
                     .tooltip(move |_, cx| {
                         Tooltip::for_action(
-                            "Buffer Search",
+                            "缓冲区搜索",
                             &zed_actions::buffer_search::Deploy::find(),
                             cx,
                         )
@@ -1077,7 +1077,7 @@ impl Render for CommitViewToolbar {
                     this.child(
                         IconButton::new("show-in-git-graph", IconName::GitGraph)
                             .icon_size(IconSize::Small)
-                            .tooltip(Tooltip::text("Show in Git Graph"))
+                            .tooltip(Tooltip::text("在 Git Graph 中显示"))
                             .on_click(move |_, window, cx| {
                                 window.dispatch_action(
                                     Box::new(crate::git_panel::OpenAtCommit {

@@ -88,7 +88,7 @@ impl PickerDelegate for SlashCommandDelegate {
     }
 
     fn placeholder_text(&self, _window: &mut Window, _cx: &mut App) -> Arc<str> {
-        "Select a command...".into()
+        "选择一个命令...".into()
     }
 
     fn update_matches(
@@ -309,7 +309,7 @@ where
                                 ),
                         )
                         .child(
-                            Label::new("Create your custom command")
+                            Label::new("创建你的自定义命令")
                                 .size(LabelSize::Small)
                                 .color(Color::Muted),
                         )

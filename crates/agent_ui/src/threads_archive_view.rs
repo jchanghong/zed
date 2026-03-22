@@ -66,11 +66,11 @@ impl TimeBucket {
 
     fn label(&self) -> &'static str {
         match self {
-            TimeBucket::Today => "Today",
-            TimeBucket::Yesterday => "Yesterday",
-            TimeBucket::ThisWeek => "This Week",
-            TimeBucket::PastWeek => "Past Week",
-            TimeBucket::Older => "Older",
+            TimeBucket::Today => "今天",
+            TimeBucket::Yesterday => "昨天",
+            TimeBucket::ThisWeek => "本周",
+            TimeBucket::PastWeek => "上周",
+            TimeBucket::Older => "更早",
         }
     }
 }
@@ -101,11 +101,11 @@ fn archive_empty_state_message(
     if !is_empty {
         None
     } else if !has_history {
-        Some("This agent does not support viewing archived threads.")
+        Some("此 Agent 不支持查看归档线程。")
     } else if has_query {
-        Some("No threads match your search.")
+        Some("没有线程匹配你的搜索。")
     } else {
-        Some("No archived threads yet.")
+        Some("还没有归档线程。")
     }
 }
 
@@ -152,7 +152,7 @@ impl ThreadsArchiveView {
 
         let filter_editor = cx.new(|cx| {
             let mut editor = Editor::single_line(window, cx);
-            editor.set_placeholder_text("Search archive…", window, cx);
+            editor.set_placeholder_text("搜索归档…", window, cx);
             editor
         });
 
@@ -574,7 +574,7 @@ impl ThreadsArchiveView {
                                                 .gap_0p5()
                                                 .when(can_unarchive, |this| {
                                                     this.child(
-                                                        Button::new("unarchive-thread", "Restore")
+                                                        Button::new("unarchive-thread", "恢复")
                                                             .style(ButtonStyle::Filled)
                                                             .label_size(LabelSize::Small)
                                                             .when(is_focused, |this| {
@@ -645,7 +645,7 @@ impl ThreadsArchiveView {
                                     })
                                     .when_some(project_names, |this, project| {
                                         this.child(
-                                            Label::new("•")
+                                            Label::new("·")
                                                 .size(LabelSize::Small)
                                                 .color(Color::Muted)
                                                 .alpha(0.5),
@@ -836,7 +836,7 @@ impl ThreadsArchiveView {
                 this.child(
                     IconButton::new("clear_filter", IconName::Close)
                         .icon_size(IconSize::Small)
-                        .tooltip(Tooltip::text("Clear Search"))
+                        .tooltip(Tooltip::text("清除搜索"))
                         .on_click(cx.listener(|this, _, window, cx| {
                             this.reset_filter_editor_text(window, cx);
                             this.update_items(cx);

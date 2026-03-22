@@ -192,20 +192,20 @@ impl Render for ClaudeCodeOnboardingModal {
             .w_full()
             .gap_1()
             .child(
-                Label::new("Beta Release")
+                Label::new("Beta 版发布")
                     .size(LabelSize::Small)
                     .color(Color::Muted),
             )
-            .child(Headline::new("Claude Agent: Natively in Zed").size(HeadlineSize::Large));
+            .child(Headline::new("Claude Agent：原生集成于 Zed").size(HeadlineSize::Large));
 
-        let copy = "Powered by the Agent Client Protocol, you can now run Claude Agent as\na first-class citizen in Zed's agent panel.";
+        let copy = "借助 Agent Client Protocol，你现在可以在 Zed 的 Agent 面板中将 Claude Agent 作为一等公民运行。";
 
-        let open_panel_button = Button::new("open-panel", "Start with Claude Agent")
+        let open_panel_button = Button::new("open-panel", "使用 Claude Agent 开始")
             .style(ButtonStyle::Tinted(TintColor::Accent))
             .full_width()
             .on_click(cx.listener(Self::open_panel));
 
-        let docs_button = Button::new("add-other-agents", "Add Other Agents")
+        let docs_button = Button::new("add-other-agents", "添加其他 Agent")
             .end_icon(
                 Icon::new(IconName::ArrowUpRight)
                     .size(IconSize::Indicator)

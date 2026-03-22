@@ -1182,7 +1182,7 @@ impl PickerDelegate for RecentProjectsDelegate {
                     .child(
                         IconButton::new(("remove-folder", worktree_id.to_usize()), IconName::Close)
                             .icon_size(IconSize::Small)
-                            .tooltip(Tooltip::text("Remove Folder from Workspace"))
+                            .tooltip(Tooltip::text("从工作区移除文件夹"))
                             .on_click(cx.listener(move |picker, _, window, cx| {
                                 let Some(workspace) = picker.delegate.workspace.upgrade() else {
                                     return;
@@ -1318,7 +1318,7 @@ impl PickerDelegate for RecentProjectsDelegate {
                     .child(
                         IconButton::new("remove_open_project", IconName::Close)
                             .icon_size(IconSize::Small)
-                            .tooltip(Tooltip::text("Remove Project from Window"))
+                            .tooltip(Tooltip::text("从窗口中移除项目"))
                             .on_click(cx.listener(move |picker, _, window, cx| {
                                 cx.stop_propagation();
                                 window.prevent_default();
@@ -1417,7 +1417,7 @@ impl PickerDelegate for RecentProjectsDelegate {
                         this.child(
                             IconButton::new("add_to_workspace", IconName::FolderPlus)
                                 .icon_size(IconSize::Small)
-                                .tooltip(Tooltip::text("Add Project to this Workspace"))
+                                .tooltip(Tooltip::text("将项目添加到此工作区"))
                                 .on_click({
                                     let paths_to_add = paths_to_add.clone();
                                     cx.listener(move |picker, _event, window, cx| {
@@ -1439,7 +1439,7 @@ impl PickerDelegate for RecentProjectsDelegate {
                                 .tooltip({
                                     move |_, cx| {
                                         Tooltip::for_action_in(
-                                            "Open Project in New Window",
+                                            "在新窗口中打开项目",
                                             &menu::SecondaryConfirm,
                                             &focus_handle,
                                             cx,
@@ -1457,7 +1457,7 @@ impl PickerDelegate for RecentProjectsDelegate {
                     .child(
                         IconButton::new("delete", IconName::Close)
                             .icon_size(IconSize::Small)
-                            .tooltip(Tooltip::text("Delete from Recent Projects"))
+                            .tooltip(Tooltip::text("从最近项目中删除"))
                             .on_click(cx.listener(move |this, _event, window, cx| {
                                 cx.stop_propagation();
                                 window.prevent_default();
@@ -1526,14 +1526,14 @@ impl PickerDelegate for RecentProjectsDelegate {
                         let open_action = workspace::Open {
                             create_new_window: self.create_new_window,
                         };
-                        Button::new("open_local_folder", "Open Local Project")
+                        Button::new("open_local_folder", "打开本地项目")
                             .key_binding(KeyBinding::for_action_in(&open_action, &focus_handle, cx))
                             .on_click(move |_, window, cx| {
                                 window.dispatch_action(open_action.boxed_clone(), cx)
                             })
                     })
                     .child(
-                        Button::new("open_remote_folder", "Open Remote Project")
+                        Button::new("open_remote_folder", "打开远程项目")
                             .key_binding(KeyBinding::for_action(
                                 &OpenRemote {
                                     from_existing_connection: false,
@@ -1567,7 +1567,7 @@ impl PickerDelegate for RecentProjectsDelegate {
                 .map(|this| {
                     if is_already_open_entry {
                         this.child(
-                            Button::new("activate", "Activate")
+                            Button::new("activate", "激活")
                                 .key_binding(KeyBinding::for_action_in(
                                     &menu::Confirm,
                                     &focus_handle,
@@ -1579,7 +1579,7 @@ impl PickerDelegate for RecentProjectsDelegate {
                         )
                     } else {
                         this.child(
-                            Button::new("open_new_window", "New Window")
+                            Button::new("open_new_window", "新建窗口")
                                 .key_binding(KeyBinding::for_action_in(
                                     &menu::SecondaryConfirm,
                                     &focus_handle,
@@ -1590,7 +1590,7 @@ impl PickerDelegate for RecentProjectsDelegate {
                                 }),
                         )
                         .child(
-                            Button::new("open_here", "Open")
+                            Button::new("open_here", "打开")
                                 .key_binding(KeyBinding::for_action_in(
                                     &menu::Confirm,
                                     &focus_handle,
@@ -1612,7 +1612,7 @@ impl PickerDelegate for RecentProjectsDelegate {
                             y: px(-2.0),
                         })
                         .trigger(
-                            Button::new("actions-trigger", "Actions…")
+                            Button::new("actions-trigger", "操作…")
                                 .selected_style(ButtonStyle::Tinted(TintColor::Accent))
                                 .key_binding(KeyBinding::for_action_in(
                                     &ToggleActionsMenu,
@@ -1630,11 +1630,11 @@ impl PickerDelegate for RecentProjectsDelegate {
                                     move |menu, _, _| {
                                         menu.context(focus_handle)
                                             .action(
-                                                "Open Local Project",
+                                                "打开本地项目",
                                                 workspace::Open { create_new_window }.boxed_clone(),
                                             )
                                             .action(
-                                                "Open Remote Project",
+                                                "打开远程项目",
                                                 OpenRemote {
                                                     from_existing_connection: false,
                                                     create_new_window: false,

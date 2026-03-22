@@ -846,18 +846,18 @@ impl Render for ConfigurationView {
 
         if self.load_credentials_task.is_some() {
             div()
-                .child(Label::new("Loading credentials..."))
+                .child(Label::new("正在加载凭据..."))
                 .into_any_element()
         } else if self.should_render_editor(cx) {
             v_flex()
                 .size_full()
                 .on_action(cx.listener(Self::save_api_key))
-                .child(Label::new("To use Zed's agent with OpenRouter, you need to add an API key. Follow these steps:"))
+                .child(Label::new("要在 Zed 中使用由 OpenRouter 提供支持的 Agent，你需要添加 API Key。请按以下步骤操作："))
                 .child(
                     List::new()
                         .child(
                             ListBulletItem::new("")
-                                .child(Label::new("Create an API key by visiting"))
+                                .child(Label::new("前往此处创建 API Key"))
                                 .child(ButtonLink::new("OpenRouter's console", "https://openrouter.ai/keys"))
                         )
                         .child(ListBulletItem::new("Ensure your OpenRouter account has credits")

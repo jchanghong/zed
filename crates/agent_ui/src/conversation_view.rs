@@ -1108,8 +1108,8 @@ impl ConversationView {
 
     pub fn title(&self, _cx: &App) -> SharedString {
         match &self.server_state {
-            ServerState::Connected(_) => "New Thread".into(),
-            ServerState::Loading(_) => "Loading…".into(),
+            ServerState::Connected(_) => "新建线程".into(),
+            ServerState::Loading(_) => "加载中…".into(),
             ServerState::LoadError { error, .. } => match error {
                 LoadError::Unsupported { .. } => {
                     format!("Upgrade {}", self.agent.agent_id()).into()
@@ -1235,7 +1235,7 @@ impl ConversationView {
                 cx,
             ),
             AcpThreadEvent::ToolAuthorizationRequested(_) => {
-                self.notify_with_sound("Waiting for tool confirmation", IconName::Info, window, cx);
+                self.notify_with_sound("等待工具确认", IconName::Info, window, cx);
             }
             AcpThreadEvent::ToolAuthorizationReceived(_) => {}
             AcpThreadEvent::Retry(retry) => {
@@ -1264,9 +1264,9 @@ impl ConversationView {
                 let used_tools = thread.read(cx).used_tools_since_last_user_message();
                 self.notify_with_sound(
                     if used_tools {
-                        "Finished running tools"
+                        "工具运行完成"
                     } else {
-                        "New message"
+                        "新消息"
                     },
                     IconName::ZedAssistant,
                     window,
@@ -1857,7 +1857,7 @@ impl ConversationView {
                     .map(|this| {
                         if show_fallback_description {
                             this.child(
-                                Label::new("Choose one of the following authentication options:")
+                                Label::new("请选择以下一种认证方式：")
                                     .size(LabelSize::Small)
                                     .color(Color::Muted),
                             )
@@ -2495,7 +2495,7 @@ impl ConversationView {
     fn create_copy_button(&self, message: impl Into<String>) -> impl IntoElement {
         let message = message.into();
 
-        CopyButton::new("copy-error-message", message).tooltip_label("Copy Error Message")
+        CopyButton::new("copy-error-message", message).tooltip_label("复制错误信息")
     }
 
     pub(crate) fn reauthenticate(&mut self, window: &mut Window, cx: &mut Context<Self>) {

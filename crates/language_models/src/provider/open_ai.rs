@@ -1354,12 +1354,12 @@ impl Render for ConfigurationView {
         let api_key_section = if self.should_render_editor(cx) {
             v_flex()
                 .on_action(cx.listener(Self::save_api_key))
-                .child(Label::new("To use Zed's agent with OpenAI, you need to add an API key. Follow these steps:"))
+                .child(Label::new("要在 Zed 中使用由 OpenAI 提供支持的 Agent，你需要添加 API Key。请按以下步骤操作："))
                 .child(
                     List::new()
                         .child(
                             ListBulletItem::new("")
-                                .child(Label::new("Create one by visiting"))
+                                .child(Label::new("前往此处创建"))
                                 .child(ButtonLink::new("OpenAI's console", "https://platform.openai.com/api-keys"))
                         )
                         .child(
@@ -1378,9 +1378,7 @@ impl Render for ConfigurationView {
                     .color(Color::Muted),
                 )
                 .child(
-                    Label::new(
-                        "Note that having a subscription for another service like GitHub Copilot won't work.",
-                    )
+                    Label::new("请注意，订阅 GitHub Copilot 等其他服务并不能在这里使用。")
                     .size(LabelSize::Small).color(Color::Muted),
                 )
                 .into_any_element()
@@ -1411,10 +1409,10 @@ impl Render for ConfigurationView {
                             .size(IconSize::XSmall)
                             .color(Color::Muted),
                     )
-                    .child(Label::new("Zed also supports OpenAI-compatible models.")),
+                    .child(Label::new("Zed 也支持兼容 OpenAI 的模型。")),
             )
             .child(
-                Button::new("docs", "Learn More")
+                Button::new("docs", "了解更多")
                     .end_icon(
                         Icon::new(IconName::ArrowUpRight)
                             .size(IconSize::Small)
@@ -1426,7 +1424,7 @@ impl Render for ConfigurationView {
             );
 
         if self.load_credentials_task.is_some() {
-            div().child(Label::new("Loading credentials…")).into_any()
+            div().child(Label::new("正在加载凭据…")).into_any()
         } else {
             v_flex()
                 .size_full()

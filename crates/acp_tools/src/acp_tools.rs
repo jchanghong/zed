@@ -464,9 +464,9 @@ enum MessageType {
 impl Display for MessageType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            MessageType::Request => write!(f, "Request"),
-            MessageType::Response => write!(f, "Response"),
-            MessageType::Notification => write!(f, "Notification"),
+            MessageType::Request => write!(f, "请求"),
+            MessageType::Response => write!(f, "响应"),
+            MessageType::Notification => write!(f, "通知"),
         }
     }
 }
@@ -512,7 +512,7 @@ impl Render for AcpTools {
                             .size_full()
                             .justify_center()
                             .items_center()
-                            .child("No messages recorded yet")
+                            .child("尚无记录的消息")
                             .into_any()
                     } else {
                         div()
@@ -534,7 +534,7 @@ impl Render for AcpTools {
                     .size_full()
                     .justify_center()
                     .items_center()
-                    .child("No active connection")
+                    .child("没有活动连接")
                     .into_any(),
             })
     }
@@ -572,13 +572,13 @@ impl Render for AcpToolsToolbarItemView {
                     .unwrap_or_default();
 
                 CopyButton::new("copy-all-messages", message)
-                    .tooltip_label("Copy All Messages")
+                    .tooltip_label("复制全部消息")
                     .disabled(!has_messages)
             })
             .child(
                 IconButton::new("clear_messages", IconName::Trash)
                     .icon_size(IconSize::Small)
-                    .tooltip(Tooltip::text("Clear Messages"))
+                    .tooltip(Tooltip::text("清除消息"))
                     .disabled(!has_messages)
                     .on_click(cx.listener(move |_this, _, _window, cx| {
                         acp_tools.update(cx, |acp_tools, cx| {

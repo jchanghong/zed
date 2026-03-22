@@ -325,7 +325,7 @@ pub async fn open_remote_project(
                                 }
                             },
                             Some(&format!("{e:#}")),
-                            &["Retry", "Cancel"],
+                            &["重试", "取消"],
                             cx,
                         )
                     })?
@@ -386,7 +386,7 @@ pub async fn open_remote_project(
                                 }
                             },
                             Some(&format!("{e:#}")),
-                            &["Retry", "Cancel"],
+                            &["重试", "取消"],
                             cx,
                         )
                     })?

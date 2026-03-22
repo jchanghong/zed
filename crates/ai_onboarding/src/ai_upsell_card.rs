@@ -167,7 +167,7 @@ impl RenderOnce for AiUpsellCard {
         match self.sign_in_status {
             SignInStatus::SignedIn => match self.user_plan {
                 None | Some(Plan::ZedFree) => card
-                    .child(Label::new("Try Zed AI").size(LabelSize::Large))
+                    .child(Label::new("试用 Zed AI").size(LabelSize::Large))
                     .map(|this| {
                         if self.account_too_young {
                             this.child(YoungAccountBanner).child(
@@ -187,7 +187,7 @@ impl RenderOnce for AiUpsellCard {
                                     )
                                     .child(PlanDefinitions.pro_plan())
                                     .child(
-                                        Button::new("pro", "Get Started")
+                                        Button::new("pro", "开始使用")
                                             .full_width()
                                             .style(ButtonStyle::Tinted(ui::TintColor::Accent))
                                             .on_click(move |_, _window, cx| {
@@ -210,7 +210,7 @@ impl RenderOnce for AiUpsellCard {
                             .child(
                                 footer_container
                                     .child(
-                                        Button::new("start_trial", "Start Pro Trial")
+                                        Button::new("start_trial", "开始 Pro 试用")
                                             .full_width()
                                             .style(ButtonStyle::Tinted(ui::TintColor::Accent))
                                             .when_some(self.tab_index, |this, tab_index| {
@@ -225,7 +225,7 @@ impl RenderOnce for AiUpsellCard {
                                             }),
                                     )
                                     .child(
-                                        Label::new("14 days, no credit card required")
+                                        Label::new("14 天，无需信用卡")
                                             .size(LabelSize::Small)
                                             .color(Color::Muted),
                                     ),
@@ -234,36 +234,36 @@ impl RenderOnce for AiUpsellCard {
                     }),
                 Some(Plan::ZedProTrial) => card
                     .child(pro_trial_stamp)
-                    .child(Label::new("You're in the Zed Pro Trial").size(LabelSize::Large))
+                    .child(Label::new("你正在使用 Zed Pro 试用").size(LabelSize::Large))
                     .child(
-                        Label::new("Here's what you get for the next 14 days:")
+                        Label::new("以下是接下来 14 天你将获得的内容：")
                             .color(Color::Muted)
                             .mb_2(),
                     )
                     .child(PlanDefinitions.pro_trial(false)),
                 Some(Plan::ZedPro) => card
                     .child(certified_user_stamp)
-                    .child(Label::new("You're in the Zed Pro plan").size(LabelSize::Large))
+                    .child(Label::new("你正在使用 Zed Pro 套餐").size(LabelSize::Large))
                     .child(
-                        Label::new("Here's what you get:")
+                        Label::new("以下是你将获得的内容：")
                             .color(Color::Muted)
                             .mb_2(),
                     )
                     .child(PlanDefinitions.pro_plan()),
                 Some(Plan::ZedBusiness) => card
                     .child(certified_user_stamp)
-                    .child(Label::new("You're in the Zed Business plan").size(LabelSize::Large))
+                    .child(Label::new("你正在使用 Zed Business 套餐").size(LabelSize::Large))
                     .child(
-                        Label::new("Here's what you get:")
+                        Label::new("以下是你将获得的内容：")
                             .color(Color::Muted)
                             .mb_2(),
                     )
                     .child(PlanDefinitions.business_plan()),
                 Some(Plan::ZedStudent) => card
                     .child(certified_user_stamp)
-                    .child(Label::new("You're in the Zed Student plan").size(LabelSize::Large))
+                    .child(Label::new("你正在使用 Zed Student 套餐").size(LabelSize::Large))
                     .child(
-                        Label::new("Here's what you get:")
+                        Label::new("以下是你将获得的内容：")
                             .color(Color::Muted)
                             .mb_2(),
                     )
@@ -271,7 +271,7 @@ impl RenderOnce for AiUpsellCard {
             },
             // Signed Out State
             _ => card
-                .child(Label::new("Try Zed AI").size(LabelSize::Large))
+                .child(Label::new("试用 Zed AI").size(LabelSize::Large))
                 .child(
                     div()
                         .max_w_3_4()
@@ -280,7 +280,7 @@ impl RenderOnce for AiUpsellCard {
                 )
                 .child(plans_section)
                 .child(
-                    Button::new("sign_in", "Sign In")
+                    Button::new("sign_in", "登录")
                         .full_width()
                         .style(ButtonStyle::Tinted(ui::TintColor::Accent))
                         .when_some(self.tab_index, |this, tab_index| this.tab_index(tab_index))

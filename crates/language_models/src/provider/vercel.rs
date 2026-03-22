@@ -454,12 +454,12 @@ impl Render for ConfigurationView {
         let api_key_section = if self.should_render_editor(cx) {
             v_flex()
                 .on_action(cx.listener(Self::save_api_key))
-                .child(Label::new("To use Zed's agent with Vercel v0, you need to add an API key. Follow these steps:"))
+                .child(Label::new("要在 Zed 中使用由 Vercel v0 提供支持的 Agent，你需要添加 API Key。请按以下步骤操作："))
                 .child(
                     List::new()
                         .child(
                             ListBulletItem::new("")
-                                .child(Label::new("Create one by visiting"))
+                                .child(Label::new("前往此处创建"))
                                 .child(ButtonLink::new("Vercel v0's console", "https://v0.dev/chat/settings/keys"))
                         )
                         .child(
@@ -475,7 +475,7 @@ impl Render for ConfigurationView {
                     .color(Color::Muted),
                 )
                 .child(
-                    Label::new("Note that Vercel v0 is a custom OpenAI-compatible provider.")
+                    Label::new("请注意，Vercel v0 是一个自定义的 OpenAI-compatible Provider。")
                         .size(LabelSize::Small)
                         .color(Color::Muted),
                 )
@@ -491,7 +491,7 @@ impl Render for ConfigurationView {
         };
 
         if self.load_credentials_task.is_some() {
-            div().child(Label::new("Loading credentials…")).into_any()
+            div().child(Label::new("正在加载凭据…")).into_any()
         } else {
             v_flex().size_full().child(api_key_section).into_any()
         }

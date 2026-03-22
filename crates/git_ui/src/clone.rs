@@ -18,7 +18,7 @@ pub fn clone_and_open(
         files: false,
         directories: true,
         multiple: false,
-        prompt: Some("Select as Repository Destination".into()),
+                prompt: Some("选择仓库目标目录".into()),
     });
 
     window
@@ -69,7 +69,7 @@ pub fn clone_and_open(
                         gpui::PromptLevel::Info,
                         &format!("Git Clone: {}", repo_name),
                         None,
-                        &["Add repo to project", "Open repo in new project"],
+                        &["将仓库添加到项目", "在新项目中打开仓库"],
                         cx,
                     )
                 })

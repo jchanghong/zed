@@ -559,11 +559,11 @@ impl PickerDelegate for BranchListDelegate {
         match self.state {
             PickerState::List | PickerState::NewRemote | PickerState::NewBranch => {
                 match self.branch_filter {
-                    BranchFilter::All => "Select branch or remote…",
-                    BranchFilter::Remote => "Select remote…",
+                    BranchFilter::All => "选择分支或远程…",
+                    BranchFilter::Remote => "选择远程…",
                 }
             }
-            PickerState::CreateRemote(_) => "Enter a name for this remote…",
+            PickerState::CreateRemote(_) => "为该远程输入名称…",
         }
         .into()
     }
@@ -571,7 +571,7 @@ impl PickerDelegate for BranchListDelegate {
     fn no_matches_text(&self, _window: &mut Window, _cx: &mut App) -> Option<SharedString> {
         match self.state {
             PickerState::CreateRemote(_) => {
-                Some(SharedString::new_static("Remote name can't be empty"))
+                Some(SharedString::new_static("远程名称不能为空"))
             }
             _ => None,
         }
@@ -602,8 +602,8 @@ impl PickerDelegate for BranchListDelegate {
                         self.editor_position() == PickerEditorPosition::End,
                         |this| {
                             let tooltip_label = match self.branch_filter {
-                                BranchFilter::All => "Filter Remote Branches",
-                                BranchFilter::Remote => "Show All Branches",
+                                BranchFilter::All => "筛选远程分支",
+                                BranchFilter::Remote => "显示所有分支",
                             };
 
                             this.gap_1().justify_between().child({
@@ -896,7 +896,7 @@ impl PickerDelegate for BranchListDelegate {
         };
 
         let entry_title = match entry {
-            Entry::NewUrl { .. } => Label::new("Create Remote Repository")
+            Entry::NewUrl { .. } => Label::new("创建远程仓库")
                 .single_line()
                 .truncate()
                 .into_any_element(),
@@ -926,7 +926,7 @@ impl PickerDelegate for BranchListDelegate {
             IconButton::new(("delete", entry_ix), IconName::Trash)
                 .tooltip(move |_, cx| {
                     Tooltip::for_action_in(
-                        "Delete Branch",
+                        "删除分支",
                         &branch_picker::DeleteBranch,
                         &focus_handle,
                         cx,
@@ -1123,7 +1123,7 @@ impl PickerDelegate for BranchListDelegate {
                 let delete_and_select_btns = h_flex()
                     .gap_1()
                     .child(
-                        Button::new("delete-branch", "Delete")
+                        Button::new("delete-branch", "删除")
                             .key_binding(
                                 KeyBinding::for_action_in(
                                     &branch_picker::DeleteBranch,
@@ -1138,7 +1138,7 @@ impl PickerDelegate for BranchListDelegate {
                             }),
                     )
                     .child(
-                        Button::new("select_branch", "Select")
+                        Button::new("select_branch", "选择")
                             .key_binding(
                                 KeyBinding::for_action_in(&menu::Confirm, &focus_handle, cx)
                                     .map(|kb| kb.size(rems_from_px(12.))),
@@ -1156,7 +1156,7 @@ impl PickerDelegate for BranchListDelegate {
                                     branch_from_default_button,
                                     |this, button| {
                                         this.child(button).child(
-                                            Button::new("create", "Create")
+                                            Button::new("create", "创建")
                                                 .key_binding(
                                                     KeyBinding::for_action_in(
                                                         &menu::Confirm,
@@ -1176,8 +1176,8 @@ impl PickerDelegate for BranchListDelegate {
                                     .child({
                                         let focus_handle = focus_handle.clone();
                                         let filter_label = match self.branch_filter {
-                                            BranchFilter::All => "Filter Remote",
-                                            BranchFilter::Remote => "Show All",
+                                            BranchFilter::All => "筛选远程",
+                                            BranchFilter::Remote => "显示全部",
                                         };
                                         Button::new("filter-remotes", filter_label)
                                             .toggle_state(matches!(
@@ -1232,7 +1232,7 @@ impl PickerDelegate for BranchListDelegate {
                             this.child(button)
                         })
                         .child(
-                            Button::new("branch-from-default", "Create")
+                            Button::new("branch-from-default", "创建")
                                 .key_binding(
                                     KeyBinding::for_action_in(&menu::Confirm, &focus_handle, cx)
                                         .map(|kb| kb.size(rems_from_px(12.))),
@@ -1248,7 +1248,7 @@ impl PickerDelegate for BranchListDelegate {
                 footer_container()
                     .justify_end()
                     .child(
-                        Button::new("branch-from-default", "Confirm")
+                        Button::new("branch-from-default", "确认")
                             .key_binding(
                                 KeyBinding::for_action_in(&menu::Confirm, &focus_handle, cx)
                                     .map(|kb| kb.size(rems_from_px(12.))),

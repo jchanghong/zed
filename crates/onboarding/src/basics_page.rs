@@ -51,7 +51,7 @@ fn render_theme_section(tab_index: &mut isize, cx: &mut App) -> impl IntoElement
     return v_flex()
         .gap_2()
         .child(
-            h_flex().justify_between().child(Label::new("Theme")).child(
+            h_flex().justify_between().child(Label::new("主题")).child(
                 ToggleButtonGroup::single_row(
                     "theme-selector-onboarding-dark-light",
                     [
@@ -61,9 +61,9 @@ fn render_theme_section(tab_index: &mut isize, cx: &mut App) -> impl IntoElement
                     ]
                     .map(|mode| {
                         const MODE_NAMES: [SharedString; 3] = [
-                            SharedString::new_static("Light"),
-                            SharedString::new_static("Dark"),
-                            SharedString::new_static("System"),
+                            SharedString::new_static("浅色"),
+                            SharedString::new_static("深色"),
+                            SharedString::new_static("系统"),
                         ];
                         ToggleButtonSimple::new(
                             MODE_NAMES[mode as usize].clone(),
@@ -334,7 +334,7 @@ fn render_base_keymap_section(tab_index: &mut isize, cx: &mut App) -> impl IntoE
         BaseKeymap::TextMate | BaseKeymap::None => None,
     };
 
-    return v_flex().gap_2().child(Label::new("Base Keymap")).child(
+    return v_flex().gap_2().child(Label::new("基础键位")).child(
         ToggleButtonGroup::two_rows(
             "base_keymap_selection",
             [
@@ -388,8 +388,8 @@ fn render_vim_mode_switch(tab_index: &mut isize, cx: &mut App) -> impl IntoEleme
     };
     SwitchField::new(
         "onboarding-vim-mode",
-        Some("Vim Mode"),
-        Some("Coming from Neovim? Use our first-class implementation of Vim Mode".into()),
+        Some("Vim 模式"),
+        Some("从 Neovim 转来？使用我们对 Vim 模式的一等实现".into()),
         toggle_state,
         {
             let fs = <dyn Fs>::global(cx);
@@ -425,12 +425,12 @@ fn render_worktree_auto_trust_switch(tab_index: &mut isize, cx: &mut App) -> imp
         ui::ToggleState::Unselected
     };
 
-    let tooltip_description = "Zed can only allow services like language servers, project settings, and MCP servers to run after you mark a new project as trusted.";
+    let tooltip_description = "只有在你将新项目标记为受信任后，Zed 才能允许语言服务器、项目设置和 MCP 服务器等服务运行。";
 
     SwitchField::new(
         "onboarding-auto-trust-worktrees",
-        Some("Trust All Projects By Default"),
-        Some("Automatically mark all new projects as trusted to unlock all Zed's features".into()),
+        Some("默认信任所有项目"),
+        Some("自动将所有新项目标记为受信任，以解锁 Zed 的全部功能".into()),
         toggle_state,
         {
             let fs = <dyn Fs>::global(cx);
@@ -513,9 +513,9 @@ fn render_import_settings_section(tab_index: &mut isize, cx: &mut App) -> impl I
             v_flex()
                 .gap_0p5()
                 .max_w_5_6()
-                .child(Label::new("Import Settings"))
+                .child(Label::new("导入设置"))
                 .child(
-                    Label::new("Automatically pull your settings from other editors")
+                    Label::new("自动从其他编辑器导入你的设置")
                         .color(Color::Muted),
                 ),
         )

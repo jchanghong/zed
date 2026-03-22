@@ -481,7 +481,7 @@ mod remote_button {
     ) -> SplitButton {
         split_button(
             id,
-            "Fetch",
+            "获取",
             0,
             0,
             Some(IconName::ArrowCircle),
@@ -491,7 +491,7 @@ mod remote_button {
             },
             move |_window, cx| {
                 git_action_tooltip(
-                    "Fetch updates from remote",
+                    "从远程获取更新",
                     &git::Fetch,
                     "git fetch",
                     keybinding_target.clone(),
@@ -508,7 +508,7 @@ mod remote_button {
     ) -> SplitButton {
         split_button(
             id,
-            "Push",
+            "推送",
             ahead as usize,
             0,
             None,
@@ -518,7 +518,7 @@ mod remote_button {
             },
             move |_window, cx| {
                 git_action_tooltip(
-                    "Push committed changes to remote",
+                    "将已提交的更改推送到远程",
                     &git::Push,
                     "git push",
                     keybinding_target.clone(),
@@ -536,7 +536,7 @@ mod remote_button {
     ) -> SplitButton {
         split_button(
             id,
-            "Pull",
+            "拉取",
             ahead as usize,
             behind as usize,
             None,
@@ -546,7 +546,7 @@ mod remote_button {
             },
             move |_window, cx| {
                 git_action_tooltip(
-                    "Pull",
+                    "拉取",
                     &git::Pull,
                     "git pull",
                     keybinding_target.clone(),
@@ -562,7 +562,7 @@ mod remote_button {
     ) -> SplitButton {
         split_button(
             id,
-            "Publish",
+            "发布",
             0,
             0,
             Some(IconName::ExpandUp),
@@ -572,7 +572,7 @@ mod remote_button {
             },
             move |_window, cx| {
                 git_action_tooltip(
-                    "Publish branch to remote",
+                    "将分支发布到远程",
                     &git::Push,
                     "git push --set-upstream",
                     keybinding_target.clone(),
@@ -588,7 +588,7 @@ mod remote_button {
     ) -> SplitButton {
         split_button(
             id,
-            "Republish",
+            "重新发布",
             0,
             0,
             Some(IconName::ExpandUp),
@@ -598,7 +598,7 @@ mod remote_button {
             },
             move |_window, cx| {
                 git_action_tooltip(
-                    "Re-publish branch to remote",
+                    "重新将分支发布到远程",
                     &git::Push,
                     "git push --set-upstream",
                     keybinding_target.clone(),
@@ -646,14 +646,14 @@ mod remote_button {
                         .when_some(keybinding_target.clone(), |el, keybinding_target| {
                             el.context(keybinding_target)
                         })
-                        .action("Fetch", git::Fetch.boxed_clone())
-                        .action("Fetch From", git::FetchFrom.boxed_clone())
-                        .action("Pull", git::Pull.boxed_clone())
-                        .action("Pull (Rebase)", git::PullRebase.boxed_clone())
+                        .action("获取", git::Fetch.boxed_clone())
+                        .action("从远程获取", git::FetchFrom.boxed_clone())
+                        .action("拉取", git::Pull.boxed_clone())
+                        .action("拉取（变基）", git::PullRebase.boxed_clone())
                         .separator()
-                        .action("Push", git::Push.boxed_clone())
-                        .action("Push To", git::PushTo.boxed_clone())
-                        .action("Force Push", git::ForcePush.boxed_clone())
+                        .action("推送", git::Push.boxed_clone())
+                        .action("推送到", git::PushTo.boxed_clone())
+                        .action("强制推送", git::ForcePush.boxed_clone())
                 }))
             })
             .anchor(Corner::TopRight)
@@ -822,7 +822,7 @@ impl GitCloneModal {
     pub fn show(panel: Entity<GitPanel>, window: &mut Window, cx: &mut Context<Self>) -> Self {
         let repo_input = cx.new(|cx| {
             let mut editor = Editor::single_line(window, cx);
-            editor.set_placeholder_text("Enter repository URL…", window, cx);
+            editor.set_placeholder_text("输入仓库 URL…", window, cx);
             editor
         });
         let focus_handle = repo_input.focus_handle(cx);
@@ -866,12 +866,12 @@ impl Render for GitCloneModal {
                     .rounded_b_sm()
                     .bg(cx.theme().colors().editor_background)
                     .child(
-                        Label::new("Clone a repository from GitHub or other sources.")
+                        Label::new("从 GitHub 或其他来源克隆仓库。")
                             .color(Color::Muted)
                             .size(LabelSize::Small),
                     )
                     .child(
-                        Button::new("learn-more", "Learn More")
+                        Button::new("learn-more", "了解更多")
                             .label_size(LabelSize::Small)
                             .end_icon(Icon::new(IconName::ArrowUpRight).size(IconSize::XSmall))
                             .on_click(|_, _, cx| {

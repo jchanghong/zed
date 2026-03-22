@@ -92,7 +92,7 @@ use zed_actions::{
 
 const AGENT_PANEL_KEY: &str = "agent_panel";
 const RECENTLY_UPDATED_MENU_LIMIT: usize = 6;
-const DEFAULT_THREAD_TITLE: &str = "New Thread";
+const DEFAULT_THREAD_TITLE: &str = "新建线程";
 
 fn read_serialized_panel(
     workspace_id: workspace::WorkspaceId,
@@ -603,8 +603,8 @@ impl From<Agent> for AgentType {
 impl StartThreadIn {
     fn label(&self) -> SharedString {
         match self {
-            Self::LocalProject => "Current Worktree".into(),
-            Self::NewWorktree => "New Git Worktree".into(),
+            Self::LocalProject => "当前 Worktree".into(),
+            Self::NewWorktree => "新建 Git Worktree".into(),
         }
     }
 }
@@ -976,8 +976,8 @@ impl AgentPanel {
                             .update(cx, |panel, cx| panel.history_for_selected_agent(window, cx))
                         {
                             let view_all_label = match history {
-                                History::AgentThreads { .. } => "View All",
-                                History::TextThreads => "View All Text Threads",
+                                History::AgentThreads { .. } => "查看全部",
+                                History::TextThreads => "查看全部文本线程",
                             };
                             menu = Self::populate_recently_updated_menu_section(
                                 menu, panel, history, cx,
@@ -1750,7 +1750,7 @@ impl AgentPanel {
 
     fn copy_thread_to_clipboard(&mut self, window: &mut Window, cx: &mut Context<Self>) {
         let Some(thread) = self.active_native_agent_thread(cx) else {
-            Self::show_deferred_toast(&self.workspace, "No active native thread to copy", cx);
+            Self::show_deferred_toast(&self.workspace, "没有可复制的活动原生线程", cx);
             return;
         };
 
@@ -1771,7 +1771,7 @@ impl AgentPanel {
                         workspace.show_toast(
                             workspace::Toast::new(
                                 workspace::notifications::NotificationId::unique::<ThreadCopiedToast>(),
-                                "Thread copied to clipboard (base64 encoded)",
+                                "线程已复制到剪贴板（base64 编码）",
                             )
                             .autohide(),
                             cx,
@@ -1810,12 +1810,12 @@ impl AgentPanel {
 
     fn load_thread_from_clipboard(&mut self, window: &mut Window, cx: &mut Context<Self>) {
         let Some(clipboard) = cx.read_from_clipboard() else {
-            Self::show_deferred_toast(&self.workspace, "No clipboard content available", cx);
+            Self::show_deferred_toast(&self.workspace, "没有可用的剪贴板内容", cx);
             return;
         };
 
         let Some(encoded) = clipboard.text() else {
-            Self::show_deferred_toast(&self.workspace, "Clipboard does not contain text", cx);
+            Self::show_deferred_toast(&self.workspace, "剪贴板中没有文本", cx);
             return;
         };
 
@@ -1868,7 +1868,7 @@ impl AgentPanel {
                         workspace.show_toast(
                             workspace::Toast::new(
                                 workspace::notifications::NotificationId::unique::<ThreadLoadedToast>(),
-                                "Thread loaded from clipboard",
+                                "线程已从剪贴板加载",
                             )
                             .autohide(),
                             cx,
@@ -2164,7 +2164,7 @@ impl AgentPanel {
                     return menu;
                 }
 
-                menu = menu.header("Recently Updated");
+                menu = menu.header("最近更新");
 
                 for entry in entries {
                     let title = entry
@@ -2212,7 +2212,7 @@ impl AgentPanel {
                     return menu;
                 }
 
-                menu = menu.header("Recent Text Threads");
+                menu = menu.header("最近文本线程");
 
                 for entry in entries {
                     let title = if entry.title.is_empty() {
@@ -3183,7 +3183,7 @@ impl Panel for AgentPanel {
     }
 
     fn icon_tooltip(&self, _window: &Window, _cx: &App) -> Option<&'static str> {
-        Some("Agent Panel")
+        Some("Agent 面板")
     }
 
     fn toggle_action(&self) -> Box<dyn Action> {
@@ -3210,7 +3210,7 @@ impl Panel for AgentPanel {
 
 impl AgentPanel {
     fn render_title_view(&self, _window: &mut Window, cx: &Context<Self>) -> AnyElement {
-        const LOADING_SUMMARY_PLACEHOLDER: &str = "Loading Summary…";
+        const LOADING_SUMMARY_PLACEHOLDER: &str = "摘要加载中…";
 
         let content = match &self.active_view {
             ActiveView::AgentThread { conversation_view } => {
@@ -3225,7 +3225,7 @@ impl AgentPanel {
                     .map(|r| r.read(cx).title_editor.clone())
                 {
                     if is_generating_title {
-                        Label::new("New Thread…")
+                        Label::new("新建线程…")
                             .color(Color::Muted)
                             .truncate()
                             .with_animation(
@@ -3324,12 +3324,12 @@ impl AgentPanel {
             }
             ActiveView::History { history: kind } => {
                 let title = match kind {
-                    History::AgentThreads { .. } => "History",
-                    History::TextThreads => "Text Thread History",
+                    History::AgentThreads { .. } => "历史",
+                    History::TextThreads => "文本线程历史",
                 };
                 Label::new(title).truncate().into_any_element()
             }
-            ActiveView::Configuration => Label::new("Settings").truncate().into_any_element(),
+            ActiveView::Configuration => Label::new("设置").truncate().into_any_element(),
             ActiveView::Uninitialized => Label::new("Agent").truncate().into_any_element(),
         };
 
@@ -3371,9 +3371,9 @@ impl AgentPanel {
         let focus_handle = self.focus_handle(cx);
 
         let full_screen_label = if self.is_zoomed(window, cx) {
-            "Disable Full Screen"
+            "退出全屏"
         } else {
-            "Enable Full Screen"
+            "进入全屏"
         };
 
         let text_thread_view = match &self.active_view {
@@ -3419,7 +3419,7 @@ impl AgentPanel {
                     let focus_handle = focus_handle.clone();
                     move |_window, cx| {
                         Tooltip::for_action_in(
-                            "Toggle Agent Menu",
+                            "切换 Agent 菜单",
                             &ToggleOptionsMenu,
                             &focus_handle,
                             cx,
@@ -3435,11 +3435,11 @@ impl AgentPanel {
                         menu = menu.context(focus_handle.clone());
 
                         if thread_with_messages | text_thread_with_messages {
-                            menu = menu.header("Current Thread");
+                            menu = menu.header("当前线程");
 
                             if let Some(text_thread_view) = text_thread_view.as_ref() {
                                 menu = menu
-                                    .entry("Regenerate Thread Title", None, {
+                                    .entry("重新生成线程标题", None, {
                                         let text_thread_view = text_thread_view.clone();
                                         move |_, cx| {
                                             Self::handle_regenerate_text_thread_title(
@@ -3453,7 +3453,7 @@ impl AgentPanel {
 
                             if let Some(conversation_view) = conversation_view.as_ref() {
                                 menu = menu
-                                    .entry("Regenerate Thread Title", None, {
+                                    .entry("重新生成线程标题", None, {
                                         let conversation_view = conversation_view.clone();
                                         move |_, cx| {
                                             Self::handle_regenerate_thread_title(
@@ -3469,7 +3469,7 @@ impl AgentPanel {
                         menu = menu
                             .header("MCP Servers")
                             .action(
-                                "View Server Extensions",
+                                "查看服务器扩展",
                                 Box::new(zed_actions::Extensions {
                                     category_filter: Some(
                                         zed_actions::ExtensionCategoryFilter::ContextServers,
@@ -3477,17 +3477,17 @@ impl AgentPanel {
                                     id: None,
                                 }),
                             )
-                            .action("Add Custom Server…", Box::new(AddContextServer))
+                            .action("添加自定义服务器…", Box::new(AddContextServer))
                             .separator()
-                            .action("Rules", Box::new(OpenRulesLibrary::default()))
+                            .action("规则", Box::new(OpenRulesLibrary::default()))
                             .action("Profiles", Box::new(ManageProfiles::default()))
-                            .action("Settings", Box::new(OpenSettings))
+                            .action("设置", Box::new(OpenSettings))
                             .separator()
-                            .action("Toggle Threads Sidebar", Box::new(ToggleWorkspaceSidebar))
+                            .action("切换线程侧边栏", Box::new(ToggleWorkspaceSidebar))
                             .action(full_screen_label, Box::new(ToggleZoom));
 
                         if has_auth_methods {
-                            menu = menu.action("Reauthenticate", Box::new(ReauthenticateAgent))
+                            menu = menu.action("重新认证", Box::new(ReauthenticateAgent))
                         }
 
                         menu
@@ -3510,7 +3510,7 @@ impl AgentPanel {
                 {
                     move |_window, cx| {
                         Tooltip::for_action_in(
-                            "Toggle Recently Updated Threads",
+                            "切换最近更新线程",
                             &ToggleNavigationMenu,
                             &focus_handle,
                             cx,
@@ -3547,7 +3547,7 @@ impl AgentPanel {
             }))
             .tooltip({
                 move |_window, cx| {
-                    Tooltip::for_action_in("Go Back", &workspace::GoBack, &focus_handle, cx)
+                    Tooltip::for_action_in("返回", &workspace::GoBack, &focus_handle, cx)
                 }
             })
     }
@@ -3598,7 +3598,7 @@ impl AgentPanel {
             .trigger_with_tooltip(trigger_button, {
                 move |_window, cx| {
                     Tooltip::for_action_in(
-                        "Start Thread In…",
+                        "在此处开始线程…",
                         &CycleStartThreadIn,
                         &focus_handle,
                         cx,
@@ -3613,9 +3613,9 @@ impl AgentPanel {
                 Some(ContextMenu::build(window, cx, move |menu, _window, _cx| {
                     let new_worktree_disabled = !has_git_repo || is_via_collab;
 
-                    menu.header("Start Thread In…")
+                    menu.header("在此处开始线程…")
                         .item(
-                            ContextMenuEntry::new("Current Worktree")
+                            ContextMenuEntry::new("当前 Worktree")
                                 .toggleable(IconPosition::End, is_local_selected)
                                 .documentation_aside(documentation_side, move |_| {
                                     HoldForDefault::new(is_local_default)
@@ -3643,7 +3643,7 @@ impl AgentPanel {
                                 }),
                         )
                         .item({
-                            let entry = ContextMenuEntry::new("New Git Worktree")
+                            let entry = ContextMenuEntry::new("新建 Git Worktree")
                                 .toggleable(IconPosition::End, is_new_worktree_selected)
                                 .disabled(new_worktree_disabled)
                                 .handler({
@@ -3669,9 +3669,9 @@ impl AgentPanel {
                             if new_worktree_disabled {
                                 entry.documentation_aside(documentation_side, move |_| {
                                     let reason = if !has_git_repo {
-                                        "No git repository found in this project."
+                                        "当前项目中未找到 git 仓库。"
                                     } else {
-                                        "Not available for remote/collab projects yet."
+                                        "暂不支持远程/协作项目。"
                                     };
                                     Label::new(reason)
                                         .color(Color::Muted)
@@ -3752,7 +3752,7 @@ impl AgentPanel {
                             if !thread.is_empty() {
                                 let session_id = thread.id().clone();
                                 this.item(
-                                    ContextMenuEntry::new("New From Summary")
+                                    ContextMenuEntry::new("从摘要新建")
                                         .icon(IconName::ThreadFromSummary)
                                         .icon_color(Color::Muted)
                                         .handler(move |window, cx| {
@@ -3803,7 +3803,7 @@ impl AgentPanel {
                                 }),
                         )
                         .item(
-                            ContextMenuEntry::new("Text Thread")
+                            ContextMenuEntry::new("文本线程")
                                 .action(NewTextThread.boxed_clone())
                                 .icon(IconName::TextThread)
                                 .icon_color(Color::Muted)
@@ -3829,7 +3829,7 @@ impl AgentPanel {
                                 }),
                         )
                         .separator()
-                        .header("External Agents")
+                        .header("外部 Agent")
                         .map(|mut menu| {
                             let agent_server_store = agent_server_store.read(cx);
                             let registry_store = project::AgentRegistryStore::try_global(cx);
@@ -3921,7 +3921,7 @@ impl AgentPanel {
                         })
                         .separator()
                         .item(
-                            ContextMenuEntry::new("Add More Agents")
+                            ContextMenuEntry::new("添加更多 Agent")
                                 .icon(IconName::Plus)
                                 .icon_color(Color::Muted)
                                 .handler({
@@ -3960,7 +3960,7 @@ impl AgentPanel {
                 Tooltip::with_meta(
                     selected_agent_label_for_tooltip.clone(),
                     None,
-                    "Selected Agent",
+                    "已选 Agent",
                     cx,
                 )
             });
@@ -4034,7 +4034,7 @@ impl AgentPanel {
                 .trigger_with_tooltip(agent_selector_button, {
                     move |_window, cx| {
                         Tooltip::for_action_in(
-                            "New Thread\u{2026}",
+                            "新建线程\u{2026}",
                             &ToggleNewThreadMenu,
                             &focus_handle,
                             cx,
@@ -4089,7 +4089,7 @@ impl AgentPanel {
                     {
                         move |_window, cx| {
                             Tooltip::for_action_in(
-                                "New Thread\u{2026}",
+                                "新建线程\u{2026}",
                                 &ToggleNewThreadMenu,
                                 &focus_handle,
                                 cx,
@@ -4155,7 +4155,7 @@ impl AgentPanel {
                             .with_rotate_animation(3),
                     )
                     .child(
-                        Label::new("Creating Worktree…")
+                        Label::new("正在创建 Worktree…")
                             .color(Color::Muted)
                             .size(LabelSize::Small),
                     )
@@ -4343,9 +4343,9 @@ impl AgentPanel {
                 .when(border_bottom, |this| {
                     this.border_position(ui::BorderPosition::Bottom)
                 })
-                .title("Sign in to continue using Zed as your LLM provider.")
+                .title("登录后可继续将 Zed 作为你的 LLM 提供方。")
                 .actions_slot(
-                    Button::new("sign_in", "Sign In")
+                    Button::new("sign_in", "登录")
                         .style(ButtonStyle::Tinted(ui::TintColor::Warning))
                         .label_size(LabelSize::Small)
                         .on_click({
@@ -4373,7 +4373,7 @@ impl AgentPanel {
                 })
                 .title(configuration_error.to_string())
                 .actions_slot(
-                    Button::new("settings", "Configure")
+                    Button::new("settings", "配置")
                         .style(ButtonStyle::Tinted(ui::TintColor::Warning))
                         .label_size(LabelSize::Small)
                         .key_binding(
@@ -4527,17 +4527,17 @@ impl AgentPanel {
             return None;
         }
 
-        let description = "To protect your system, third-party code—like MCP servers—won't run until you mark this workspace as safe.";
+        let description = "为保护你的系统，第三方代码（例如 MCP 服务器）在你将此工作区标记为安全之前不会运行。";
 
         Some(
             Callout::new()
                 .icon(IconName::Warning)
                 .severity(Severity::Warning)
                 .border_position(ui::BorderPosition::Bottom)
-                .title("You're in Restricted Mode")
+                .title("你处于受限模式")
                 .description(description)
                 .actions_slot(
-                    Button::new("open-trust-modal", "Configure Project Trust")
+                    Button::new("open-trust-modal", "配置项目信任")
                         .label_size(LabelSize::Small)
                         .style(ButtonStyle::Outlined)
                         .on_click({

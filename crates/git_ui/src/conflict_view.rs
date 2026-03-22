@@ -426,7 +426,7 @@ fn render_conflict_buttons(
                 }),
         )
         .child(
-            Button::new("both", "Use Both")
+            Button::new("both", "两者都保留")
                 .label_size(LabelSize::Small)
                 .on_click({
                     let editor = editor.clone();
@@ -448,7 +448,7 @@ fn render_conflict_buttons(
         )
         .when(is_ai_enabled, |this| {
             this.child(Divider::vertical()).child(
-                Button::new("resolve-with-agent", "Resolve with Agent")
+                Button::new("resolve-with-agent", "用 Agent 解决")
                     .label_size(LabelSize::Small)
                     .start_icon(
                         Icon::new(IconName::ZedAssistant)
@@ -565,7 +565,7 @@ pub(crate) fn register_conflict_notification(
                     );
 
                     MessageNotification::new(message, cx)
-                        .primary_message("Resolve with Agent")
+                        .primary_message("用 Agent 解决")
                         .primary_icon(IconName::ZedAssistant)
                         .primary_icon_color(Color::Muted)
                         .primary_on_click({

@@ -216,7 +216,7 @@ fn workspace_label_from_path_list(path_list: &PathList) -> SharedString {
     }
     if names.is_empty() {
         // TODO: Can we do something better in this case?
-        "Empty Workspace".into()
+        "空工作区".into()
     } else {
         names.join(", ").into()
     }
@@ -267,7 +267,7 @@ impl Sidebar {
         let filter_editor = cx.new(|cx| {
             let mut editor = Editor::single_line(window, cx);
             editor.set_use_modal_editing(true);
-            editor.set_placeholder_text("Search…", window, cx);
+            editor.set_placeholder_text("搜索…", window, cx);
             editor
         });
 
@@ -1302,7 +1302,7 @@ impl Sidebar {
                             )
                             .icon_size(IconSize::Small)
                             .icon_color(Color::Muted)
-                            .tooltip(Tooltip::text("Collapse Displayed Threads"))
+                            .tooltip(Tooltip::text("折叠当前显示的线程"))
                             .on_click(cx.listener({
                                 let path_list_for_collapse = path_list_for_collapse.clone();
                                 move |this, _, _window, cx| {
@@ -1324,7 +1324,7 @@ impl Sidebar {
                             )
                             .icon_size(IconSize::Small)
                             .icon_color(Color::Muted)
-                            .tooltip(Tooltip::text("Remove Project"))
+                            .tooltip(Tooltip::text("移除项目"))
                             .on_click(cx.listener(
                                 move |this, _, window, cx| {
                                     this.remove_workspace(&workspace_for_remove_btn, window, cx);
@@ -1342,7 +1342,7 @@ impl Sidebar {
                             )
                             .icon_size(IconSize::Small)
                             .icon_color(Color::Muted)
-                            .tooltip(Tooltip::text("New Thread"))
+                            .tooltip(Tooltip::text("新建线程"))
                             .on_click(cx.listener({
                                 let workspace_for_new_thread = workspace_for_new_thread.clone();
                                 let path_list_for_new_thread = path_list_for_new_thread.clone();
@@ -1414,7 +1414,7 @@ impl Sidebar {
                     let worktree_count = worktrees.len();
 
                     let mut menu = menu
-                        .header("Project Folders")
+                        .header("项目文件夹")
                         .end_slot_action(Box::new(menu::EndSlot));
 
                     for (worktree_id, name) in &worktrees {
@@ -1451,7 +1451,7 @@ impl Sidebar {
                             None,
                             |_, _| {},
                             IconName::Close,
-                            "Remove Folder".into(),
+                            "移除文件夹".into(),
                             remove_handler,
                         );
                     }
@@ -1459,7 +1459,7 @@ impl Sidebar {
                     let workspace_for_add = workspace.clone();
                     let multi_workspace_for_add = multi_workspace.clone();
                     menu.separator().entry(
-                        "Add Folder to Project",
+                        "将文件夹添加到项目",
                         Some(Box::new(AddFolderToProject)),
                         move |window, cx| {
                             if let Some(mw) = multi_workspace_for_add.upgrade() {
@@ -2379,7 +2379,7 @@ impl Sidebar {
             .session_info
             .title
             .clone()
-            .unwrap_or_else(|| "Untitled".into());
+            .unwrap_or_else(|| "未命名".into());
         let session_info = thread.session_info.clone();
         let thread_workspace = thread.workspace.clone();
 
@@ -2443,7 +2443,7 @@ impl Sidebar {
                         .icon_size(IconSize::Small)
                         .icon_color(Color::Error)
                         .style(ButtonStyle::Tinted(TintColor::Error))
-                        .tooltip(Tooltip::text("Stop Generation"))
+                        .tooltip(Tooltip::text("停止生成"))
                         .on_click({
                             let session_id = session_id_for_delete.clone();
                             cx.listener(move |this, _, _window, cx| {
@@ -2461,7 +2461,7 @@ impl Sidebar {
                             let focus_handle = focus_handle.clone();
                             move |_window, cx| {
                                 Tooltip::for_action_in(
-                                    "Archive Thread",
+                                    "归档线程",
                                     &RemoveSelectedThread,
                                     &focus_handle,
                                     cx,
@@ -2562,7 +2562,7 @@ impl Sidebar {
                     .selected_style(ButtonStyle::Tinted(TintColor::Accent)),
                 |_window, cx| {
                     Tooltip::for_action(
-                        "Add Project",
+                        "添加项目",
                         &OpenRecent {
                             create_new_window: false,
                         },
@@ -2589,9 +2589,9 @@ impl Sidebar {
         let id = SharedString::from(format!("view-more-{}", ix));
 
         let label: SharedString = if is_fully_expanded {
-            "Collapse".into()
+            "折叠".into()
         } else {
-            "View More".into()
+            "查看更多".into()
         };
 
         ThreadItem::new(id, label)
@@ -2691,9 +2691,9 @@ impl Sidebar {
 
         let label: SharedString = if is_active {
             self.active_draft_text(cx)
-                .unwrap_or_else(|| "New Thread".into())
+                .unwrap_or_else(|| "新建线程".into())
         } else {
-            "New Thread".into()
+            "新建线程".into()
         };
 
         let workspace = workspace.clone();
@@ -2726,9 +2726,9 @@ impl Sidebar {
     fn render_no_results(&self, cx: &mut Context<Self>) -> impl IntoElement {
         let has_query = self.has_filter_query(cx);
         let message = if has_query {
-            "No threads match your search."
+            "没有线程匹配你的搜索。"
         } else {
-            "No threads yet"
+            "暂无线程"
         };
 
         v_flex()
@@ -2754,7 +2754,7 @@ impl Sidebar {
             .gap_1()
             .track_focus(&self.focus_handle(cx))
             .child(
-                Button::new("open_project", "Open Project")
+                Button::new("open_project", "打开项目")
                     .full_width()
                     .key_binding(KeyBinding::for_action(&workspace::Open::default(), cx))
                     .on_click(|_, window, cx| {
@@ -2772,11 +2772,11 @@ impl Sidebar {
                     .w_1_2()
                     .gap_2()
                     .child(Divider::horizontal())
-                    .child(Label::new("or").size(LabelSize::XSmall).color(Color::Muted))
+                    .child(Label::new("或").size(LabelSize::XSmall).color(Color::Muted))
                     .child(Divider::horizontal()),
             )
             .child(
-                Button::new("clone_repo", "Clone Repository")
+                Button::new("clone_repo", "克隆仓库")
                     .full_width()
                     .on_click(|_, window, cx| {
                         window.dispatch_action(git::Clone.boxed_clone(), cx);
@@ -2827,7 +2827,7 @@ impl Sidebar {
                                 this.child(
                                     IconButton::new("clear_filter", IconName::Close)
                                         .icon_size(IconSize::Small)
-                                        .tooltip(Tooltip::text("Clear Search"))
+                                        .tooltip(Tooltip::text("清除搜索"))
                                         .on_click(cx.listener(|this, _, window, cx| {
                                             this.reset_filter_editor_text(window, cx);
                                             this.update_entries(cx);
@@ -2848,7 +2848,7 @@ impl Sidebar {
                         h_flex()
                             .gap_2()
                             .justify_between()
-                            .child(Label::new("Toggle Sidebar"))
+                            .child(Label::new("切换侧边栏"))
                             .child(KeyBinding::for_action(&ToggleWorkspaceSidebar, cx)),
                     )
                     .child(
@@ -2858,7 +2858,7 @@ impl Sidebar {
                             .border_t_1()
                             .border_color(cx.theme().colors().border_variant)
                             .justify_between()
-                            .child(Label::new("Focus Sidebar"))
+                            .child(Label::new("聚焦侧边栏"))
                             .child(KeyBinding::for_action(&FocusWorkspaceSidebar, cx)),
                     )
                     .into_any_element()
@@ -3065,7 +3065,7 @@ impl Render for Sidebar {
                                     .toggle_state(matches!(self.view, SidebarView::Archive(..)))
                                     .tooltip(move |_, cx| {
                                         Tooltip::for_action(
-                                            "Toggle Archived Threads",
+                                            "切换已归档线程",
                                             &ToggleArchive,
                                             cx,
                                         )
@@ -3264,7 +3264,7 @@ mod tests {
                                 .title
                                 .as_ref()
                                 .map(|s| s.as_ref())
-                                .unwrap_or("Untitled");
+                                .unwrap_or("未命名");
                             let active = if thread.is_live { " *" } else { "" };
                             let status_str = match thread.status {
                                 AgentThreadStatus::Running => " (running)",

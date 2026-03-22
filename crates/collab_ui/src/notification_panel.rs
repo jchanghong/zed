@@ -302,9 +302,9 @@ impl NotificationPanel {
                                 .children(if let Some(is_accepted) = response {
                                     Some(div().flex().flex_grow().justify_end().child(Label::new(
                                         if is_accepted {
-                                            "You accepted"
+                                            "你已接受"
                                         } else {
-                                            "You declined"
+                                            "你已拒绝"
                                         },
                                     )))
                                 } else if needs_response {
@@ -312,7 +312,7 @@ impl NotificationPanel {
                                         h_flex()
                                             .flex_grow()
                                             .justify_end()
-                                            .child(Button::new("decline", "Decline").on_click({
+                                            .child(Button::new("decline", "拒绝").on_click({
                                                 let notification = notification.clone();
                                                 let entity = cx.entity();
                                                 move |_, _, cx| {
@@ -325,7 +325,7 @@ impl NotificationPanel {
                                                     });
                                                 }
                                             }))
-                                            .child(Button::new("accept", "Accept").on_click({
+                                            .child(Button::new("accept", "接受").on_click({
                                                 let notification = notification.clone();
                                                 let entity = cx.entity();
                                                 move |_, _, cx| {
@@ -530,7 +530,7 @@ impl Render for NotificationPanel {
                     .h(Tab::container_height(cx))
                     .border_b_1()
                     .border_color(cx.theme().colors().border)
-                    .child(Label::new("Notifications"))
+                    .child(Label::new("通知"))
                     .child(Icon::new(IconName::Envelope)),
             )
             .map(|this| {
@@ -540,7 +540,7 @@ impl Render for NotificationPanel {
                             .gap_2()
                             .p_4()
                             .child(
-                                Button::new("connect_prompt_button", "Connect")
+                                Button::new("connect_prompt_button", "连接")
                                     .start_icon(Icon::new(IconName::Github).color(Color::Muted))
                                     .style(ButtonStyle::Filled)
                                     .full_width()
@@ -568,7 +568,7 @@ impl Render for NotificationPanel {
                             )
                             .child(
                                 div().flex().w_full().items_center().child(
-                                    Label::new("Connect to view notifications.")
+                                    Label::new("连接后查看通知。")
                                         .color(Color::Muted)
                                         .size(LabelSize::Small),
                                 ),
@@ -578,7 +578,7 @@ impl Render for NotificationPanel {
                     this.child(
                         v_flex().p_4().child(
                             div().flex().w_full().items_center().child(
-                                Label::new("You have no notifications.")
+                                Label::new("你没有通知。")
                                     .color(Color::Muted)
                                     .size(LabelSize::Small),
                             ),
@@ -670,7 +670,7 @@ impl Panel for NotificationPanel {
     }
 
     fn icon_tooltip(&self, _window: &Window, _cx: &App) -> Option<&'static str> {
-        Some("Notification Panel")
+        Some("通知面板")
     }
 
     fn icon_label(&self, _window: &Window, cx: &App) -> Option<String> {
@@ -746,13 +746,13 @@ impl Render for NotificationToast {
                     .tooltip(move |_window, cx| {
                         if suppress {
                             Tooltip::for_action(
-                                "Suppress.\nClose with click.",
+                                "抑制。\n点击可关闭。",
                                 &workspace::SuppressNotification,
                                 cx,
                             )
                         } else {
                             Tooltip::for_action(
-                                "Close.\nSuppress with shift-click",
+                                "关闭。\n按住 Shift 点击可抑制。",
                                 &menu::Cancel,
                                 cx,
                             )

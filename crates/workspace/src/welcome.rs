@@ -166,46 +166,46 @@ impl SectionEntry {
 
 const CONTENT: (Section<4>, Section<3>) = (
     Section {
-        title: "Get Started",
+        title: "开始使用",
         entries: [
             SectionEntry {
                 icon: IconName::Plus,
-                title: "New File",
+                title: "新建文件",
                 action: &NewFile,
                 visibility_guard: SectionVisibility::Always,
             },
             SectionEntry {
                 icon: IconName::FolderOpen,
-                title: "Open Project",
+                title: "打开项目",
                 action: &Open::DEFAULT,
                 visibility_guard: SectionVisibility::Always,
             },
             SectionEntry {
                 icon: IconName::CloudDownload,
-                title: "Clone Repository",
+                title: "克隆仓库",
                 action: &GitClone,
                 visibility_guard: SectionVisibility::Always,
             },
             SectionEntry {
                 icon: IconName::ListCollapse,
-                title: "Open Command Palette",
+                title: "打开命令面板",
                 action: &command_palette::Toggle,
                 visibility_guard: SectionVisibility::Always,
             },
         ],
     },
     Section {
-        title: "Configure",
+        title: "配置",
         entries: [
             SectionEntry {
                 icon: IconName::Settings,
-                title: "Open Settings",
+                title: "打开设置",
                 action: &OpenSettings,
                 visibility_guard: SectionVisibility::Always,
             },
             SectionEntry {
                 icon: IconName::ZedAssistant,
-                title: "View AI Settings",
+                title: "查看 AI 设置",
                 action: &agent::OpenSettings,
                 visibility_guard: SectionVisibility::Conditional(|cx| {
                     !DisableAiSettings::get_global(cx).disable_ai
@@ -213,7 +213,7 @@ const CONTENT: (Section<4>, Section<3>) = (
             },
             SectionEntry {
                 icon: IconName::Blocks,
-                title: "Explore Extensions",
+                title: "浏览扩展",
                 action: &Extensions {
                     category_filter: None,
                     id: None,
@@ -344,7 +344,7 @@ impl WelcomePage {
     ) -> impl IntoElement {
         v_flex()
             .w_full()
-            .child(SectionHeader::new("Recent Projects"))
+            .child(SectionHeader::new("最近项目"))
             .children(recent_projects)
     }
 
@@ -361,11 +361,11 @@ impl WelcomePage {
                 let name = path
                     .and_then(|p| p.file_name())
                     .map(|n| n.to_string_lossy().to_string())
-                    .unwrap_or_else(|| "Untitled".to_string());
+                    .unwrap_or_else(|| "未命名".to_string());
                 (IconName::Folder, name)
             }
             SerializedWorkspaceLocation::Remote(_) => {
-                (IconName::Server, "Remote Project".to_string())
+                (IconName::Server, "远程项目".to_string())
             }
         };
 
@@ -409,9 +409,9 @@ impl Render for WelcomePage {
         };
 
         let welcome_label = if self.fallback_to_recent_projects {
-            "Welcome back to Zed"
+            "欢迎回到 Zed"
         } else {
-            "Welcome to Zed"
+            "欢迎使用 Zed"
         };
 
         h_flex()
@@ -447,7 +447,7 @@ impl Render for WelcomePage {
                                     .child(Vector::square(VectorName::ZedLogo, rems_from_px(45.)))
                                     .child(
                                         v_flex().child(Headline::new(welcome_label)).child(
-                                            Label::new("The editor for what's next")
+                                            Label::new("面向未来的编辑器")
                                                 .size(LabelSize::Small)
                                                 .color(Color::Muted)
                                                 .italic(),
@@ -459,7 +459,7 @@ impl Render for WelcomePage {
                             .when(!self.fallback_to_recent_projects, |this| {
                                 this.child(
                                     v_flex().gap_1().child(Divider::horizontal()).child(
-                                        Button::new("welcome-exit", "Return to Onboarding")
+                                        Button::new("welcome-exit", "返回入门引导")
                                             .tab_index(last_index as isize)
                                             .full_width()
                                             .label_size(LabelSize::XSmall)
@@ -489,7 +489,7 @@ impl Item for WelcomePage {
     type Event = ItemEvent;
 
     fn tab_content_text(&self, _detail: usize, _cx: &App) -> SharedString {
-        "Welcome".into()
+        "欢迎".into()
     }
 
     fn telemetry_event_text(&self) -> Option<&'static str> {

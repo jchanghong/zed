@@ -412,7 +412,7 @@ impl PickerDelegate for SidebarRecentProjectsDelegate {
                     let open_action = workspace::Open {
                         create_new_window: false,
                     };
-                    Button::new("open_local_folder", "Add Local Project")
+                    Button::new("open_local_folder", "添加本地项目")
                         .key_binding(KeyBinding::for_action_in(&open_action, &focus_handle, cx))
                         .on_click(move |_, window, cx| {
                             window.dispatch_action(open_action.boxed_clone(), cx)

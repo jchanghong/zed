@@ -604,7 +604,7 @@ impl PickerDelegate for WorktreeListDelegate {
     type ListItem = ListItem;
 
     fn placeholder_text(&self, _window: &mut Window, _cx: &mut App) -> Arc<str> {
-        "Select worktree…".into()
+        "选择工作树…".into()
     }
 
     fn editor_position(&self) -> PickerEditorPosition {
@@ -741,7 +741,7 @@ impl PickerDelegate for WorktreeListDelegate {
         let (branch_name, sublabel) = if entry.is_new {
             (
                 Label::new(format!(
-                    "Create Worktree: \"{}\"…",
+                    "创建工作树: \"{}\"…",
                     entry.worktree.display_name()
                 ))
                 .truncate()
@@ -805,7 +805,7 @@ impl PickerDelegate for WorktreeListDelegate {
     }
 
     fn no_matches_text(&self, _window: &mut Window, _cx: &mut App) -> Option<SharedString> {
-        Some("No worktrees found".into())
+        Some("未找到工作树".into())
     }
 
     fn render_footer(&self, _: &mut Window, cx: &mut Context<Picker<Self>>) -> Option<AnyElement> {
@@ -860,7 +860,7 @@ impl PickerDelegate for WorktreeListDelegate {
             Some(
                 footer_container
                     .child(
-                        Button::new("delete-worktree", "Delete")
+                        Button::new("delete-worktree", "删除")
                             .key_binding(
                                 KeyBinding::for_action_in(&DeleteWorktree, &focus_handle, cx)
                                     .map(|kb| kb.size(rems_from_px(12.))),
@@ -870,7 +870,7 @@ impl PickerDelegate for WorktreeListDelegate {
                             }),
                     )
                     .child(
-                        Button::new("open-in-new-window", "Open in New Window")
+                        Button::new("open-in-new-window", "在新窗口中打开")
                             .key_binding(
                                 KeyBinding::for_action_in(&menu::Confirm, &focus_handle, cx)
                                     .map(|kb| kb.size(rems_from_px(12.))),
@@ -880,7 +880,7 @@ impl PickerDelegate for WorktreeListDelegate {
                             }),
                     )
                     .child(
-                        Button::new("open-in-window", "Open")
+                        Button::new("open-in-window", "打开")
                             .key_binding(
                                 KeyBinding::for_action_in(
                                     &menu::SecondaryConfirm,

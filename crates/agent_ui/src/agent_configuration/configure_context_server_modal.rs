@@ -566,9 +566,9 @@ impl ConfigureContextServerModal {
                         format!("{} configured successfully.", id.0),
                         cx,
                         |this, _cx| {
-                            this.icon(ToastIcon::new(IconName::ToolHammer).color(Color::Muted))
-                                .action("Dismiss", |_, _| {})
-                        },
+                                this.icon(ToastIcon::new(IconName::ToolHammer).color(Color::Muted))
+                                .action("关闭", |_, _| {})
+                            },
                     );
 
                     workspace.toggle_status_toast(status_toast, cx);
@@ -607,15 +607,15 @@ impl EventEmitter<DismissEvent> for ConfigureContextServerModal {}
 impl ConfigureContextServerModal {
     fn render_modal_header(&self) -> ModalHeader {
         let text: SharedString = match &self.source {
-            ConfigurationSource::New { .. } => "Add MCP Server".into(),
-            ConfigurationSource::Existing { .. } => "Configure MCP Server".into(),
+            ConfigurationSource::New { .. } => "添加 MCP 服务器".into(),
+            ConfigurationSource::Existing { .. } => "配置 MCP 服务器".into(),
             ConfigurationSource::Extension { id, .. } => format!("Configure {}", id.0).into(),
         };
         ModalHeader::new().headline(text)
     }
 
     fn render_modal_description(&self, window: &mut Window, cx: &mut Context<Self>) -> AnyElement {
-        const MODAL_DESCRIPTION: &str = "Visit the MCP server configuration docs to find all necessary arguments and environment variables.";
+        const MODAL_DESCRIPTION: &str = "查看 MCP 服务器配置文档，以找到所有必需的参数和环境变量。";
 
         if let ConfigurationSource::Extension {
             installation_instructions: Some(installation_instructions),
@@ -692,7 +692,7 @@ impl ConfigureContextServerModal {
                 } = &self.source
                 {
                     Some(
-                        Button::new("open-repository", "Open Repository")
+                        Button::new("open-repository", "打开仓库")
                             .end_icon(
                                 Icon::new(IconName::ArrowUpRight)
                                     .size(IconSize::Small)
@@ -702,7 +702,7 @@ impl ConfigureContextServerModal {
                                 let repository_url = repository_url.clone();
                                 move |_window, cx| {
                                     Tooltip::with_meta(
-                                        "Open Repository",
+                                        "打开仓库",
                                         None,
                                         repository_url.clone(),
                                         cx,
@@ -716,14 +716,14 @@ impl ConfigureContextServerModal {
                     )
                 } else if let ConfigurationSource::New { is_http, .. } = &self.source {
                     let label = if *is_http {
-                        "Configure Local"
+                        "配置本地"
                     } else {
-                        "Configure Remote"
+                        "配置远程"
                     };
                     let tooltip = if *is_http {
-                        "Configure an MCP server that runs on stdin/stdout."
+                        "配置一个运行在 stdin/stdout 上的 MCP 服务器。"
                     } else {
-                        "Configure an MCP server that you connect to over HTTP"
+                        "配置一个通过 HTTP 连接的 MCP 服务器。"
                     };
 
                     Some(
@@ -755,9 +755,9 @@ impl ConfigureContextServerModal {
                         Button::new(
                             "cancel",
                             if self.source.has_configuration_options() {
-                                "Cancel"
+                                "取消"
                             } else {
-                                "Dismiss"
+                                "关闭"
                             },
                         )
                         .key_binding(
@@ -772,9 +772,9 @@ impl ConfigureContextServerModal {
                         Button::new(
                             "add-server",
                             if self.source.is_new() {
-                                "Add Server"
+                                "添加服务器"
                             } else {
-                                "Configure Server"
+                                "配置服务器"
                             },
                         )
                         .disabled(is_connecting)
@@ -802,7 +802,7 @@ impl ConfigureContextServerModal {
                     .into_any_element(),
             )
             .child(
-                Label::new("Waiting for Context Server")
+                Label::new("正在等待 Context Server")
                     .size(LabelSize::Small)
                     .color(Color::Muted),
             )

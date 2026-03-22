@@ -400,14 +400,14 @@ impl MemoryView {
         if !self.is_writing_memory {
             self.query_editor.update(cx, |this, cx| {
                 this.clear(window, cx);
-                this.set_placeholder_text("Write to Selected Memory Range", window, cx);
+                this.set_placeholder_text("向选定内存范围写入", window, cx);
             });
             self.is_writing_memory = true;
             self.query_editor.focus_handle(cx).focus(window, cx);
         } else {
             self.query_editor.update(cx, |this, cx| {
                 this.clear(window, cx);
-                this.set_placeholder_text("Go to Memory Address / Expression", window, cx);
+                this.set_placeholder_text("转到内存地址 / 表达式", window, cx);
             });
             self.is_writing_memory = false;
         }
@@ -630,14 +630,14 @@ impl MemoryView {
 
             let mut menu = menu.action_disabled_when(
                 range_too_large || *memory_unreadable,
-                "Go To Selected Address",
+                "转到选定地址",
                 GoToSelectedAddress.boxed_clone(),
             );
 
             if supports_data_breakpoints {
                 menu = menu.action_disabled_when(
                     *memory_unreadable,
-                    "Set Data Breakpoint",
+                    "设置数据断点",
                     ToggleDataBreakpoint { access_type: None }.boxed_clone(),
                 );
             }
@@ -679,13 +679,13 @@ impl ViewWidth {
 }
 
 static WIDTHS: [ViewWidth; 7] = [
-    ViewWidth::new(1, "1 byte"),
-    ViewWidth::new(2, "2 bytes"),
-    ViewWidth::new(4, "4 bytes"),
-    ViewWidth::new(8, "8 bytes"),
-    ViewWidth::new(16, "16 bytes"),
-    ViewWidth::new(32, "32 bytes"),
-    ViewWidth::new(64, "64 bytes"),
+    ViewWidth::new(1, "1 字节"),
+    ViewWidth::new(2, "2 字节"),
+    ViewWidth::new(4, "4 字节"),
+    ViewWidth::new(8, "8 字节"),
+    ViewWidth::new(16, "16 字节"),
+    ViewWidth::new(32, "32 字节"),
+    ViewWidth::new(64, "64 字节"),
 ];
 
 fn render_single_memory_view_line(
@@ -852,11 +852,11 @@ impl Render for MemoryView {
         cx: &mut ui::Context<Self>,
     ) -> impl ui::IntoElement {
         let (icon, tooltip_text) = if self.is_writing_memory {
-            (IconName::Pencil, "Edit memory at a selected address")
+            (IconName::Pencil, "编辑选定地址的内存")
         } else {
             (
                 IconName::LocationEdit,
-                "Change address of currently viewed memory",
+                "更改当前查看的内存地址",
             )
         };
         v_flex()

@@ -650,9 +650,9 @@ impl PickerDelegate for OpenPathDelegate {
                             gpui::PromptLevel::Critical,
                             &format!("{prompted_path:?} already exists. Do you want to replace it?"),
                             Some(
-                                "A file or folder with the same name already exists. Replacing it will overwrite its current contents.",
+                                "同名文件或文件夹已存在。替换后会覆盖其当前内容。",
                             ),
-                            &["Replace", "Cancel"],
+                            &["替换", "取消"],
                             cx
                         );
                         self.replace_prompt = cx.spawn_in(window, async move |picker, cx| {
@@ -744,7 +744,7 @@ impl PickerDelegate for OpenPathDelegate {
         match &self.directory_state {
             DirectoryState::List { parent_path, .. } => {
                 let (label, indices) = if is_current_dir_candidate {
-                    ("open this directory".to_string(), vec![])
+                    ("打开此目录".to_string(), vec![])
                 } else if *parent_path == self.prompt_root {
                     match_positions.iter_mut().for_each(|position| {
                         *position += self.prompt_root.len();
@@ -842,7 +842,7 @@ impl PickerDelegate for OpenPathDelegate {
 
     fn no_matches_text(&self, _window: &mut Window, _cx: &mut App) -> Option<SharedString> {
         Some(match &self.directory_state {
-            DirectoryState::Create { .. } => SharedString::from("Type a path…"),
+            DirectoryState::Create { .. } => SharedString::from("输入路径…"),
             DirectoryState::List {
                 error: Some(error), ..
             } => error.clone(),

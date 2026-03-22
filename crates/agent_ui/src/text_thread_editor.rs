@@ -895,7 +895,7 @@ impl TextThreadEditor {
                     )
                     .with_metadata(CreaseMetadata {
                         icon_path: SharedString::from(IconName::Ai.path()),
-                        label: "Thinking Process".into(),
+                        label: "思考过程".into(),
                     }),
                 );
             }
@@ -1069,7 +1069,7 @@ impl TextThreadEditor {
 
                         let (label, spinner, note) = match message.role {
                             Role::User => (
-                                Label::new("You").color(Color::Default).into_any_element(),
+                                Label::new("你").color(Color::Default).into_any_element(),
                                 None,
                                 None,
                             ),
@@ -1126,9 +1126,9 @@ impl TextThreadEditor {
                                     )
                                     .tooltip(|_window, cx| {
                                         Tooltip::with_meta(
-                                            "Toggle message role",
+                                            "切换消息角色",
                                             None,
-                                            "Available roles: You (User), Agent, System",
+                                            "可用角色：你（用户）、Agent、System",
                                             cx,
                                         )
                                     })
@@ -1166,9 +1166,9 @@ impl TextThreadEditor {
                                             )
                                             .tooltip(|_window, cx| {
                                                 Tooltip::with_meta(
-                                                    "Context Cached",
+                                                    "上下文已缓存",
                                                     None,
-                                                    "Large messages cached to optimize performance",
+                                                    "较大的消息会被缓存以优化性能",
                                                     cx,
                                                 )
                                             })
@@ -1188,7 +1188,7 @@ impl TextThreadEditor {
                             })
                             .children(match &message.status {
                                 MessageStatus::Error(error) => Some(
-                                    Button::new("show-error", "Error")
+                                    Button::new("show-error", "错误")
                                         .color(Color::Error)
                                         .selected_label_color(Color::Error)
                                         .start_icon(
@@ -1196,7 +1196,7 @@ impl TextThreadEditor {
                                                 .size(IconSize::XSmall)
                                                 .color(Color::Error),
                                         )
-                                        .tooltip(Tooltip::text("View Details"))
+                                        .tooltip(Tooltip::text("查看详情"))
                                         .on_click({
                                             let text_thread = text_thread.clone();
                                             let error = error.clone();
@@ -1220,7 +1220,7 @@ impl TextThreadEditor {
                                                 .size(IconSize::XSmall),
                                         )
                                         .child(
-                                            Label::new("Canceled")
+                                            Label::new("已取消")
                                                 .size(LabelSize::Small)
                                                 .color(Color::Disabled),
                                         )
@@ -2130,7 +2130,7 @@ impl TextThreadEditor {
                     over_warn_threshold,
                 } => {
                     let (color, tooltip) = if over_warn_threshold {
-                        (Color::Warning, Some("Token Limit is Close to Exhaustion"))
+                        (Color::Warning, Some("Token 限额接近耗尽"))
                     } else {
                         (Color::Muted, None)
                     };
@@ -2165,7 +2165,7 @@ impl TextThreadEditor {
         let (style, tooltip) = match token_state(&self.text_thread, cx) {
             Some(TokenState::NoTokensLeft { .. }) => (
                 ButtonStyle::Tinted(TintColor::Error),
-                Some(Tooltip::text("Token limit reached")(window, cx)),
+                Some(Tooltip::text("Token 限额已达")(window, cx)),
             ),
             Some(TokenState::HasMoreTokens {
                 over_warn_threshold,
@@ -2174,7 +2174,7 @@ impl TextThreadEditor {
                 let (style, tooltip) = if over_warn_threshold {
                     (
                         ButtonStyle::Tinted(TintColor::Warning),
-                        Some(Tooltip::text("Token limit is close to exhaustion")(
+                        Some(Tooltip::text("Token 限额接近耗尽")(
                             window, cx,
                         )),
                     )
@@ -2186,7 +2186,7 @@ impl TextThreadEditor {
             None => (ButtonStyle::Filled, None),
         };
 
-        Button::new("send_button", "Send")
+        Button::new("send_button", "发送")
             .label_size(LabelSize::Small)
             .disabled(self.sending_disabled(cx))
             .style(style)
@@ -2231,7 +2231,7 @@ impl TextThreadEditor {
                 .selected_icon_color(Color::Accent)
                 .selected_style(ButtonStyle::Filled),
             move |_window, cx| {
-                Tooltip::with_meta("Add Context", None, "Type / to insert via keyboard", cx)
+                Tooltip::with_meta("添加上下文", None, "输入 / 可通过键盘插入", cx)
             },
         )
     }
@@ -2246,7 +2246,7 @@ impl TextThreadEditor {
             .map(|default| default.model);
         let model_name = match active_model {
             Some(model) => model.name().0,
-            None => SharedString::from("Select Model"),
+            None => SharedString::from("选择 Model"),
         };
 
         let active_provider = LanguageModelRegistry::read_global(cx)
@@ -2334,7 +2334,7 @@ impl TextThreadEditor {
                     .gap_1p5()
                     .items_center()
                     .child(Icon::new(IconName::XCircle).color(Color::Error))
-                    .child(Label::new("Free Usage Exceeded").weight(FontWeight::MEDIUM)),
+                    .child(Label::new("免费使用已超出").weight(FontWeight::MEDIUM)),
             )
             .child(
                 div()
@@ -2347,14 +2347,14 @@ impl TextThreadEditor {
                 h_flex()
                     .justify_end()
                     .mt_1()
-                    .child(Button::new("subscribe", "Subscribe").on_click(cx.listener(
+                    .child(Button::new("subscribe", "订阅").on_click(cx.listener(
                         |this, _, _window, cx| {
                             this.last_error = None;
                             cx.open_url(&zed_urls::account_url(cx));
                             cx.notify();
                         },
                     )))
-                    .child(Button::new("dismiss", "Dismiss").on_click(cx.listener(
+                    .child(Button::new("dismiss", "关闭").on_click(cx.listener(
                         |this, _, _window, cx| {
                             this.last_error = None;
                             cx.notify();
@@ -2377,7 +2377,7 @@ impl TextThreadEditor {
                     .items_center()
                     .child(Icon::new(IconName::XCircle).color(Color::Error))
                     .child(
-                        Label::new("Error interacting with language model")
+                        Label::new("与 LLM 交互时发生错误")
                             .weight(FontWeight::MEDIUM),
                     ),
             )
@@ -2392,7 +2392,7 @@ impl TextThreadEditor {
                 h_flex()
                     .justify_end()
                     .mt_1()
-                    .child(Button::new("dismiss", "Dismiss").on_click(cx.listener(
+                    .child(Button::new("dismiss", "关闭").on_click(cx.listener(
                         |this, _, _window, cx| {
                             this.last_error = None;
                             cx.notify();
@@ -2461,7 +2461,7 @@ fn render_thought_process_fold_icon_button(
                         .color(Color::Muted),
                 )
                 .child(
-                    Label::new("Thinking…").color(Color::Muted).with_animation(
+                    Label::new("思考中…").color(Color::Muted).with_animation(
                         "pulsating-label",
                         Animation::new(Duration::from_secs(2))
                             .repeat()
@@ -2472,7 +2472,7 @@ fn render_thought_process_fold_icon_button(
             ThoughtProcessStatus::Completed => button
                 .style(ButtonStyle::Filled)
                 .child(Icon::new(IconName::ToolThink).size(IconSize::Small))
-                .child(Label::new("Thought Process").single_line()),
+                .child(Label::new("思考过程").single_line()),
         };
 
         button

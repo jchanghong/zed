@@ -813,24 +813,24 @@ impl Render for HighlightsTreeView {
                             if self.editor.is_some() {
                                 let has_any = !self.cached_entries.is_empty();
                                 if has_any {
-                                    this.child(Label::new("All highlights are filtered out"))
+                                    this.child(Label::new("所有高亮都被筛掉了"))
                                         .child(
                                             Label::new(
-                                                "Enable text, syntax, or semantic highlights in the toolbar",
+                                                "在工具栏中启用文本、语法或语义高亮",
                                             )
                                             .size(LabelSize::Small),
                                         )
                                 } else {
-                                    this.child(Label::new("No highlights found")).child(
+                                    this.child(Label::new("未找到高亮")).child(
                                         Label::new(
-                                            "The editor has no text, syntax, or semantic token highlights",
+                                            "当前编辑器没有文本、语法或语义 token 高亮",
                                         )
                                         .size(LabelSize::Small),
                                     )
                                 }
                             } else {
-                                this.child(Label::new("Not attached to an editor")).child(
-                                    Label::new("Focus an editor to show highlights")
+                                this.child(Label::new("未附加到编辑器")).child(
+                                    Label::new("聚焦一个编辑器以显示高亮")
                                         .size(LabelSize::Small),
                                 )
                             }
@@ -953,7 +953,7 @@ impl HighlightsTreeToolbarItemView {
                     .icon_size(IconSize::Small)
                     .style(ButtonStyle::Subtle)
                     .toggle_state(self.toggle_settings_handle.is_deployed()),
-                Tooltip::text("Highlights Settings"),
+                Tooltip::text("高亮设置"),
             )
             .anchor(Corner::TopRight)
             .with_handle(self.toggle_settings_handle.clone())

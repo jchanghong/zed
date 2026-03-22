@@ -178,7 +178,7 @@ impl ChangedFileEntry {
                         } else {
                             format!("{}/{}", dir_path, file_name).into()
                         };
-                        move |_, cx| Tooltip::with_meta("View Changes", None, meta.clone(), cx)
+                        move |_, cx| Tooltip::with_meta("查看更改", None, meta.clone(), cx)
                     })
                     .on_click({
                         let entry = self.clone();
@@ -1116,7 +1116,7 @@ impl GitGraph {
                     author_name = data.author_name.clone();
                     formatted_time = format_timestamp(data.commit_timestamp);
                 } else {
-                    subject = "Loading…".into();
+                    subject = "加载中…".into();
                     author_name = "".into();
                 }
 
@@ -1367,7 +1367,7 @@ impl GitGraph {
                 Some(data.commit_timestamp),
                 data.subject.clone(),
             ),
-            CommitDataState::Loading => ("Loading…".into(), "".into(), None, "Loading…".into()),
+            CommitDataState::Loading => ("加载中…".into(), "".into(), None, "加载中…".into()),
         };
 
         let date_string = commit_timestamp
@@ -1535,9 +1535,9 @@ impl GitGraph {
                                 let is_copied = copied_state.read(cx).is_copied();
 
                                 let (icon, icon_color, tooltip_label) = if is_copied {
-                                    (IconName::Check, Color::Success, "Commit SHA Copied!")
+                                    (IconName::Check, Color::Success, "提交 SHA 已复制！")
                                 } else {
-                                    (IconName::Hash, Color::Muted, "Copy Commit SHA")
+                                    (IconName::Hash, Color::Muted, "复制提交 SHA")
                                 };
 
                                 Button::new("sha-button", &full_sha)
@@ -1676,7 +1676,7 @@ impl GitGraph {
             .child(Divider::horizontal())
             .child(
                 h_flex().p_1p5().w_full().child(
-                    Button::new("view-commit", "View Commit")
+                    Button::new("view-commit", "查看提交")
                         .full_width()
                         .style(ButtonStyle::Outlined)
                         .on_click(cx.listener(|this, _, window, cx| {
@@ -2136,7 +2136,7 @@ impl Render for GitGraph {
                                 .border_b_1()
                                 .whitespace_nowrap()
                                 .border_color(cx.theme().colors().border)
-                                .child(Label::new("Graph").color(Color::Muted)),
+                                .child(Label::new("图").color(Color::Muted)),
                         )
                         .child(
                             div()
@@ -2167,12 +2167,12 @@ impl Render for GitGraph {
                             .hide_row_borders()
                             .hide_row_hover()
                             .header(vec![
-                                Label::new("Description")
+                                Label::new("描述")
                                     .color(Color::Muted)
                                     .into_any_element(),
-                                Label::new("Date").color(Color::Muted).into_any_element(),
-                                Label::new("Author").color(Color::Muted).into_any_element(),
-                                Label::new("Commit").color(Color::Muted).into_any_element(),
+                                Label::new("日期").color(Color::Muted).into_any_element(),
+                                Label::new("作者").color(Color::Muted).into_any_element(),
+                                Label::new("提交").color(Color::Muted).into_any_element(),
                             ])
                             .column_widths(
                                 [
@@ -2314,7 +2314,7 @@ impl Item for GitGraph {
         Some(TabTooltipContent::Custom(Box::new(Tooltip::element({
             move |_, _| {
                 v_flex()
-                    .child(Label::new("Git Graph"))
+                    .child(Label::new("Git 图"))
                     .when_some(repo_name.clone(), |this, name| {
                         this.child(Label::new(name).color(Color::Muted).size(LabelSize::Small))
                     })
@@ -2331,7 +2331,7 @@ impl Item for GitGraph {
                     .file_name()
                     .map(|name| name.to_string_lossy().to_string())
             })
-            .map_or_else(|| "Git Graph".into(), |name| SharedString::from(name))
+            .map_or_else(|| "Git 图".into(), |name| SharedString::from(name))
     }
 
     fn show_toolbar(&self) -> bool {

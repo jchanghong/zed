@@ -101,7 +101,7 @@ impl RemoteConnectionPrompt {
 
     pub fn confirm(&mut self, window: &mut Window, cx: &mut Context<Self>) {
         if let Some((_, tx)) = self.prompt.take() {
-            self.status_message = Some("Connecting".into());
+            self.status_message = Some("正在连接".into());
 
             let pw = self.editor.text(cx);
             if let Ok(secure) = EncryptedPassword::try_from(pw.as_ref()) {
@@ -164,7 +164,7 @@ impl Render for RemoteConnectionPrompt {
                         .child(self.editor.render(window, cx)),
                 )
                 .when(window.capslock().on, |el| {
-                    el.child(Label::new("⚠️ ⇪ is on"))
+                    el.child(Label::new("⚠️ ⇪ 已开启"))
                 })
             })
     }
@@ -338,7 +338,7 @@ impl Render for RemoteConnectionModal {
                         .inset(true)
                         .spacing(ui::ListItemSpacing::Sparse)
                         .start_slot(Icon::new(IconName::Close).color(Color::Muted))
-                        .child(Label::new("Cancel"))
+                        .child(Label::new("取消"))
                         .end_slot(
                             KeyBinding::for_action_in(&menu::Cancel, &self.focus_handle(cx), cx)
                                 .size(rems_from_px(12.)),

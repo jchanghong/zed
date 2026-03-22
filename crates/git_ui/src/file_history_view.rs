@@ -426,7 +426,7 @@ impl Render for FileHistoryView {
                             )
                             .when(self.has_more, |this| {
                                 this.child(Divider::vertical()).child(
-                                    Button::new("load-more", "Load More")
+                                    Button::new("load-more", "加载更多")
                                         .disabled(self.loading_more)
                                         .label_size(LabelSize::Small)
                                         .start_icon(

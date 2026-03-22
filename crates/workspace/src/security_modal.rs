@@ -70,9 +70,9 @@ impl Render for SecurityModal {
         }
 
         let header_label = if self.restricted_paths.len() == 1 {
-            "Unrecognized Project"
+            "未识别的项目"
         } else {
-            "Unrecognized Projects"
+            "未识别的项目"
         };
 
         let trust_label = self.build_trust_label();
@@ -136,23 +136,23 @@ impl Render for SecurityModal {
                         v_flex()
                             .child(
                                 Label::new(
-                                    "Untrusted projects are opened in Restricted Mode to protect your system.",
+                                    "未受信任的项目会以受限模式打开，以保护你的系统。",
                                 )
                                 .color(Color::Muted),
                             )
                             .child(
                                 Label::new(
-                                    "Review .zed/settings.json for any extensions or commands configured by this project.",
+                                    "请检查 .zed/settings.json，确认此项目配置的扩展或命令。",
                                 )
                                 .color(Color::Muted),
                             ),
                     )
                     .child(
                         v_flex()
-                            .child(Label::new("Restricted Mode prevents:").color(Color::Muted))
-                            .child(ListBulletItem::new("Project settings from being applied"))
-                            .child(ListBulletItem::new("Language servers from running"))
-                            .child(ListBulletItem::new("MCP Server integrations from installing")),
+                            .child(Label::new("受限模式会阻止：").color(Color::Muted))
+                            .child(ListBulletItem::new("应用项目设置"))
+                            .child(ListBulletItem::new("语言服务器运行"))
+                            .child(ListBulletItem::new("MCP Server 集成安装")),
                     )
                     .map(|this| match trust_label {
                         Some(trust_label) => this.child(
@@ -176,7 +176,7 @@ impl Render for SecurityModal {
                     .gap_1()
                     .justify_end()
                     .child(
-                        Button::new("rm", "Stay in Restricted Mode")
+                        Button::new("rm", "保持受限模式")
                             .key_binding(
                                 KeyBinding::for_action(
                                     &ToggleWorktreeSecurity,
@@ -191,7 +191,7 @@ impl Render for SecurityModal {
                             })),
                     )
                     .child(
-                        Button::new("tc", "Trust and Continue")
+                        Button::new("tc", "信任并继续")
                             .style(ButtonStyle::Filled)
                             .layer(ui::ElevationIndex::ModalSurface)
                             .key_binding(
@@ -242,7 +242,7 @@ impl SecurityModal {
         match available_parents.len() {
             0 => {
                 if has_restricted_files {
-                    Some(Cow::Borrowed("Trust all single files"))
+                    Some(Cow::Borrowed("信任所有单个文件"))
                 } else {
                     None
                 }
@@ -251,7 +251,7 @@ impl SecurityModal {
                 "Trust all projects in the {:} folder",
                 self.shorten_path(available_parents[0]).display()
             ))),
-            _ => Some(Cow::Borrowed("Trust all projects in the parent folders")),
+            _ => Some(Cow::Borrowed("信任父文件夹中的所有项目")),
         }
     }
 

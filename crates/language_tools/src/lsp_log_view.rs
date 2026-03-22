@@ -967,7 +967,7 @@ impl Render for LspLogToolbarItemView {
                                 row.server_name.0, row.worktree_root_name,
                             ))
                         })
-                        .unwrap_or_else(|| "No server selected".into()),
+                        .unwrap_or_else(|| "未选择服务器".into()),
                 )
                 .end_icon(
                     Icon::new(IconName::ChevronDown)
@@ -1126,7 +1126,7 @@ impl Render for LspLogToolbarItemView {
                                         .trigger(
                                             Button::new(
                                                 "language_server_trace_level_selector",
-                                                "Trace level",
+                                                "Trace 级别",
                                             )
                                             .end_icon(
                                                 Icon::new(IconName::ChevronDown)
@@ -1196,7 +1196,7 @@ impl Render for LspLogToolbarItemView {
                                         .trigger(
                                             Button::new(
                                                 "language_server_log_level_selector",
-                                                "Log level",
+                                                "日志级别",
                                             )
                                             .end_icon(
                                                 Icon::new(IconName::ChevronDown)
@@ -1264,7 +1264,7 @@ impl Render for LspLogToolbarItemView {
                     ),
             )
             .child(
-                Button::new("clear_log_button", "Clear").on_click(cx.listener(
+                Button::new("clear_log_button", "清空").on_click(cx.listener(
                     |this, _, window, cx| {
                         if let Some(log_view) = this.log_view.as_ref() {
                             log_view.update(cx, |log_view, cx| {
