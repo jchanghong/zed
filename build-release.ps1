@@ -23,6 +23,16 @@ if ($releaseChannel -ne "stable") {
 
 Write-Host "RELEASE_CHANNEL verified: stable" -ForegroundColor Green
 
+# Clean the entire target directory
+$targetDir = "$env:ZED_WORKSPACE\target"
+if (Test-Path $targetDir) {
+    Write-Host "Removing target directory: $targetDir" -ForegroundColor Yellow
+    cmd /c "rd /s /q `"$targetDir`""
+    Write-Host "Target directory removed." -ForegroundColor Green
+} else {
+    Write-Host "Target directory does not exist, skipping clean." -ForegroundColor Yellow
+}
+
 # Navigate to workspace
 Set-Location $env:ZED_WORKSPACE
 
