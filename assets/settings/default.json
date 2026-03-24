@@ -443,50 +443,25 @@
     "show_sign_in": true,
     // 是否在标题栏中显示菜单。
     "show_menus": false,
+    // The layout of window control buttons in the title bar (Linux only).
+    "button_layout": "platform_default",
   },
   "audio": {
-    // 选择使用新的音频系统。
-    "experimental.rodio_audio": false,
-    // 需要 'rodio_audio: true'
-    //
-    // 自动增加或减少麦克风的音量。这会影响
-    // 其他人听到您的声音大小。
+    // Automatically increase or decrease you microphone's volume. This affects how
+    // loud you sound to others.
     //
     // 推荐：off (默认)
     // Zed 中的麦克风太安静，直到每个人都使用实验性
     // 音频并开启自动扬声器音量，这会让您的声音
     // 比其他扬声器大很多。
     "experimental.auto_microphone_volume": false,
-    // 需要 'rodio_audio: true'
-    //
-    // 自动增加或减少其他通话成员的音量。
-    // 这仅影响您听到的声音。
-    "experimental.auto_speaker_volume": true,
-    // 需要 'rodio_audio: true'
-    //
-    // 消除背景噪音。对打字声、汽车、狗、空调效果很好。
-    // 对音乐效果不佳。
-    "experimental.denoise": true,
-    // 需要 'rodio_audio: true'
-    //
-    // 使用与以前版本的实验性音频和非实验性音频
-    // 兼容的音频参数。当此值为 false 时，
-    // 任何未使用最新实验性音频的人都会觉得您的声音很奇怪。
-    // 将来我们将通过将其设置为 false 来迁移
-    //
-    // 您需要重新加入通话才能应用此设置
-    "experimental.legacy_audio_compatible": true,
-    // 需要 'rodio_audio: true'
-    //
-    // 选择特定的输出音频设备。
-    // `null` 表示使用系统默认值。
-    // 任何无法识别的输出设备将回退到系统默认值。
+    // Select specific output audio device.
+    // `null` means use system default.
+    // Any unrecognized output device will fall back to system default.
     "experimental.output_audio_device": null,
-    // 需要 'rodio_audio: true'
-    //
-    // 选择特定的输入音频设备。
-    // `null` 表示使用系统默认值。
-    // 任何无法识别的输入设备将回退到系统默认值。
+    // Select specific input audio device.
+    // `null` means use system default.
+    // Any unrecognized input device will fall back to system default.
     "experimental.input_audio_device": null,
   },
   // 滚动条相关设置
@@ -2207,6 +2182,9 @@
       "api_url": "https://api.openai.com/v1",
     },
     "openai_compatible": {},
+    "opencode": {
+      "api_url": "https://opencode.ai/zen",
+    },
     "open_router": {
       "api_url": "https://openrouter.ai/api/v1",
     },
