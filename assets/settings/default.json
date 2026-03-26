@@ -1,21 +1,23 @@
 {
   "$schema": "zed://schemas/settings",
-  /// 项目的显示名称。如果未设置或为 null，将显示根目录名称。
+  /// The displayed name of this project. If not set or null, the root directory name
+  /// will be displayed.
   "project_name": null,
-  // 用于 UI 的 Zed 主题名称。
+  // The name of the Zed theme to use for the UI.
   //
-  // `mode` 可以是以下值之一：
-  // - "system"：使用与系统外观对应的主题
-  // - "light"：使用 "light" 字段指定的主题
-  // - "dark"：使用 "dark" 字段指定的主题
+  // `mode` is one of:
+  // - "system": Use the theme that corresponds to the system's appearance
+  // - "light": Use the theme indicated by the "light" field
+  // - "dark": Use the theme indicated by the "dark" field
   "theme": {
     "mode": "system",
     "light": "One Light",
     "dark": "One Dark",
   },
   "icon_theme": "Zed (Default)",
-  // 要使用的基础按键绑定集合名称。
-  // 此设置可取六个值，每个都以另一个文本编辑器命名：
+  // The name of a base set of key bindings to use.
+  // This setting can take six values, each named after another
+  // text editor:
   //
   // 1. "VSCode"
   // 2. "Atom"
@@ -24,424 +26,439 @@
   // 5. "SublimeText"
   // 6. "TextMate"
   "base_keymap": "VSCode",
-  // 用于在编辑器中渲染文本的字体名称
-  // ".ZedMono" 目前别名为 Lilex
-  // 但将来可能会更改。
+  // The name of a font to use for rendering text in the editor
+  // ".ZedMono" currently aliases to Lilex
+  // but this may change in the future.
   "buffer_font_family": ".ZedMono",
-  // 设置缓冲区文本的字体回退，这将与平台的默认回退合并。
+  // Set the buffer text's font fallbacks, this will be merged with
+  // the platform's default fallbacks.
   "buffer_font_fallbacks": null,
-  // 为编辑器中的文本启用的 OpenType 特性。
+  // The OpenType features to enable for text in the editor.
   "buffer_font_features": {
-    // 禁用连字：
+    // Disable ligatures:
     // "calt": false
   },
-  // 编辑器中文本的默认字体大小
+  // The default font size for text in the editor
   "buffer_font_size": 15,
-  // 编辑器字体的粗细，使用 100 到 900 的标准 CSS 单位。
+  // The weight of the editor font in standard CSS units from 100 to 900.
   "buffer_font_weight": 400,
-  // 设置缓冲区的行高。
-  // 可取 3 个值：
-  //  1. 使用适合阅读的行高 (1.618)
+  // Set the buffer's line height.
+  // May take 3 values:
+  //  1. Use a line height that's comfortable for reading (1.618)
   //         "buffer_line_height": "comfortable"
-  //  2. 使用标准行高 (1.3)
+  //  2. Use a standard line height, (1.3)
   //         "buffer_line_height": "standard",
-  //  3. 使用自定义行高
+  //  3. Use a custom line height
   //         "buffer_line_height": {
   //           "custom": 2
   //         },
   "buffer_line_height": "comfortable",
-  // 用于在 UI 中渲染文本的字体名称
-  // 可以设置为 ".SystemUIFont" 以使用系统字体
-  // ".ZedSans" 目前别名为 "IBM Plex Sans"，但将来可能会更改
+  // The name of a font to use for rendering text in the UI
+  // You can set this to ".SystemUIFont" to use the system font
+  // ".ZedSans" currently aliases to "IBM Plex Sans", but this may
+  // change in the future
   "ui_font_family": ".ZedSans",
-  // 设置 UI 的字体回退，这将与平台的默认字体回退合并。
+  // Set the UI's font fallbacks, this will be merged with the platform's
+  // default font fallbacks.
   "ui_font_fallbacks": null,
-  // 为 UI 中的文本启用的 OpenType 特性
+  // The OpenType features to enable for text in the UI
   "ui_font_features": {
-    // 禁用连字：
+    // Disable ligatures:
     "calt": false,
   },
-  // UI 字体的粗细，使用 100 到 900 的标准 CSS 单位。
+  // The weight of the UI font in standard CSS units from 100 to 900.
   "ui_font_weight": 400,
-  // UI 中文本的默认字体大小
+  // The default font size for text in the UI
   "ui_font_size": 16,
-  // 代理面板中代理回复的默认字体大小。如果未设置，则回退到 UI 字体大小。
+  // The default font size for agent responses in the agent panel. Falls back to the UI font size if unset.
   "agent_ui_font_size": null,
-  // 代理面板中用户消息的默认字体大小。
+  // The default font size for user messages in the agent panel.
   "agent_buffer_font_size": 12,
-  // 未使用代码的淡化程度。
+  // How much to fade out unused code.
   "unnecessary_code_fade": 0.3,
-  // 活动窗格样式设置。
+  // Active pane styling settings.
   "active_pane_modifiers": {
-    // 活动窗格的内嵌边框大小，以像素为单位。
+    // Inset border size of the active pane, in pixels.
     "border_size": 0.0,
-    // 非活动窗格的不透明度。0 表示透明，1 表示不透明。
-    // 值被限制在 [0.0, 1.0] 范围内。
+    // Opacity of the inactive panes. 0 means transparent, 1 means opaque.
+    // Values are clamped to the [0.0, 1.0] range.
     "inactive_opacity": 1.0,
   },
-  // 底部停靠栏的布局模式。默认为 "contained"
-  //   选项：contained, full, left_aligned, right_aligned
+  // Layout mode of the bottom dock. Defaults to "contained"
+  //   choices: contained, full, left_aligned, right_aligned
   "bottom_dock_layout": "contained",
-  // 水平分割窗格的方向。默认为 "down"
+  // The direction that you want to split panes horizontally. Defaults to "down"
   "pane_split_direction_horizontal": "down",
-  // 垂直分割窗格的方向。默认为 "right"
+  // The direction that you want to split panes vertically. Defaults to "right"
   "pane_split_direction_vertical": "right",
-  // 居中布局相关设置。
+  // Centered layout related settings.
   "centered_layout": {
-    // 使用居中布局时，中央窗格左侧相对于工作区的填充宽度。
+    // The relative width of the left padding of the central pane from the
+    // workspace when the centered layout is used.
     "left_padding": 0.2,
-    // 使用居中布局时，中央窗格右侧相对于工作区的填充宽度。
+    // The relative width of the right padding of the central pane from the
+    // workspace when the centered layout is used.
     "right_padding": 0.2,
   },
-  // 图片查看器设置
+  // Image viewer settings
   "image_viewer": {
-    // 图片文件大小的单位："binary" (KiB, MiB) 或 decimal (KB, MB)
+    // The unit for image file sizes: "binary" (KiB, MiB) or decimal (KB, MB)
     "unit": "binary",
   },
-  // 确定使用鼠标添加多个光标时要使用的修饰键。悬停链接鼠标手势将自动适应，以避免与多光标修饰键冲突。
+  // Determines the modifier to be used to add multiple cursors with the mouse. The open hover link mouse gestures will adapt such that it do not conflict with the multicursor modifier.
   //
-  // 1. 在 Linux 和 Windows 上映射到 `Alt`，在 macOS 上映射到 `Option`：
+  // 1. Maps to `Alt` on Linux and Windows and to `Option` on MacOS:
   //    "alt"
-  // 2. 在 Linux 和 Windows 上映射到 `Control`，在 macOS 上映射到 `Command`：
-  //    "cmd_or_ctrl" (别名："cmd", "ctrl")
+  // 2. Maps `Control` on Linux and Windows and to `Command` on MacOS:
+  //    "cmd_or_ctrl" (alias: "cmd", "ctrl")
   "multi_cursor_modifier": "alt",
-  // 是否启用 vim 模式和按键绑定。
+  // Whether to enable vim modes and key bindings.
   "vim_mode": false,
-  // 是否启用 helix 模式和按键绑定。
-  // 启用此模式将自动启用 vim 模式。
+  // Whether to enable helix mode and key bindings.
+  // Enabling this mode will automatically enable vim mode.
   "helix_mode": false,
-  // 当鼠标在编辑器中的符号上移动时，是否显示信息悬停框。
+  // Whether to show the informational hover box when moving the mouse
+  // over symbols in the editor.
   "hover_popover_enabled": true,
-  // 显示信息悬停框前等待的时间（毫秒）。
-  // 此延迟也适用于启用 `auto_signature_help` 时的自动签名帮助。
+  // Time to wait in milliseconds before showing the informational hover box.
+  // This delay also applies to auto signature help when `auto_signature_help` is enabled.
   "hover_popover_delay": 300,
-  // 退出 Zed 前是否确认。
+  // Whether to confirm before quitting Zed.
   "confirm_quit": false,
-  // 打开新的 Zed 实例时是否恢复上次关闭的项目
-  // 可取 3 个值：
-  //  1. 上次会话中打开的所有工作区
+  // Whether to restore last closed project when fresh Zed instance is opened
+  // May take 3 values:
+  //  1. All workspaces open during last session
   //         "restore_on_startup": "last_session"
-  //  2. 打开的工作区
+  //  2. The workspace opened
   //         "restore_on_startup": "last_workspace",
-  //  3. 不恢复以前的工作区
+  //  3. Do not restore previous workspaces
   //         "restore_on_startup": "none",
   "restore_on_startup": "last_session",
-  // 再次打开文件时是否尝试恢复以前文件的状态。
-  // 状态按窗格存储。
-  // 禁用时，将应用默认值而不是状态恢复。
+  // Whether to attempt to restore previous file's state when opening it again.
+  // The state is stored per pane.
+  // When disabled, defaults are applied instead of the state restoration.
   //
-  // 例如，对于编辑器，如果在同一窗格中关闭并再次打开同一文件，则会恢复选择、折叠和滚动位置。
-  // 禁用时，使用文件最开头的单个选择、零滚动位置和无折叠状态作为默认值。
+  // E.g. for editors, selections, folds and scroll positions are restored, if the same file is closed and, later, opened again in the same pane.
+  // When disabled, a single selection in the very beginning of the file, zero scroll position and no folds state is used as a default.
   //
-  // 默认值：true
+  // Default: true
   "restore_on_file_reopen": true,
-  // 是否自动关闭磁盘上已删除的文件。
+  // Whether to automatically close files that have been deleted on disk.
   "close_on_file_delete": false,
-  // 切换面板（例如使用键盘快捷键）时，是否在面板已获得焦点时关闭面板，而不是仅将焦点移回编辑器。
+  // Whether toggling a panel (e.g. with its keyboard shortcut) also closes
+  // the panel when it is already focused, instead of just moving focus back
+  // to the editor.
   "close_panel_on_toggle": false,
-  // 编辑器中放置目标区域的相对大小，该区域将打开放置的文件作为分割窗格 (0-0.5)
-  // 例如，0.25 == 如果放置到窗格的上/下四分之一区域，将使用新的垂直分割
-  //              如果放置到窗格的左/右四分之一区域，将使用新的水平分割
+  // Relative size of the drop target in the editor that will open dropped file as a split pane (0-0.5)
+  // E.g. 0.25 == If you drop onto the top/bottom quarter of the pane a new vertical split will be used
+  //              If you drop onto the left/right quarter of the pane a new horizontal split will be used
   "drop_target_size": 0.2,
-  // 在没有标签页的窗口上使用"关闭活动项"时是否关闭窗口。
-  // 可取 3 个值：
-  //  1. 使用当前平台的约定
+  // Whether the window should be closed when using 'close active item' on a window with no tabs.
+  // May take 3 values:
+  //  1. Use the current platform's convention
   //         "when_closing_with_no_tabs": "platform_default"
-  //  2. 始终关闭窗口：
+  //  2. Always close the window:
   //         "when_closing_with_no_tabs": "close_window",
-  //  3. 从不关闭窗口
+  //  3. Never close the window
   //         "when_closing_with_no_tabs": "keep_window_open",
   "when_closing_with_no_tabs": "platform_default",
-  // 最后一个窗口关闭时要执行的操作。
-  // 可取 2 个值：
-  //  1. 使用当前平台的约定
+  // What to do when the last window is closed.
+  // May take 2 values:
+  //  1. Use the current platform's convention
   //         "on_last_window_closed": "platform_default"
-  //  2. 始终退出应用程序
+  //  2. Always quit the application
   //         "on_last_window_closed": "quit_app",
   "on_last_window_closed": "platform_default",
-  // 要使用的文本渲染模式。
-  // 可取 3 个值：
-  //  1. 使用平台默认行为：
+  // The text rendering mode to use.
+  // May take 3 values:
+  //  1. Use platform default behavior:
   //         "text_rendering_mode": "platform_default"
-  //  2. 使用子像素 (ClearType 风格) 文本渲染：
+  //  2. Use subpixel (ClearType-style) text rendering:
   //         "text_rendering_mode": "subpixel"
-  //  3. 使用灰度文本渲染：
+  //  3. Use grayscale text rendering:
   //         "text_rendering_mode": "grayscale"
   "text_rendering_mode": "platform_default",
-  // 是否为缩放的面板显示填充。
-  // 启用时，缩放的中央面板（例如代码编辑器）将四周都有填充，
-  // 而缩放的底部/左侧/右侧面板将分别有顶部/右侧/左侧的填充。
+  // Whether to show padding for zoomed panels.
+  // When enabled, zoomed center panels (e.g. code editor) will have padding all around,
+  // while zoomed bottom/left/right panels will have padding to the top/right/left (respectively).
   //
-  // 默认值：true
+  // Default: true
   "zoomed_padding": true,
-  // Zed 窗口装饰（标题栏）的绘制方式：
-  // 1. 客户端应用程序 (Zed) 绘制自己的窗口装饰
+  // What draws Zed's window decorations (titlebar):
+  // 1. Client application (Zed) draws its own window decorations
   //    "client"
-  // 2. 显示服务器绘制窗口装饰。GNOME Wayland 不支持。
+  // 2. Display server draws the window decorations. Not supported by GNOME Wayland.
   //    "server"
   //
-  // 这需要重启 Zed 才能生效。
+  // This requires restarting Zed for changes to take effect.
   //
-  // 默认值："client"
+  // Default: "client"
   "window_decorations": "client",
-  // 是否使用系统提供的打开和另存为对话框。
-  // 设置为 false 时，Zed 将使用内置的键盘优先选择器。
+  // Whether to use the system provided dialogs for Open and Save As.
+  // When set to false, Zed will use the built-in keyboard-first pickers.
   "use_system_path_prompts": true,
-  // 是否使用系统提供的提示对话框，例如确认提示。
-  // 设置为 false 时，Zed 将使用其内置提示。请注意，在 Linux 上，
-  // 此选项将被忽略，Zed 将始终使用内置提示。
+  // Whether to use the system provided dialogs for prompts, such as confirmation
+  // prompts.
+  // When set to false, Zed will use its built-in prompts. Note that on Linux,
+  // this option is ignored and Zed will always use the built-in prompts.
   "use_system_prompts": true,
-  // 编辑器中的光标是否闪烁。
+  // Whether the cursor blinks in the editor.
   "cursor_blink": true,
-  // 默认编辑器的光标形状。
-  //  1. 垂直线
+  // Cursor shape for the default editor.
+  //  1. A vertical bar
   //     "bar"
-  //  2. 包围下一个字符的块
+  //  2. A block that surrounds the following character
   //     "block"
-  //  3. 沿着下一个字符的下划线
+  //  3. An underline / underscore that runs along the following character
   //     "underline"
-  //  4. 围绕下一个字符绘制的方框
+  //  4. A box drawn around the following character
   //     "hollow"
   //
-  // 默认值："bar"
+  // Default: "bar"
   "cursor_shape": "bar",
-  // 确定何时在编辑器或输入框中隐藏鼠标光标。
+  // Determines when the mouse cursor should be hidden in an editor or input box.
   //
-  // 1. 从不隐藏鼠标光标：
+  // 1. Never hide the mouse cursor:
   //    "never"
-  // 2. 仅在输入时隐藏：
+  // 2. Hide only when typing:
   //    "on_typing"
-  // 3. 在输入和光标移动时都隐藏：
+  // 3. Hide on both typing and cursor movement:
   //    "on_typing_and_movement"
   "hide_mouse": "on_typing_and_movement",
-  // 确定代码片段相对于其他补全项的排序方式。
+  // Determines how snippets are sorted relative to other completion items.
   //
-  // 1. 将代码片段放在补全列表顶部：
+  // 1. Place snippets at the top of the completion list:
   //    "top"
-  // 2. 正常放置代码片段，无优先级：
+  // 2. Place snippets normally without any preference:
   //    "inline"
-  // 3. 将代码片段放在补全列表底部：
+  // 3. Place snippets at the bottom of the completion list:
   //    "bottom"
-  // 4. 不在补全列表中显示代码片段：
+  // 4. Do not show snippets in the completion list:
   //    "none"
   "snippet_sort_order": "inline",
-  // 如何在编辑器中高亮当前行。
+  // How to highlight the current line in the editor.
   //
-  // 1. 不高亮当前行：
+  // 1. Don't highlight the current line:
   //    "none"
-  // 2. 高亮装订线区域：
+  // 2. Highlight the gutter area:
   //    "gutter"
-  // 3. 高亮编辑器区域：
+  // 3. Highlight the editor area:
   //    "line"
-  // 4. 高亮整行（默认）：
+  // 4. Highlight the full line (default):
   //    "all"
   "current_line_highlight": "all",
-  // 是否在编辑器中高亮选中文本的所有出现。
+  // Whether to highlight all occurrences of the selected text in an editor.
   "selection_highlight": true,
-  // 文本选择是否应有圆角。
+  // Whether the text selection should have rounded corners.
   "rounded_selection": true,
-  // 根据当前光标位置从语言服务器查询高亮的防抖延迟。
+  // The debounce delay before querying highlights from the language
+  // server based on the current cursor location.
   "lsp_highlight_debounce": 75,
-  // 前景色和背景色之间的最小 APCA 感知对比度。
-  // APCA（可访问感知对比度算法）比 WCAG 2.x 更准确，
-  // 特别是对于深色模式。值范围从 0 到 106。
+  // The minimum APCA perceptual contrast between foreground and background colors.
+  // APCA (Accessible Perceptual Contrast Algorithm) is more accurate than WCAG 2.x,
+  // especially for dark mode. Values range from 0 to 106.
   //
-  // 基于 APCA 可读性标准 (ARC) 青铜简单模式：
+  // Based on APCA Readability Criterion (ARC) Bronze Simple Mode:
   // https://readtech.org/ARC/tests/bronze-simple-mode/
-  // - 0：无对比度调整
-  // - 45：大型流畅文本的最小值 (36px+)
-  // - 60：其他内容文本的最小值
-  // - 75：正文文本的最小值
-  // - 90：正文文本的首选值
+  // - 0: No contrast adjustment
+  // - 45: Minimum for large fluent text (36px+)
+  // - 60: Minimum for other content text
+  // - 75: Minimum for body text
+  // - 90: Preferred for body text
   //
-  // 这仅影响编辑器中高亮背景上绘制的文本。
+  // This only affects text drawn over highlight backgrounds in the editor.
   "minimum_contrast_for_highlights": 45,
-  // 在编辑器中输入时是否弹出补全菜单，而无需显式请求。
+  // Whether to pop the completions menu while typing in an editor without
+  // explicitly requesting it.
   "show_completions_on_input": true,
-  // 是否在补全菜单中显示内联和并排文档
+  // Whether to display inline and alongside documentation for items in the
+  // completions menu
   "show_completion_documentation": true,
-  // 是否在编辑器中为括号着色。
-  // （也称为"彩虹括号"）
+  // Whether to colorize brackets in the editor.
+  // (also known as "rainbow brackets")
   //
-  // 用于不同缩进级别的颜色在主题中定义（主题键：`accents`）。
-  // 可以通过使用主题覆盖来自定义它们。
+  // The colors that are used for different indentation levels are defined in the theme (theme key: `accents`).
+  // They can be customized by using theme overrides.
   "colorize_brackets": false,
-  // 何时在补全菜单中显示滚动条。
-  // 此设置可取四个值：
+  // When to show the scrollbar in the completion menu.
+  // This setting can take four values:
   //
-  // 1. 如果有重要信息则显示滚动条，或
-  //    遵循系统配置的行为
+  // 1. Show the scrollbar if there's important information or
+  //    follow the system's configured behavior
   //   "auto"
-  // 2. 匹配系统配置的行为：
+  // 2. Match the system's configured behavior:
   //    "system"
-  // 3. 始终显示滚动条：
+  // 3. Always show the scrollbar:
   //    "always"
-  // 4. 从不显示滚动条：
-  //    "never" (默认)
+  // 4. Never show the scrollbar:
+  //    "never" (default)
   "completion_menu_scrollbar": "never",
-  // 是否在代码补全上下文菜单中左对齐或右对齐详细信息文本。
+  // Whether to align detail text in code completions context menus left or right.
   "completion_detail_alignment": "left",
-  // 如何在编辑器中显示差异。
+  // How to display diffs in the editor.
   //
-  // 默认值：split
+  // Default: split
   "diff_view_style": "split",
-  // 在括号内时，在编辑器中显示方法签名。
+  // Show method signatures in the editor, when inside parentheses.
   "auto_signature_help": false,
-  // 是否在补全或插入括号对后显示签名帮助。
-  // 如果启用了 `auto_signature_help`，此设置也将被视为已启用。
+  // Whether to show the signature help after completion or a bracket pair inserted.
+  // If `auto_signature_help` is enabled, this setting will be treated as enabled also.
   "show_signature_help_after_edits": false,
-  // 是否在缓冲区行首显示代码操作按钮。
+  // Whether to show code action button at start of buffer line.
   "inline_code_actions": true,
-  // 是否允许在缓冲区中拖放文本选择。
+  // Whether to allow drag and drop text selection in buffer.
   "drag_and_drop_selection": {
-    // 为 true 时，启用缓冲区中的拖放文本选择。
+    // When true, enables drag and drop text selection in buffer.
     "enabled": true,
-    // 允许拖放之前必须经过的延迟（毫秒）。否则，将创建新的文本选择。
+    // The delay in milliseconds that must elapse before drag and drop is allowed. Otherwise, a new text selection is created.
     "delay": 300,
   },
-  // 转到定义没有结果时要执行的操作。
+  // What to do when go to definition yields no results.
   //
-  // 1. 不执行任何操作：`none`
-  // 2. 查找同一符号的引用：`find_all_references` (默认)
+  // 1. Do nothing: `none`
+  // 2. Find references for the same symbol: `find_all_references` (default)
   "go_to_definition_fallback": "find_all_references",
-  // 用于过滤编辑器中显示的诊断的级别。
+  // Which level to use to filter out diagnostics displayed in the editor.
   //
-  // 仅影响编辑器渲染，不会中断
-  // 诊断获取和项目诊断编辑器的功能。
-  // 在标签页中标记包含诊断错误/警告的文件。
-  // 诊断仅在文件图标也处于活动状态时显示。
-  // 此设置只能取以下三个值：
+  // Affects the editor rendering only, and does not interrupt
+  // the functionality of diagnostics fetching and project diagnostics editor.
+  // Which files containing diagnostic errors/warnings to mark in the tabs.
+  // Diagnostics are only shown when file icons are also active.
+  // This setting only works when can take the following three values:
   //
-  // 在滚动条中显示哪些诊断指示器，其级别应大于或等于指定的严重级别。
-  // 可能的值：
-  //  - "off" — 不允许任何诊断
+  // Which diagnostic indicators to show in the scrollbar, their level should be more or equal to the specified severity level.
+  // Possible values:
+  //  - "off" — no diagnostics are allowed
   //  - "error"
   //  - "warning"
   //  - "info"
   //  - "hint"
-  //  - "all" — 允许所有诊断 (默认)
+  //  - "all" — allow all diagnostics (default)
   "diagnostics_max_severity": "all",
-  // 是否在编辑器中显示换行参考线（垂直标尺）。
-  // 设置为 true 将在 'preferred_line_length' 值处显示参考线
-  // 如果 'soft_wrap' 设置为 'preferred_line_length'，并将显示
-  // 'wrap_guides' 设置指定的任何其他参考线。
+  // Whether to show wrap guides (vertical rulers) in the editor.
+  // Setting this to true will show a guide at the 'preferred_line_length' value
+  // if 'soft_wrap' is set to 'preferred_line_length', and will show any
+  // additional guides as specified by the 'wrap_guides' setting.
   "show_wrap_guides": true,
-  // 在编辑器中显示换行参考线的字符计数位置。
+  // Character counts at which to show wrap guides in the editor.
   "wrap_guides": [],
-  // 在私有文件中隐藏变量的值，不进行视觉显示
+  // Hide the values of in variables from visual display in private files
   "redact_private_values": false,
-  // 在多缓冲区中展开摘录的默认行数。
+  // The default number of lines to expand excerpts in the multibuffer by.
   "expand_excerpt_lines": 5,
-  // 多缓冲区摘录中显示的默认上下文行数。
+  // The default number of context lines shown in multibuffer excerpts.
   "excerpt_context_lines": 2,
-  // 用于匹配文件路径以确定文件是否为私有的 glob 模式。
+  // Globs to match against file paths to determine if a file is private.
   "private_files": ["**/.env*", "**/*.pem", "**/*.key", "**/*.cert", "**/*.crt", "**/secrets.yml"],
-  // 是否在每次"触发"符号输入后使用额外的 LSP 查询来格式化（和修改）代码，
-  // 由 LSP 服务器功能定义。
+  // Whether to use additional LSP queries to format (and amend) the code after
+  // every "trigger" symbol input, defined by LSP server capabilities.
   "use_on_type_format": true,
-  // 输入左括号、方括号、花括号、单引号或双引号字符时是否自动添加匹配的闭合字符。
-  // 例如，当您输入 '(' 时，Zed 将在正确位置添加闭合的 )。
+  // Whether to automatically add matching closing characters when typing
+  // opening parenthesis, bracket, brace, single or double quote characters.
+  // For example, when you type '(', Zed will add a closing ) at the correct position.
   "use_autoclose": true,
-  // 输入左括号、方括号、花括号、单引号或双引号字符时是否自动包围选中文本。
-  // 例如，当您选中文本并输入 '(' 时，Zed 将用 () 包围该文本。
+  // Whether to automatically surround selected text when typing opening parenthesis,
+  // bracket, brace, single or double quote characters.
+  // For example, when you select text and type '(', Zed will surround the text with ().
   "use_auto_surround": true,
-  // 控制输入时的自动缩进行为。
-  // - "syntax_aware"：根据语法上下文调整缩进（默认）
-  // - "preserve_indent"：在新行上保留当前行的缩进
-  // - "none"：无自动缩进
+  // Controls automatic indentation behavior when typing.
+  // - "syntax_aware": Adjusts indentation based on syntax context (default)
+  // - "preserve_indent": Preserves current line's indentation on new lines
+  // - "none": No automatic indentation
   "auto_indent": "syntax_aware",
-  // 是否根据上下文调整粘贴内容的缩进。
+  // Whether indentation of pasted content should be adjusted based on the context.
   "auto_indent_on_paste": true,
-  // 控制编辑器如何处理自动闭合的字符。
-  // 设置为 `false`（默认）时，跳过和自动删除闭合字符
-  // 仅适用于自动插入的字符。
-  // 否则（当 `true` 时），无论闭合字符是如何插入的，
-  // 都会被跳过和自动删除。
+  // Controls how the editor handles the autoclosed characters.
+  // When set to `false`(default), skipping over and auto-removing of the closing characters
+  // happen only for auto-inserted characters.
+  // Otherwise(when `true`), the closing characters are always skipped over and auto-removed
+  // no matter how they were inserted.
   "always_treat_brackets_as_autoclosed": false,
-  // 控制在当前语言作用域中是否允许 `editor::Rewrap` 操作。
+  // Controls where the `editor::Rewrap` action is allowed in the current language scope.
   //
-  // 此设置可取三个值：
+  // This setting can take three values:
   //
-  // 1. 仅允许在注释中重新换行：
+  // 1. Only allow rewrapping in comments:
   //    "in_comments"
-  // 2. 仅允许在当前选择中重新换行：
+  // 2. Only allow rewrapping in the current selection(s):
   //    "in_selections"
-  // 3. 允许在任何地方重新换行：
+  // 3. Allow rewrapping anywhere:
   //    "anywhere"
   //
-  // 使用除 `in_comments` 以外的值时，重新换行可能会产生
-  // 语法无效的代码。在选择要使用的行为时请记住这一点。
+  // When using values other than `in_comments`, it is possible for the rewrapping to produce code
+  // that is syntactically invalid. Keep this in mind when selecting which behavior you would like
+  // to use.
   //
-  // 注意：此设置在 Vim 模式下无效，因为重新换行已允许在任何地方进行。
+  // Note: This setting has no effect in Vim mode, as rewrap is already allowed everywhere.
   "allow_rewrap": "in_comments",
-  // 控制是否立即显示编辑预测 (true)
-  // 还是手动触发 `editor::ShowEditPrediction` (false)。
+  // Controls whether edit predictions are shown immediately (true)
+  // or manually by triggering `editor::ShowEditPrediction` (false).
   "show_edit_predictions": true,
-  // 控制是否在给定语言作用域中显示编辑预测。
-  // 示例：["string", "comment"]
+  // Controls whether edit predictions are shown in a given language scope.
+  // Example: ["string", "comment"]
   "edit_predictions_disabled_in": [],
-  // 是否在编辑器中显示制表符和空格。
-  // 此设置可取四个值：
+  // Whether to show tabs and spaces in the editor.
+  // This setting can take four values:
   //
-  // 1. 仅绘制选中文本的制表符和空格（默认）：
+  // 1. Draw tabs and spaces only for the selected text (default):
   //    "selection"
-  // 2. 不绘制任何制表符或空格：
+  // 2. Do not draw any tabs or spaces:
   //    "none"
-  // 3. 绘制所有不可见符号：
+  // 3. Draw all invisible symbols:
   //    "all"
-  // 4. 仅绘制边界处的空白：
+  // 4. Draw whitespaces at boundaries only:
   //    "boundary"
-  // 5. 仅绘制非空白字符后的空白：
+  // 5. Draw whitespaces only after non-whitespace characters:
   //    "trailing"
-  // 空白要位于边界，需要满足以下任一条件：
-  // - 它是制表符
-  // - 它与边缘相邻（开始或结束）
-  // - 它与空白相邻（左侧或右侧）
+  // For a whitespace to be on a boundary, any of the following conditions need to be met:
+  // - It is a tab
+  // - It is adjacent to an edge (start or end)
+  // - It is adjacent to a whitespace (left or right)
   "show_whitespaces": "selection",
-  // 启用 show_whitespaces 时用于渲染空白的可见字符。
+  // Visible characters used to render whitespace when show_whitespaces is enabled.
   "whitespace_map": {
     "space": "•",
     "tab": "→",
   },
-  // Zed 中通话相关设置
+  // Settings related to calls in Zed
   "calls": {
-    // 默认以麦克风静音状态加入通话
+    // Join calls with the microphone live by default
     "mute_on_join": false,
-    // 当您是第一个加入频道的人时分享您的项目
+    // Share your project when you are the first to join a channel
     "share_on_join": false,
   },
-  // 工具栏相关设置
+  // Toolbar related settings
   "toolbar": {
-    // 是否显示面包屑导航。
+    // Whether to show breadcrumbs.
     "breadcrumbs": true,
-    // 是否显示快速操作按钮。
+    // Whether to show quick action buttons.
     "quick_actions": true,
-    // 是否在编辑器工具栏中显示选择菜单。
+    // Whether to show the Selections menu in the editor toolbar.
     "selections_menu": true,
-    // 是否在编辑器工具栏中显示代理审查按钮。
+    // Whether to show agent review buttons in the editor toolbar.
     "agent_review": true,
-    // 是否在编辑器工具栏中显示代码操作按钮。
+    // Whether to show code action buttons in the editor toolbar.
     "code_actions": false,
   },
-  // 是否允许窗口根据用户的标签页偏好组合在一起（仅限 macOS）。
+  // Whether to allow windows to tab together based on the user’s tabbing preference (macOS only).
   "use_system_window_tabs": false,
-  // 标题栏相关设置
+  // Titlebar related settings
   "title_bar": {
-    // 是否在标题栏的分支切换器旁显示分支图标。
+    // Whether to show the branch icon beside branch switcher in the titlebar.
     "show_branch_icon": false,
-    // 是否在标题栏中显示分支名称按钮。
+    // Whether to show the branch name button in the titlebar.
     "show_branch_name": true,
-    // 是否在标题栏中显示项目主机和名称。
+    // Whether to show the project host and name in the titlebar.
     "show_project_items": true,
-    // 是否在标题栏中显示入门横幅。
+    // Whether to show onboarding banners in the titlebar.
     "show_onboarding_banner": true,
-    // 是否在标题栏中显示用户头像。
+    // Whether to show user picture in the titlebar.
     "show_user_picture": true,
-    // 是否在标题栏中显示用户菜单。
+    // Whether to show the user menu in the titlebar.
     "show_user_menu": true,
-    // 是否在标题栏中显示登录按钮。
+    // Whether to show the sign in button in the titlebar.
     "show_sign_in": true,
-    // 是否在标题栏中显示菜单。
+    // Whether to show the menus in the titlebar.
     "show_menus": false,
     // The layout of window control buttons in the title bar (Linux only).
     "button_layout": "platform_default",
@@ -450,10 +467,10 @@
     // Automatically increase or decrease you microphone's volume. This affects how
     // loud you sound to others.
     //
-    // 推荐：off (默认)
-    // Zed 中的麦克风太安静，直到每个人都使用实验性
-    // 音频并开启自动扬声器音量，这会让您的声音
-    // 比其他扬声器大很多。
+    // Recommended: off (default)
+    // Microphones are too quite in zed, until everyone is on experimental
+    // audio and has auto speaker volume on this will make you very loud
+    // compared to other speakers.
     "experimental.auto_microphone_volume": false,
     // Select specific output audio device.
     // `null` means use system default.
@@ -464,210 +481,211 @@
     // Any unrecognized input device will fall back to system default.
     "experimental.input_audio_device": null,
   },
-  // 滚动条相关设置
+  // Scrollbar related settings
   "scrollbar": {
-    // 何时在编辑器中显示滚动条。
-    // 此设置可取四个值：
+    // When to show the scrollbar in the editor.
+    // This setting can take four values:
     //
-    // 1. 如果有重要信息则显示滚动条，或
-    //    遵循系统配置的行为（默认）：
+    // 1. Show the scrollbar if there's important information or
+    //    follow the system's configured behavior (default):
     //   "auto"
-    // 2. 匹配系统配置的行为：
+    // 2. Match the system's configured behavior:
     //    "system"
-    // 3. 始终显示滚动条：
+    // 3. Always show the scrollbar:
     //    "always"
-    // 4. 从不显示滚动条：
+    // 4. Never show the scrollbar:
     //    "never"
     "show": "auto",
-    // 是否在滚动条中显示光标位置。
+    // Whether to show cursor positions in the scrollbar.
     "cursors": true,
-    // 是否在滚动条中显示 git 差异指示器。
+    // Whether to show git diff indicators in the scrollbar.
     "git_diff": true,
-    // 是否在滚动条中显示缓冲区搜索结果。
+    // Whether to show buffer search results in the scrollbar.
     "search_results": true,
-    // 是否在滚动条中显示选中文本的出现。
+    // Whether to show selected text occurrences in the scrollbar.
     "selected_text": true,
-    // 是否在滚动条中显示选中符号的出现。
+    // Whether to show selected symbol occurrences in the scrollbar.
     "selected_symbol": true,
-    // 在滚动条中显示哪些诊断指示器：
-    //  - "none" 或 false：不显示诊断
-    //  - "error"：仅显示错误
-    //  - "warning"：仅显示错误和警告
-    //  - "information"：仅显示错误、警告和信息
-    //  - "all" 或 true：显示所有诊断
+    // Which diagnostic indicators to show in the scrollbar:
+    //  - "none" or false: do not show diagnostics
+    //  - "error": show only errors
+    //  - "warning": show only errors and warnings
+    //  - "information": show only errors, warnings, and information
+    //  - "all" or true: show all diagnostics
     "diagnostics": "all",
-    // 强制启用或禁用每个轴的滚动条
+    // Forcefully enable or disable the scrollbar for each axis
     "axes": {
-      // 为 false 时，强制禁用水平滚动条。否则，遵循其他设置。
+      // When false, forcefully disables the horizontal scrollbar. Otherwise, obey other settings.
       "horizontal": true,
-      // 为 false 时，强制禁用垂直滚动条。否则，遵循其他设置。
+      // When false, forcefully disables the vertical scrollbar. Otherwise, obey other settings.
       "vertical": true,
     },
   },
-  // 缩略图相关设置
+  // Minimap related settings
   "minimap": {
-    // 何时在编辑器中显示缩略图。
-    // 此设置可取三个值：
-    // 1. 如果编辑器的滚动条可见则显示缩略图：
+    // When to show the minimap in the editor.
+    // This setting can take three values:
+    // 1. Show the minimap if the editor's scrollbar is visible:
     //    "auto"
-    // 2. 始终显示缩略图：
+    // 2. Always show the minimap:
     //    "always"
-    // 3. 从不显示缩略图：
-    //    "never" (默认)
+    // 3. Never show the minimap:
+    //    "never" (default)
     "show": "never",
-    // 在编辑器中何处显示缩略图。
-    // 此设置可取两个值：
-    // 1. 仅在聚焦的编辑器上显示缩略图：
-    //    "active_editor" (默认)
-    // 2. 在所有打开的编辑器上显示缩略图：
+    // Where to show the minimap in the editor.
+    // This setting can take two values:
+    // 1. Show the minimap on the focused editor only:
+    //    "active_editor" (default)
+    // 2. Show the minimap on all open editors:
     //    "all_editors"
     "display_in": "active_editor",
-    // 何时显示缩略图滑块。
-    // 此设置可取两个值：
-    // 1. 如果鼠标悬停在缩略图上则显示滑块：
+    // When to show the minimap thumb.
+    // This setting can take two values:
+    // 1. Show the minimap thumb if the mouse is over the minimap:
     //    "hover"
-    // 2. 始终显示滑块：
-    //    "always" (默认)
+    // 2. Always show the minimap thumb:
+    //    "always" (default)
     "thumb": "always",
-    // 缩略图滑块边框的外观。
-    // 此设置可取五个值：
-    // 1. 在滑块的所有边显示边框：
+    // How the minimap thumb border should look.
+    // This setting can take five values:
+    // 1. Display a border on all sides of the thumb:
     //    "thumb_border": "full"
-    // 2. 在滑块除左侧外的所有边显示边框：
-    //    "thumb_border": "left_open" (默认)
-    // 3. 在滑块除右侧外的所有边显示边框：
+    // 2. Display a border on all sides except the left side of the thumb:
+    //    "thumb_border": "left_open" (default)
+    // 3. Display a border on all sides except the right side of the thumb:
     //    "thumb_border": "right_open"
-    // 4. 仅在滑块左侧显示边框：
+    // 4. Display a border only on the left side of the thumb:
     //    "thumb_border": "left_only"
-    // 5. 显示不带任何边框的滑块：
+    // 5. Display the thumb without any border:
     //    "thumb_border": "none"
     "thumb_border": "left_open",
-    // 如何在缩略图中高亮当前行。
-    // 此设置可取以下值：
+    // How to highlight the current line in the minimap.
+    // This setting can take the following values:
     //
-    // 1. `null` 继承编辑器的 `current_line_highlight` 设置（默认）
-    // 2. "line" 或 "all" 在缩略图中高亮当前行。
-    // 3. "gutter" 或 "none" 不在缩略图中高亮当前行。
+    // 1. `null` to inherit the editor `current_line_highlight` setting (default)
+    // 2. "line" or "all" to highlight the current line in the minimap.
+    // 3. "gutter" or "none" to not highlight the current line in the minimap.
     "current_line_highlight": null,
-    // 缩略图中显示的最大列数。
+    // Maximum number of columns to display in the minimap.
     "max_width_columns": 80,
   },
-  // 在 Linux 上启用中键粘贴。
+  // Enable middle-click paste on Linux.
   "middle_click_paste": true,
-  // 在多缓冲区的某些摘录（单例缓冲区的部分）中双击时要执行的操作。
-  // 可取 2 个值：
-  //  1. 表现为常规缓冲区并选择整个单词（默认）。
+  // What to do when multibuffer is double clicked in some of its excerpts
+  // (parts of singleton buffers).
+  // May take 2 values:
+  //  1. Behave as a regular buffer and select the whole word (default).
   //         "double_click_in_multibuffer": "select"
-  //  2. 在新标签页中将点击的摘录作为新缓冲区打开。
+  //  2. Open the excerpt clicked as a new buffer in the new tab.
   //         "double_click_in_multibuffer": "open",
-  // 对于 "open" 情况，可以通过在双击时按住 `alt` 来实现常规选择行为。
+  // For the case of "open", regular selection behavior can be achieved by holding `alt` when double clicking.
   "double_click_in_multibuffer": "select",
   "gutter": {
-    // 是否在装订线中显示行号。
+    // Whether to show line numbers in the gutter.
     "line_numbers": true,
-    // 是否在装订线中显示可运行按钮。
+    // Whether to show runnables buttons in the gutter.
     "runnables": true,
-    // 是否在装订线中显示断点。
+    // Whether to show breakpoints in the gutter.
     "breakpoints": true,
-    // 是否在装订线中显示折叠按钮。
+    // Whether to show fold buttons in the gutter.
     "folds": true,
-    // 在装订线中保留空间的最小字符数。
+    // Minimum number of characters to reserve space for in the gutter.
     "min_line_number_digits": 4,
   },
   "indent_guides": {
-    // 是否在编辑器中显示缩进参考线。
+    // Whether to show indent guides in the editor.
     "enabled": true,
-    // 缩进参考线的宽度（像素），介于 1 到 10 之间。
+    // The width of the indent guides in pixels, between 1 and 10.
     "line_width": 1,
-    // 活动缩进参考线的宽度（像素），介于 1 到 10 之间。
+    // The width of the active indent guide in pixels, between 1 and 10.
     "active_line_width": 1,
-    // 确定缩进参考线的着色方式。
-    // 此设置可取以下三个值：
+    // Determines how indent guides are colored.
+    // This setting can take the following three values:
     //
     // 1. "disabled"
     // 2. "fixed"
     // 3. "indent_aware"
     "coloring": "fixed",
-    // 确定缩进参考线背景的着色方式。
-    // 此设置可取以下两个值：
+    // Determines how indent guide backgrounds are colored.
+    // This setting can take the following two values:
     //
     // 1. "disabled"
     // 2. "indent_aware"
     "background_coloring": "disabled",
   },
-  // 编辑器是否可以滚动到最后一行之后。
+  // Whether the editor will scroll beyond the last line.
   "scroll_beyond_last_line": "one_page",
-  // 使用键盘滚动时在光标上方/下方保留的行数
+  // The number of lines to keep above/below the cursor when scrolling with the keyboard
   "vertical_scroll_margin": 3,
-  // 点击可见文本区域边缘时是否滚动。
+  // Whether to scroll when clicking near the edge of the visible text area.
   "autoscroll_on_clicks": false,
-  // 使用鼠标滚动时在任一侧保留的字符数
+  // The number of characters to keep on either side when scrolling with the mouse
   "horizontal_scroll_margin": 5,
-  // 滚动灵敏度乘数。此乘数应用于
-  // 滚动时的水平和垂直增量值。
+  // Scroll sensitivity multiplier. This multiplier is applied
+  // to both the horizontal and vertical delta values while scrolling.
   "scroll_sensitivity": 1.0,
-  // 快速滚动的滚动灵敏度乘数。此乘数应用于
-  // 滚动时的水平和垂直增量值。快速滚动
-  // 发生在用户在滚动时按住 alt 或 option 键时。
+  // Scroll sensitivity multiplier for fast scrolling. This multiplier is applied
+  // to both the horizontal and vertical delta values while scrolling. Fast scrolling
+  // happens when a user holds the alt or option key while scrolling.
   "fast_scroll_sensitivity": 4.0,
   "sticky_scroll": {
-    // 是否将作用域固定在编辑器顶部。
+    // Whether to stick scopes to the top of the editor.
     "enabled": false,
   },
   "relative_line_numbers": "disabled",
-  // 如果禁用 'search_wrap'，搜索结果不会在文件末尾循环。
+  // If 'search_wrap' is disabled, search result do not wrap around the end of the file.
   "search_wrap": true,
-  // 打开新的项目和缓冲区搜索时默认启用的搜索选项。
+  // Search options to enable by default when opening new project and buffer searches.
   "search": {
-    // 是否在状态栏中显示项目搜索按钮。
+    // Whether to show the project search button in the status bar.
     "button": true,
-    // 是否仅匹配整个单词。
+    // Whether to only match on whole words.
     "whole_word": false,
-    // 是否区分大小写匹配。
+    // Whether to match case sensitively.
     "case_sensitive": false,
-    // 是否在搜索结果中包含 gitignored 文件。
+    // Whether to include gitignored files in search results.
     "include_ignored": false,
-    // 是否将搜索查询解释为正则表达式。
+    // Whether to interpret the search query as a regular expression.
     "regex": false,
-    // 导航时是否将光标居中于每个搜索匹配项。
+    // Whether to center the cursor on each search match when navigating.
     "center_on_match": false,
   },
-  // 何时根据光标下的文本填充新搜索的查询。
-  // 此设置可取以下三个值：
+  // When to populate a new search's query based on the text under the cursor.
+  // This setting can take the following three values:
   //
-  // 1. 始终用光标下的单词填充搜索查询（默认）。
+  // 1. Always populate the search query with the word under the cursor (default).
   //    "always"
-  // 2. 仅在有选中文本时填充搜索查询
+  // 2. Only populate the search query when there is text selected
   //    "selection"
-  // 3. 从不填充搜索查询
+  // 3. Never populate the search query
   //    "never"
   "seed_search_query_from_cursor": "always",
-  // 启用时，根据您的查询自动调整搜索大小写敏感性。
-  // 如果您的搜索查询包含任何大写字母，搜索将区分大小写；
-  // 如果仅包含小写字母，搜索将不区分大小写。
+  // When enabled, automatically adjusts search case sensitivity based on your query.
+  // If your search query contains any uppercase letters, the search becomes case-sensitive;
+  // if it contains only lowercase letters, the search becomes case-insensitive.
   "use_smartcase_search": false,
-  // 内嵌提示相关设置
+  // Inlay hint related settings
   "inlay_hints": {
-    // 全局开关，用于切换提示的开启和关闭，默认关闭。
+    // Global switch to toggle hints on and off, switched off by default.
     "enabled": false,
-    // 切换某些类型提示的开启和关闭，默认全部开启。
+    // Toggle certain types of hints on and off, all switched on by default.
     "show_type_hints": true,
     "show_parameter_hints": true,
     "show_value_hints": true,
-    // 对应于 null/None LSP 提示类型值。
+    // Corresponds to null/None LSP hint type value.
     "show_other_hints": true,
-    // 是否为内嵌提示显示背景。
+    // Whether to show a background for inlay hints.
     //
-    // 如果设置为 `true`，背景将使用当前主题的 `hint.background` 颜色。
+    // If set to `true`, the background will use the `hint.background` color from the current theme.
     "show_background": false,
-    // 编辑缓冲区后等待的时间，然后请求提示，
-    // 设置为 0 以禁用防抖。
+    // Time to wait after editing the buffer, before requesting the hints,
+    // set to 0 to disable debouncing.
     "edit_debounce_ms": 700,
-    // 滚动缓冲区后等待的时间，然后请求提示，
-    // 设置为 0 以禁用防抖。
+    // Time to wait after scrolling the buffer, before requesting the hints,
+    // set to 0 to disable debouncing.
     "scroll_debounce_ms": 50,
-    // 一组修饰键，按下时将切换内嵌提示的可见性。
-    // 如果集合为空或未按下所有指定的修饰键，内嵌提示将不会切换。
+    // A set of modifiers which, when pressed, will toggle the visibility of inlay hints.
+    // If the set if empty or not all the modifiers specified are pressed, inlay hints will not be toggled.
     "toggle_on_modifiers_press": {
       "control": false,
       "shift": false,
@@ -676,318 +694,319 @@
       "function": false,
     },
   },
-  // 调整停靠栏大小时是否调整停靠栏中所有面板的大小。
-  // 可以是 "left"、"right" 和 "bottom" 的组合。
+  // Whether to resize all the panels in a dock when resizing the dock.
+  // Can be a combination of "left", "right" and "bottom".
   "resize_all_panels_in_dock": ["left"],
   "project_panel": {
-    // 是否在状态栏中显示项目面板按钮
+    // Whether to show the project panel button in the status bar
     "button": true,
-    // 是否在项目面板中隐藏 gitignore 条目。
+    // Whether to hide the gitignore entries in the project panel.
     "hide_gitignore": false,
-    // 项目面板的默认宽度。
+    // Default width of the project panel.
     "default_width": 240,
-    // 项目面板停靠的位置。可以是 'left' 或 'right'。
+    // Where to dock the project panel. Can be 'left' or 'right'.
     "dock": "left",
-    // 项目面板中工作树条目之间的间距。可以是 'comfortable' 或 'standard'。
+    // Spacing between worktree entries in the project panel. Can be 'comfortable' or 'standard'.
     "entry_spacing": "comfortable",
-    // 是否在项目面板中显示文件图标。
+    // Whether to show file icons in the project panel.
     "file_icons": true,
-    // 是否在项目面板中为目录显示文件夹图标或箭头。
+    // Whether to show folder icons or chevrons for directories in the project panel.
     "folder_icons": true,
-    // 是否在项目面板中显示 git 状态。
+    // Whether to show the git status in the project panel.
     "git_status": true,
-    // 嵌套项目的缩进量。
+    // Amount of indentation for nested items.
     "indent_size": 20,
-    // 当相应的项目条目变为活动状态时，
-    // 是否自动在项目面板中显示它。
-    // Gitignored 条目从不自动显示。
+    // Whether to reveal it in the project panel automatically,
+    // when a corresponding project entry becomes active.
+    // Gitignored entries are never auto revealed.
     "auto_reveal_entries": true,
-    // 项目面板是否应在启动时打开。
+    // Whether the project panel should open on startup.
     "starts_open": true,
-    // 是否自动折叠目录并显示紧凑文件夹
-    // （例如 "a/b/c"），当目录内部只有一个子目录时。
+    // Whether to fold directories automatically and show compact folders
+    // (e.g. "a/b/c" ) when a directory has only one subdirectory inside.
     "auto_fold_dirs": true,
-    // 是否在项目面板中以粗体文本显示文件夹名称。
+    // Whether to show folder names with bold text in the project panel.
     "bold_folder_labels": false,
-    // 滚动条相关设置
+    // Scrollbar-related settings
     "scrollbar": {
-      // 何时在项目面板中显示滚动条。
-      // 此设置可取五个值：
+      // When to show the scrollbar in the project panel.
+      // This setting can take five values:
       //
-      // 1. null (默认)：继承编辑器设置
-      // 2. 如果有重要信息则显示滚动条，或
-      //    遵循系统配置的行为：
+      // 1. null (default): Inherit editor settings
+      // 2. Show the scrollbar if there's important information or
+      //    follow the system's configured behavior (default):
       //   "auto"
-      // 3. 匹配系统配置的行为：
+      // 3. Match the system's configured behavior:
       //    "system"
-      // 4. 始终显示滚动条：
+      // 4. Always show the scrollbar:
       //    "always"
-      // 5. 从不显示滚动条：
+      // 5. Never show the scrollbar:
       //    "never"
       "show": null,
-      // 是否允许在项目面板中水平滚动。
-      // 为 false 时，视图锁定在最左侧位置，长文件名会被截断。
+      // Whether to allow horizontal scrolling in the project panel.
+      // When false, the view is locked to the leftmost position and long file names are clipped.
       "horizontal_scroll": true,
     },
-    // 在项目面板中标记包含诊断错误/警告的文件。
-    // 此设置可取以下三个值：
+    // Which files containing diagnostic errors/warnings to mark in the project panel.
+    // This setting can take the following three values:
     //
-    // 1. 不标记任何文件：
+    // 1. Do not mark any files:
     //    "off"
-    // 2. 仅标记有错误的文件：
+    // 2. Only mark files with errors:
     //    "errors"
-    // 3. 标记有错误和警告的文件：
+    // 3. Mark files with errors and warnings:
     //    "all"
     "show_diagnostics": "all",
-    // 是否将父目录固定在项目面板顶部。
+    // Whether to stick parent directories at top of the project panel.
     "sticky_scroll": true,
-    // 项目面板中缩进参考线相关设置。
+    // Settings related to indent guides in the project panel.
     "indent_guides": {
-      // 何时在项目面板中显示缩进参考线。
-      // 此设置可取两个值：
+      // When to show indent guides in the project panel.
+      // This setting can take two values:
       //
-      // 1. 始终显示缩进参考线：
+      // 1. Always show indent guides:
       //    "always"
-      // 2. 从不显示缩进参考线：
+      // 2. Never show indent guides:
       //    "never"
       "show": "always",
     },
-    // 项目面板中条目的排序顺序。
-    // 此设置可取三个值：
+    // Sort order for entries in the project panel.
+    // This setting can take three values:
     //
-    // 1. 先显示目录，然后是文件：
+    // 1. Show directories first, then files:
     //    "directories_first"
-    // 2. 将目录和文件混合在一起：
+    // 2. Mix directories and files together:
     //    "mixed"
-    // 3. 先显示文件，然后是目录：
+    // 3. Show files first, then directories:
     //    "files_first"
     "sort_mode": "directories_first",
-    // 是否在项目面板中的文件名旁显示错误和警告计数徽章。
+    // Whether to show error and warning count badges next to file names in the project panel.
     "diagnostic_badges": false,
-    // 是否在项目面板中启用拖放操作。
+    // Whether to show the git status indicator next to file names in the project panel.
     "git_status_indicator": false,
-    // 是否在项目面板中启用拖放操作。
+    // Whether to enable drag-and-drop operations in the project panel.
     "drag_and_drop": true,
-    // 当窗口中只打开一个文件夹时是否隐藏根条目；
-    // 这也会影响文件路径在文件查找器历史记录中的显示方式。
+    // Whether to hide the root entry when only one folder is open in the window;
+    // this also affects how file paths appear in the file finder history.
     "hide_root": false,
-    // 是否在项目面板中隐藏隐藏条目。
+    // Whether to hide the hidden entries in the project panel.
     "hide_hidden": false,
-    // 自动打开文件的设置。
+    // Settings for automatically opening files.
     "auto_open": {
-      // 是否在编辑器中自动打开新创建的文件。
+      // Whether to automatically open newly created files in the editor.
       "on_create": true,
-      // 粘贴或复制文件后是否自动打开它们。
+      // Whether to automatically open files after pasting or duplicating them.
       "on_paste": true,
-      // 是否自动打开从外部来源拖放的文件。
+      // Whether to automatically open files dropped from external sources.
       "on_drop": true,
     },
   },
   "outline_panel": {
-    // 是否在状态栏中显示大纲面板按钮
+    // Whether to show the outline panel button in the status bar
     "button": true,
-    // 大纲面板的默认宽度。
+    // Default width of the outline panel.
     "default_width": 300,
-    // 大纲面板停靠的位置。可以是 'left' 或 'right'。
+    // Where to dock the outline panel. Can be 'left' or 'right'.
     "dock": "left",
-    // 是否在大纲面板中显示文件图标。
+    // Whether to show file icons in the outline panel.
     "file_icons": true,
-    // 是否在大纲面板中为目录显示文件夹图标或箭头。
+    // Whether to show folder icons or chevrons for directories in the outline panel.
     "folder_icons": true,
-    // 是否在大纲面板中显示 git 状态。
+    // Whether to show the git status in the outline panel.
     "git_status": true,
-    // 嵌套项目的缩进量。
+    // Amount of indentation for nested items.
     "indent_size": 20,
-    // 当相应的大纲条目变为活动状态时，
-    // 是否自动在大纲面板中显示它。
-    // Gitignored 条目从不自动显示。
+    // Whether to reveal it in the outline panel automatically,
+    // when a corresponding outline entry becomes active.
+    // Gitignored entries are never auto revealed.
     "auto_reveal_entries": true,
-    // 当目录内部只有一个目录时
-    // 是否自动折叠目录。
+    // Whether to fold directories automatically
+    // when a directory has only one directory inside.
     "auto_fold_dirs": true,
-    // 大纲面板中缩进参考线相关设置。
+    // Settings related to indent guides in the outline panel.
     "indent_guides": {
-      // 何时在大纲面板中显示缩进参考线。
-      // 此设置可取两个值：
+      // When to show indent guides in the outline panel.
+      // This setting can take two values:
       //
-      // 1. 始终显示缩进参考线：
+      // 1. Always show indent guides:
       //    "always"
-      // 2. 从不显示缩进参考线：
+      // 2. Never show indent guides:
       //    "never"
       "show": "always",
     },
-    // 滚动条相关设置
+    // Scrollbar-related settings
     "scrollbar": {
-      // 何时在项目面板中显示滚动条。
-      // 此设置可取五个值：
+      // When to show the scrollbar in the project panel.
+      // This setting can take five values:
       //
-      // 1. null (默认)：继承编辑器设置
-      // 2. 如果有重要信息则显示滚动条，或
-      //    遵循系统配置的行为：
+      // 1. null (default): Inherit editor settings
+      // 2. Show the scrollbar if there's important information or
+      //    follow the system's configured behavior (default):
       //   "auto"
-      // 3. 匹配系统配置的行为：
+      // 3. Match the system's configured behavior:
       //    "system"
-      // 4. 始终显示滚动条：
+      // 4. Always show the scrollbar:
       //    "always"
-      // 5. 从不显示滚动条：
+      // 5. Never show the scrollbar:
       //    "never"
       "show": null,
     },
-    // 当前文件中展开大纲项目的默认深度。
-    // 设置为 0 以折叠所有有子项的项目，设置为 1 或更高以折叠该深度或更深的项目。
+    // Default depth to expand outline items in the current file.
+    // Set to 0 to collapse all items that have children, 1 or higher to collapse items at that depth or deeper.
     "expand_outlines_with_depth": 100,
   },
   "collaboration_panel": {
-    // 是否在状态栏中显示协作面板按钮。
+    // Whether to show the collaboration panel button in the status bar.
     "button": true,
-    // 协作面板停靠的位置。可以是 'left' 或 'right'。
+    // Where to dock the collaboration panel. Can be 'left' or 'right'.
     "dock": "left",
-    // 协作面板的默认宽度。
+    // Default width of the collaboration panel.
     "default_width": 240,
   },
   "git_panel": {
-    // 是否在状态栏中显示 git 面板按钮。
+    // Whether to show the git panel button in the status bar.
     "button": true,
-    // git 面板停靠的位置。可以是 'left' 或 'right'。
+    // Where to dock the git panel. Can be 'left' or 'right'.
     "dock": "left",
-    // git 面板的默认宽度。
+    // Default width of the git panel.
     "default_width": 360,
-    // 面板中 git 状态指示器的样式。
+    // Style of the git status indicator in the panel.
     //
-    // 选项：label_color, icon
-    // 默认值：icon
+    // Choices: label_color, icon
+    // Default: icon
     "status_style": "icon",
-    // 是否在 git 面板中显示文件图标。
+    // Whether to show file icons in the git panel.
     //
-    // 默认值：false
+    // Default: false
     "file_icons": false,
-    // 是否在 git 面板中为目录显示文件夹图标或箭头。
+    // Whether to show folder icons or chevrons for directories in the git panel.
     //
-    // 默认值：true
+    // Default: true
     "folder_icons": true,
-    // 如果未设置 `init.defaultBranch` 要使用的分支名称
+    // What branch name to use if `init.defaultBranch` is not set
     //
-    // 默认值：main
+    // Default: main
     "fallback_branch_name": "main",
-    // 是否按路径或按状态（默认）对面板中的条目进行排序。
+    // Whether to sort entries in the panel by path or by status (the default).
     //
-    // 默认值：false
+    // Default: false
     "sort_by_path": false,
-    // 是否在差异面板中折叠未跟踪的文件。
+    // Whether to collapse untracked files in the diff panel.
     //
-    // 默认值：false
+    // Default: false
     "collapse_untracked_diff": false,
-    /// 是否在面板中以树形或平面视图显示条目
+    /// Whether to show entries with tree or flat view in the panel
     ///
-    /// 默认值：false
+    /// Default: false
     "tree_view": false,
-    // git 面板是否应在启动时打开。
+    // Whether the git panel should open on startup.
     //
-    // 默认值：false
+    // Default: false
     "starts_open": false,
-    // 是否在 git 面板图标上显示未提交更改计数的徽章。
+    // Whether to show a badge on the git panel icon with the count of uncommitted changes.
     //
-    // 默认值：false
+    // Default: false
     "show_count_badge": false,
     "scrollbar": {
-      // 何时在 git 面板中显示滚动条。
+      // When to show the scrollbar in the git panel.
       //
-      // 选项：always, auto, never, system
-      // 默认值：继承编辑器滚动条设置
+      // Choices: always, auto, never, system
+      // Default: inherits editor scrollbar settings
       // "show": null
     },
-    // 是否在 Git 面板中的每个文件旁显示添加/删除更改计数。
+    // Whether to show the addition/deletion change count next to each file in the Git panel.
     //
-    // 默认值：true
+    // Default: true
     "diff_stats": true,
   },
   "message_editor": {
-    // 是否自动将 emoji 短代码替换为 emoji 字符。
-    // 例如：输入 `:wave:` 会被替换为 `👋`。
+    // Whether to automatically replace emoji shortcodes with emoji characters.
+    // For example: typing `:wave:` gets replaced with `👋`.
     "auto_replace_emoji_shortcode": true,
   },
   "notification_panel": {
-    // 是否在状态栏中显示通知面板按钮。
+    // Whether to show the notification panel button in the status bar.
     "button": true,
-    // 通知面板停靠的位置。可以是 'left' 或 'right'。
+    // Where to dock the notification panel. Can be 'left' or 'right'.
     "dock": "right",
-    // 通知面板的默认宽度。
+    // Default width of the notification panel.
     "default_width": 380,
-    // 是否在通知面板图标上显示未读通知计数的徽章。
+    // Whether to show a badge on the notification panel icon with the count of unread notifications.
     "show_count_badge": false,
   },
   "agent": {
-    // 内联助手是否应使用流式工具（如果可用）
+    // Whether the inline assistant should use streaming tools, when available
     "inline_assistant_use_streaming_tools": true,
-    // 是否启用代理。
+    // Whether the agent is enabled.
     "enabled": true,
-    // 是否在状态栏中显示代理面板按钮。
+    // Whether to show the agent panel button in the status bar.
     "button": true,
-    // 代理面板停靠的位置。可以是 'left'、'right' 或 'bottom'。
+    // Where to dock the agent panel. Can be 'left', 'right' or 'bottom'.
     "dock": "right",
-    // 代理面板在侧边栏中的位置。可以是 'left'、'right' 或 'follow_agent'。
+    // Where to position the sidebar. Can be 'left', 'right', or 'follow_agent'.
     "sidebar_side": "follow_agent",
-    // 代理面板停靠在左侧或右侧时的默认宽度。
+    // Default width when the agent panel is docked to the left or right.
     "default_width": 640,
-    // 代理面板停靠在底部时的默认高度。
+    // Default height when the agent panel is docked to the bottom.
     "default_height": 320,
-    // 默认使用的视图（thread 或 text_thread）
+    // The view to use by default (thread, or text_thread)
     "default_view": "thread",
-    // 创建新线程时使用的默认模型。
+    // The default model to use when creating new threads.
     "default_model": {
-      // 要使用的提供商。
+      // The provider to use.
       "provider": "zed.dev",
-      // 要使用的模型。
+      // The model to use.
       "model": "claude-sonnet-4",
-      // 是否启用思考。
+      // Whether thinking is enabled.
       "enable_thinking": false,
     },
-    // 语言模型请求的附加参数。向模型发出请求时，参数将取自
-    // 此列表中与模型的提供商和名称匹配的最后一个条目。在每个条目中，提供商
-    // 和模型都是可选的，因此您可以为其中之一指定参数。
+    // Additional parameters for language model requests. When making a request to a model, parameters will be taken
+    // from the last entry in this list that matches the model's provider and name. In each entry, both provider
+    // and model are optional, so that you can specify parameters for either one.
     "model_parameters": [
-      // 为所有对 OpenAI 模型的请求设置参数：
+      // To set parameters for all requests to OpenAI models:
       // {
       //   "provider": "openai",
       //   "temperature": 0.5
       // }
       //
-      // 为所有常规请求设置参数：
+      // To set parameters for all requests in general:
       // {
       //   "temperature": 0
       // }
       //
-      // 为特定的提供商和模型设置参数：
+      // To set parameters for a specific provider and model:
       // {
       //   "provider": "zed.dev",
       //   "model": "claude-sonnet-4",
       //   "temperature": 1.0
       // }
     ],
-    // 工具操作的权限规则。
+    // Permission rules for tool actions.
     //
-    // "default" 设置在没有工具特定规则匹配时应用。
-    // 对于定义了自己权限模式的外部代理，
-    // "deny" 和 "confirm" 仍然优先 — 外部代理的
-    // 权限系统仅在 Zed 允许该操作时使用。
+    // The "default" setting applies when no tool-specific rules match.
+    // For external agents that define their own permission modes,
+    // "deny" and "confirm" still take precedence — the external agent's
+    // permission system is only used when Zed would allow the action.
     //
-    // 每个工具的正则表达式模式（下面的 "tools"）与工具输入文本
-    // （命令、路径、URL 等）匹配。对于 `copy_path` 和 `move_path`，
-    // 模式独立匹配每个路径（源和目标）。
+    // Per-tool regex patterns ("tools" below) match against tool input text
+    // (commands, paths, URLs, etc.). For `copy_path` and `move_path`,
+    // patterns are matched independently against each path (source and
+    // destination).
     "tool_permissions": {
-      // 没有工具特定规则匹配时的全局默认权限。
-      // "allow" - 自动批准，无需提示
-      // "deny" - 自动拒绝
-      // "confirm" - 始终提示（默认）
+      // Global default permission when no tool-specific rules match.
+      // "allow" - Auto-approve without prompting
+      // "deny" - Auto-reject
+      // "confirm" - Always prompt (default)
       "default": "confirm",
-      // 每个工具的权限规则。正则表达式模式与工具输入文本匹配。
-      // 每个工具的 "default" 也适用于 MCP 工具。
-      // 每个工具可以有自己的默认值和正则表达式模式。
+      // Per-tool permission rules. Regex patterns match against tool input text.
+      // The per-tool "default" also applies to MCP tools.
+      // Each tool can have its own default and regex patterns.
       "tools": {
         // "terminal": {
         //   "default": "confirm",
         //   "always_confirm": [
-        //     // 破坏性 git 操作
+        //     // Destructive git operations
         //     { "pattern": "git\\s+(reset|clean)\\s+--hard" },
         //     { "pattern": "git\\s+push\\s+(-f|--force)" },
         //   ],
@@ -995,7 +1014,7 @@
         // "edit_file": {
         //   "default": "confirm",
         //   "always_deny": [
-        //     // 机密和凭证
+        //     // Secrets and credentials
         //     { "pattern": "\\.env($|\\.)" },
         //     { "pattern": "secrets?/" },
         //     { "pattern": "\\.pem$" },
@@ -1004,9 +1023,9 @@
         // },
       },
     },
-    // 启用时，代理编辑将在单文件编辑器中显示以供审查
+    // When enabled, agent edits will be displayed in single-file editors for review
     "single_file_review": false,
-    // 启用时，显示代理编辑的反馈投票拇指。
+    // When enabled, show voting thumbs for feedback on agent edits.
     "enable_feedback": true,
     "default_profile": "write",
     "profiles": {
@@ -1039,7 +1058,7 @@
       },
       "ask": {
         "name": "Ask",
-        // 我们不知道哪些上下文服务器工具对 "Ask" 配置文件是安全的，所以我们默认不启用它们。
+        // We don't know which of the context server tools are safe for the "Ask" profile, so we don't enable them by default.
         // "enable_all_context_servers": true,
         "tools": {
           "diagnostics": true,
@@ -1063,344 +1082,353 @@
         "tools": {},
       },
     },
-    // 是在当前本地项目中启动新线程，还是在新的 Git 工作树中启动。
+    // Whether to start a new thread in the current local project or in a new Git worktree.
     //
-    // 默认值：local_project
+    // Default: local_project
     "new_thread_location": "local_project",
-    // 当代理完成响应或需要确认才能运行工具操作时，
-    // 在何处显示通知。
-    // "primary_screen" - 仅在主屏幕上显示通知（默认）
-    // "all_screens" - 在所有屏幕上显示这些通知
-    // "never" - 从不显示这些通知
+    // Where to show notifications when the agent has either completed
+    // its response, or else needs confirmation before it can run a
+    // tool action.
+    // "primary_screen" - Show the notification only on your primary screen (default)
+    // "all_screens" - Show these notifications on all screens
+    // "never" - Never show these notifications
     "notify_when_agent_waiting": "primary_screen",
-    // 当代理完成响应或需要用户输入时是否播放声音。
+    // Whether to play a sound when the agent has either completed
+    // its response, or needs user input.
 
-    // 默认值：false
+    // Default: false
     "play_sound_when_agent_done": false,
-    // 是否在代理面板中展开编辑卡片，显示完整差异预览。
+    // Whether to have edit cards in the agent panel expanded, showing a preview of the full diff.
     //
-    // 默认值：true
+    // Default: true
     "expand_edit_card": true,
-    // 是否在代理面板中展开终端卡片，显示整个命令输出。
+    // Whether to have terminal cards in the agent panel expanded, showing the whole command output.
     //
-    // 默认值：true
+    // Default: true
     "expand_terminal_card": true,
-    // 点击正在运行的终端工具上的停止按钮是否也应取消代理的生成。
-    // 注意，这仅适用于停止按钮，不适用于终端内的 ctrl+c。
+    // Whether clicking the stop button on a running terminal tool should also cancel the agent's generation.
+    // Note that this only applies to the stop button, not to ctrl+c inside the terminal.
     //
-    // 默认值：true
+    // Default: true
     "cancel_generation_on_terminal_stop": true,
-    // 是否始终使用 cmd-enter（在 Linux 或 Windows 上为 ctrl-enter）在代理面板中发送消息。
+    // Whether to always use cmd-enter (or ctrl-enter on Linux or Windows) to send messages in the agent panel.
     //
-    // 默认值：false
+    // Default: false
     "use_modifier_to_send": false,
-    // 代理消息编辑器中显示的最小行数。
+    // Minimum number of lines to display in the agent message editor.
     //
-    // 默认值：4
+    // Default: 4
     "message_editor_min_lines": 4,
-    // 是否显示轮次统计（生成期间经过的时间、最终轮次持续时间）。
+    // Whether to show turn statistics (elapsed time during generation, final turn duration).
     //
-    // 默认值：false
+    // Default: false
     "show_turn_stats": false,
   },
-  // 是否在操作系统状态栏中显示屏幕共享图标。
+  // Whether the screen sharing icon is shown in the os status bar.
   "show_call_status_icon": true,
-  // 是否使用语言服务器提供代码智能。
+  // Whether to use language servers to provide code intelligence.
   "enable_language_server": true,
-  // 如果语言服务器支持，是否执行关联范围的链接编辑。
-  // 例如，当编辑开始 <html> 标签时，结束 </html> 标签的内容也会被编辑。
+  // Whether to perform linked edits of associated ranges, if the language server supports it.
+  // For example, when editing opening <html> tag, the contents of the closing </html> tag will be edited as well.
   "linked_edits": true,
-  // 用于所有语言的语言服务器列表（或禁用）。
+  // The list of language servers to use (or disable) for all languages.
   //
-  // 这通常按语言自定义。
+  // This is typically customized on a per-language basis.
   "language_servers": ["..."],
-  // 控制如何使用语言服务器的语义标记进行语法高亮。
+  // Controls how semantic tokens from language servers are used for syntax highlighting.
   //
-  // 选项：
-  // - "off"：不从语言服务器请求语义标记。
-  // - "combined"：将 LSP 语义标记与 tree-sitter 高亮一起使用作为基础。
-  // - "full"：仅使用 LSP 语义标记高亮文本，tree-sitter 语法高亮关闭。
+  // Options:
+  // - "off": Do not request semantic tokens from language servers.
+  // - "combined": Use LSP semantic tokens together with tree-sitter highlighting as base.
+  // - "full": Use LSP semantic tokens exclusively to highlight the text, tree-sitter syntax highlighting is off.
   //
-  // 可能需要重启语言服务器才能正确应用。
+  // May require language server restart to properly apply.
   "semantic_tokens": "off",
 
-  // 控制是否使用语言服务器的折叠范围，而不是
-  // 基于 tree-sitter 和缩进的折叠。
+  // Controls whether folding ranges from language servers are used instead of
+  // tree-sitter and indent-based folding.
   //
-  // 选项：
-  // - "off"：使用 tree-sitter 和基于缩进的折叠（默认）。
-  // - "on"：尽可能使用 LSP 折叠，当服务器未返回结果时回退到 tree-sitter 和基于缩进的折叠。
+  // Options:
+  // - "off": Use tree-sitter and indent-based folding (default).
+  // - "on": Use LSP folding wherever possible, falling back to tree-sitter and indent-based folding when no results were returned by the server.
   "document_folding_ranges": "off",
 
-  // 控制用于大纲和面包屑的文档符号来源。
+  // Controls the source of document symbols used for outlines and breadcrumbs.
   //
-  // 选项：
-  // - "off"：使用 tree-sitter 查询计算文档符号（默认）。
-  // - "on"：使用语言服务器的 `textDocument/documentSymbol` LSP 响应。启用时，tree-sitter 不用于文档符号。
+  // Options:
+  // - "off": Use tree-sitter queries to compute document symbols (default).
+  // - "on": Use the language server's `textDocument/documentSymbol` LSP response. When enabled, tree-sitter is not used for document symbols.
   "document_symbols": "off",
 
-  // 何时自动保存编辑的缓冲区。此设置可
-  // 取四个值。
+  // When to automatically save edited buffers. This setting can
+  // take four values.
   //
-  // 1. 从不自动保存：
+  // 1. Never automatically save:
   //     "autosave": "off",
-  // 2. 当焦点从 Zed 窗口移开时保存：
+  // 2. Save when changing focus away from the Zed window:
   //     "autosave": "on_window_change",
-  // 3. 当焦点从特定缓冲区移开时保存：
+  // 3. Save when changing focus away from a specific buffer:
   //     "autosave": "on_focus_change",
-  // 4. 空闲一定时间后保存：
+  // 4. Save when idle for a certain amount of time:
   //     "autosave": { "after_delay": {"milliseconds": 500} },
   "autosave": "off",
-  // 每个窗格的最大标签页数。未设置表示无限制。
+  // Maximum number of tabs per pane. Unset for unlimited.
   "max_tabs": null,
-  // 编辑器标签栏相关设置。
+  // Settings related to the editor's tab bar.
   "tab_bar": {
-    // 是否在编辑器中显示标签栏
+    // Whether or not to show the tab bar in the editor
     "show": true,
-    // 是否显示导航历史按钮。
+    // Whether or not to show the navigation history buttons.
     "show_nav_history_buttons": true,
-    // 是否显示标签栏按钮。
+    // Whether or not to show the tab bar buttons.
     "show_tab_bar_buttons": true,
-    // 是否在单独的行中显示固定的标签页。
-    // 启用时，固定标签页显示在顶行，未固定标签页显示在底行。
-    // 禁用时，所有标签页显示在单行中（默认行为）。
+    // Whether or not to show pinned tabs in a separate row.
+    // When enabled, pinned tabs appear in a top row and unpinned tabs in a bottom row.
+    // When disabled, all tabs appear in a single row (default behavior).
     "show_pinned_tabs_in_separate_row": false,
   },
-  // 编辑器标签页相关设置
+  // Settings related to the editor's tabs
   "tabs": {
-    // 在编辑器标签页中显示 git 状态颜色。
+    // Show git status colors in the editor tabs.
     "git_status": false,
-    // 编辑器标签页上关闭按钮的位置。
-    // 可选值：["right", "left"]
+    // Position of the close button on the editor tabs.
+    // One of: ["right", "left"]
     "close_position": "right",
-    // 是否显示标签页的文件图标。
+    // Whether to show the file icon for a tab.
     "file_icons": false,
-    // 控制标签页关闭按钮的外观行为。
+    // Controls the appearance behavior of the tab's close button.
     //
-    // 1. 仅在悬停标签页时显示。（默认）
+    // 1. Show it just upon hovering the tab. (default)
     //     "hover"
-    // 2. 持续显示。
+    // 2. Show it persistently.
     //     "always"
-    // 3. 从不显示，即使悬停时也不显示。
+    // 3. Never show it, even if hovering it.
     //     "hidden"
     "show_close_button": "hover",
-    // 关闭当前标签页后要执行的操作。
+    // What to do after closing the current tab.
     //
-    // 1. 激活之前打开的标签页（默认）
+    // 1. Activate the tab that was open previously (default)
     //     "history"
-    // 2. 如果存在右侧相邻标签页则激活它
+    // 2. Activate the right neighbour tab if present
     //     "neighbour"
-    // 3. 如果存在左侧相邻标签页则激活它
+    // 3. Activate the left neighbour tab if present
     //     "left_neighbour"
     "activate_on_close": "history",
-    // 在标签页中标记包含诊断错误/警告的文件。
-    // 诊断仅在文件图标也处于活动状态时显示。
-    // 此设置只能取以下三个值：
+    // Which files containing diagnostic errors/warnings to mark in the tabs.
+    // Diagnostics are only shown when file icons are also active.
+    // This setting only works when can take the following three values:
     //
-    // 1. 不标记任何文件：
+    // 1. Do not mark any files:
     //    "off"
-    // 2. 仅标记有错误的文件：
+    // 2. Only mark files with errors:
     //    "errors"
-    // 3. 标记有错误和警告的文件：
+    // 3. Mark files with errors and warnings:
     //    "all"
     "show_diagnostics": "off",
   },
-  // 预览标签页相关设置。
+  // Settings related to preview tabs.
   "preview_tabs": {
-    // 是否启用预览标签页。
-    // 预览标签页允许您以预览模式打开文件，当您打开另一个预览标签页时，
-    // 它们会自动关闭。
-    // 这对于快速查看文件而不弄乱工作区很有用。
+    // Whether preview tabs should be enabled.
+    // Preview tabs allow you to open files in preview mode, where they close automatically
+    // when you open another preview tab.
+    // This is useful for quickly viewing files without cluttering your workspace.
     "enabled": true,
-    // 从项目面板单击打开标签页时是否以预览模式打开。
+    // Whether to open tabs in preview mode when opened from the project panel with a single click.
     "enable_preview_from_project_panel": true,
-    // 从文件查找器选择时是否以预览模式打开标签页。
+    // Whether to open tabs in preview mode when selected from the file finder.
     "enable_preview_from_file_finder": false,
-    // 从多缓冲区打开时是否以预览模式打开标签页。
+    // Whether to open tabs in preview mode when opened from a multibuffer.
     "enable_preview_from_multibuffer": true,
-    // 使用代码导航打开多缓冲区时是否以预览模式打开标签页。
+    // Whether to open tabs in preview mode when code navigation is used to open a multibuffer.
     "enable_preview_multibuffer_from_code_navigation": false,
-    // 使用代码导航打开单个文件时是否以预览模式打开标签页。
+    // Whether to open tabs in preview mode when code navigation is used to open a single file.
     "enable_preview_file_from_code_navigation": true,
-    // 使用代码导航离开标签页时是否保持预览模式。
-    // 如果 `enable_preview_file_from_code_navigation` 或 `enable_preview_multibuffer_from_code_navigation` 也为 true，新标签页可能会替换现有标签页。
+    // Whether to keep tabs in preview mode when code navigation is used to navigate away from them.
+    // If `enable_preview_file_from_code_navigation` or `enable_preview_multibuffer_from_code_navigation` is also true, the new tab may replace the existing one.
     "enable_keep_preview_on_code_navigation": false,
   },
-  // 文件查找器相关设置。
+  // Settings related to the file finder.
   "file_finder": {
-    // 是否在文件查找器中显示文件图标。
+    // Whether to show file icons in the file finder.
     "file_icons": true,
-    // 确定文件查找器相对于可用窗口宽度可以占用多少空间。
-    // 有 5 个可能的宽度值：
+    // Determines how much space the file finder can take up in relation to the available window width.
+    // There are 5 possible width values:
     //
-    // 1. Small：此值本质上是固定宽度。
+    // 1. Small: This value is essentially a fixed width.
     //    "modal_max_width": "small"
-    // 2. Medium：
+    // 2. Medium:
     //    "modal_max_width": "medium"
-    // 3. Large：
+    // 3. Large:
     //    "modal_max_width": "large"
-    // 4. Extra Large：
+    // 4. Extra Large:
     //    "modal_max_width": "xlarge"
-    // 5. Fullscreen：此值移除任何水平填充，因为它占用整个视口宽度。
+    // 5. Fullscreen: This value removes any horizontal padding, as it consumes the whole viewport width.
     //    "modal_max_width": "full"
     //
-    // 默认值：small
+    // Default: small
     "modal_max_width": "small",
-    // 确定文件查找器是否应在搜索结果中跳过对活动文件的聚焦。
-    // 有 2 个可能的值：
+    // Determines whether the file finder should skip focus for the active file in search results.
+    // There are 2 possible values:
     //
-    // 1. true：搜索文件时，如果当前活动文件作为第一个结果出现，
-    //    自动聚焦将跳过它并聚焦第二个结果。
+    // 1. true: When searching for files, if the currently active file appears as the first result,
+    //    auto-focus will skip it and focus the second result instead.
     //    "skip_focus_for_active_in_search": true
     //
-    // 2. false：搜索文件时，第一个结果将始终获得焦点，
-    //    即使它是当前活动文件。
+    // 2. false: When searching for files, the first result will always receive focus,
+    //    even if it's the currently active file.
     //    "skip_focus_for_active_in_search": false
     //
-    // 默认值：true
+    // Default: true
     "skip_focus_for_active_in_search": true,
-    // 搜索时是否使用 gitignored 文件。
-    // 仅使用 Zed 已索引的文件，不一定是所有 gitignored 文件。
+    // Whether to use gitignored files when searching.
+    // Only the file Zed had indexed will be used, not necessary all the gitignored files.
     //
-    // 可接受 3 个值：
-    //   * "all"：使用所有 gitignored 文件
-    //   * "indexed"：仅使用 Zed 已索引的文件
-    //   * "smart"：从 gitignored 工作树调用时智能搜索忽略的文件
+    // Can accept 3 values:
+    //   * "all": Use all gitignored files
+    //   * "indexed": Use only the files Zed had indexed
+    //   * "smart": Be smart and search for ignored when called from a gitignored worktree
     "include_ignored": "smart",
-    // 是否在文件查找器结果中包含文本频道。
+    // Whether to include text channels in file finder results.
     "include_channels": false,
   },
-  // 保存缓冲区前是否移除行尾的任何尾随空白。
+  // Whether or not to remove any trailing whitespace from lines of a buffer
+  // before saving it.
   "remove_trailing_whitespace_on_save": true,
-  // 当上一行也是注释时，是否以注释开始新行。
+  // Whether to start a new line with a comment when a previous line is a comment as well.
   "extend_comment_on_newline": true,
-  // 按下回车键时是否继续 markdown 列表。
+  // Whether to continue markdown lists when pressing enter.
   "extend_list_on_newline": true,
-  // 在列表标记后按下 tab 键时是否缩进列表项。
+  // Whether to indent list items when pressing tab after a list marker.
   "indent_list_on_tab": true,
-  // 移除文件末尾仅包含空白的任何行，并确保末尾只有一个换行符。
+  // Removes any lines containing only whitespace at the end of the file and
+  // ensures just one newline at the end.
   "ensure_final_newline_on_save": true,
-  // 保存前是否执行缓冲区格式化：[on, off]
-  // 请注意，如果启用了延迟自动保存，format_on_save 将被忽略
+  // Whether or not to perform a buffer format before saving: [on, off]
+  // Keep in mind, if the autosave with delay is enabled, format_on_save will be ignored
   "format_on_save": "on",
-  // 如何执行缓冲区格式化。此设置可取多个值：
+  // How to perform a buffer format. This setting can take multiple values:
   //
-  // 1. 默认。使用 Zed 的 Prettier 集成格式化文件（如果适用），
-  //    或回退到通过语言服务器格式化：
+  // 1. Default. Format files using Zed's Prettier integration (if applicable),
+  //    or falling back to formatting via language server:
   //     "formatter": "auto"
-  // 2. 使用当前语言服务器格式化代码：
+  // 2. Format code using the current language server:
   //     "formatter": "language_server"
-  // 3. 使用特定语言服务器格式化代码：
+  // 3. Format code using a specific language server:
   //     "formatter": {"language_server": {"name": "ruff"}}
-  // 4. 使用外部命令格式化代码：
+  // 4. Format code using an external command:
   //     "formatter": {
   //       "external": {
   //         "command": "prettier",
   //         "arguments": ["--stdin-filepath", "{buffer_path}"]
   //       }
   //     }
-  // 5. 使用 Zed 的 Prettier 集成格式化代码：
+  // 5. Format code using Zed's Prettier integration:
   //     "formatter": "prettier"
-  // 6. 使用代码操作格式化代码
+  // 6. Format code using a code action
   //     "formatter": {"code_action": "source.fixAll.eslint"}
-  // 7. 按顺序应用的任何上述格式化步骤的数组
+  // 7. An array of any format step specified above to apply in order
   //     "formatter": [{"code_action": "source.fixAll.eslint"}, "prettier"]
   "formatter": "auto",
-  // 如何对长文本行进行软换行。
-  // 可能的值：
+  // How to soft-wrap long lines of text.
+  // Possible values:
   //
-  // 1. 通常首选单行，除非遇到过长的行。
+  // 1. Prefer a single line generally, unless an overly long line is encountered.
   //      "soft_wrap": "none",
-  //      "soft_wrap": "prefer_line", // (已弃用，与 "none" 相同)
-  // 2. 对溢出编辑器的行进行软换行。
+  //      "soft_wrap": "prefer_line", // (deprecated, same as "none")
+  // 2. Soft wrap lines that overflow the editor.
   //      "soft_wrap": "editor_width",
-  // 3. 在首选行长度处软换行。
+  // 3. Soft wrap lines at the preferred line length.
   //      "soft_wrap": "preferred_line_length",
-  // 4. 在首选行长度或编辑器宽度（以较小者为准）处软换行。
+  // 4. Soft wrap lines at the preferred line length or the editor width (whichever is smaller).
   //      "soft_wrap": "bounded",
   "soft_wrap": "none",
-  // 对于启用软换行的缓冲区，软换行的列位置。
+  // The column at which to soft-wrap lines, for buffers where soft-wrap
+  // is enabled.
   "preferred_line_length": 80,
-  // 是否使用制表符缩进，而不是多个空格。
+  // Whether to indent lines using tab characters, as opposed to multiple
+  // spaces.
   "hard_tabs": false,
-  // 一个制表符应占用的列数。
+  // How many columns a tab should occupy.
   "tab_size": 4,
-  // 从文件开头和结尾各搜索多少行来查找 modeline。
-  // Modeline 包含编辑器指令（例如 vim/emacs 设置），用于为特定文件配置编辑器行为。
+  // Number of lines to search for modelines at the beginning and end of files.
+  // Modelines contain editor directives (e.g., vim/emacs settings) that configure
+  // the editor behavior for specific files.
   //
-  // 设为 0 可禁用 modeline 支持。
+  // A value of 0 disables modelines support.
   "modeline_lines": 5,
-  // 所有语言默认首选的调试器。
+  // What debuggers are preferred by default for all languages.
   "debuggers": [],
-  // 是否在编辑器中启用单词差异高亮。
+  // Whether to enable word diff highlighting in the editor.
   //
-  // 启用时，修改行内更改的单词会被高亮
-  // 以准确显示更改了什么。
+  // When enabled, changed words within modified lines are highlighted
+  // to show exactly what changed.
   //
-  // 默认值：true
+  // Default: true
   "word_diff_enabled": true,
-  // 控制 Zed 收集哪些信息。
+  // Control what info is collected by Zed.
   "telemetry": {
-    // 发送调试信息，如崩溃报告。
+    // Send debug info like crash reports.
     "diagnostics": true,
-    // 发送匿名使用数据，如您使用 Zed 的语言。
+    // Send anonymized usage data like what languages you're using Zed with.
     "metrics": true,
   },
-  // 是否禁用 Zed 中的所有 AI 功能。
+  // Whether to disable all AI features in Zed.
   //
-  // 默认值：false
+  // Default: false
   "disable_ai": false,
-  // 自动更新 Zed。如果通过包管理器安装，
-  // 此设置在 Linux 上可能会被忽略。
+  // Automatically update Zed. This setting may be ignored on Linux if
+  // installed through a package manager.
   "auto_update": true,
-  // 如何在编辑器中渲染 LSP `textDocument/documentColor` 颜色。
+  // How to render LSP `textDocument/documentColor` colors in the editor.
   //
-  // 可能的值：
+  // Possible values:
   //
-  // 1. 不查询和渲染文档颜色。
+  // 1. Do not query and render document colors.
   //      "lsp_document_colors": "none",
-  // 2. 将文档颜色渲染为颜色文本附近的内嵌提示（默认）。
+  // 2. Render document colors as inlay hints near the color text (default).
   //      "lsp_document_colors": "inlay",
-  // 3. 在颜色文本周围绘制边框。
+  // 3. Draw a border around the color text.
   //      "lsp_document_colors": "border",
-  // 4. 在颜色文本后面绘制背景。
+  // 4. Draw a background behind the color text..
   //      "lsp_document_colors": "background",
   "lsp_document_colors": "inlay",
-  // 诊断配置。
+  // Diagnostics configuration.
   "diagnostics": {
-    // 是否在状态栏中显示项目诊断按钮。
+    // Whether to show the project diagnostics button in the status bar.
     "button": true,
-    // 默认是否显示警告。
+    // Whether to show warnings or not by default.
     //
-    // 默认值：true
+    // Default: true
     "include_warnings": true,
-    // 在 Zed 中使用 LSP 拉取诊断机制的设置。
+    // Settings for using LSP pull diagnostics mechanism in Zed.
     "lsp_pull_diagnostics": {
-      // 是否拉取诊断。
+      // Whether to pull for diagnostics or not.
       "enabled": true,
-      // 从语言服务器拉取诊断前等待的最短时间。
-      // 0 关闭防抖。
+      // Minimum time to wait before pulling diagnostics from the language server(s).
+      // 0 turns the debounce off.
       "debounce_ms": 50,
     },
-    // 内联诊断设置
+    // Settings for inline diagnostics
     "inline": {
-      // 是否显示内联诊断
+      // Whether to show diagnostics inline or not
       "enabled": false,
-      // 最后一次诊断更新后显示内联诊断的延迟（毫秒）。
+      // The delay in milliseconds to show inline diagnostics after the
+      // last diagnostic update.
       "update_debounce_ms": 150,
-      // 源行末尾与内联诊断开始之间的填充量，以 em 宽度为单位。
+      // The amount of padding between the end of the source line and the start
+      // of the inline diagnostic in units of em widths.
       "padding": 4,
-      // 显示内联诊断的最小列。此设置可用于
-      // 在某列水平对齐内联诊断。超过此值的行
-      // 仍会将诊断推到更右侧。
+      // The minimum column to display inline diagnostics. This setting can be
+      // used to horizontally align inline diagnostics at some column. Lines
+      // longer than this value will still push diagnostics further to the right.
       "min_column": 0,
-      // 内联显示的诊断的最小严重级别。
-      // 为 `null` 时继承编辑器的诊断最大严重级别设置。
+      // The minimum severity of the diagnostics to show inline.
+      // Inherits editor's diagnostics' max severity settings when `null`.
       "max_severity": null,
     },
   },
-  // Zed 将完全排除的文件或文件 glob 模式。它们将在文件
-  // 扫描、文件搜索期间被跳过，并且不会显示在项目文件树中。优先于 `file_scan_inclusions`。
+  // Files or globs of files that will be excluded by Zed entirely. They will be skipped during file
+  // scans, file searches, and not be displayed in the project file tree. Takes precedence over `file_scan_inclusions`.
   "file_scan_exclusions": [
     "**/.git",
     "**/.svn",
@@ -1414,87 +1442,91 @@
     "**/.classpath",
     "**/.settings",
   ],
-  // Zed 将包含的文件或文件 glob 模式，即使被 git 忽略。这对于
-  // 未被 git 跟踪但仍对项目重要的文件很有用。请注意，过于宽泛的 glob
-  // 可能会减慢 Zed 的文件扫描速度。`file_scan_exclusions` 优先于这些包含项。
+  // Files or globs of files that will be included by Zed, even when ignored by git. This is useful
+  // for files that are not tracked by git, but are still important to your project. Note that globs
+  // that are overly broad can slow down Zed's file scanning. `file_scan_exclusions` takes
+  // precedence over these inclusions.
   "file_scan_inclusions": [".env*"],
-  // 用于匹配将被视为"隐藏"的文件的 glob 模式。这些文件可以通过
-  // 切换 "hide_hidden" 设置从项目面板中隐藏。
+  // Globs to match files that will be considered "hidden". These files can be hidden from the
+  // project panel by toggling the "hide_hidden" setting.
   "hidden_files": ["**/.*"],
-  // 用于匹配将以只读方式打开的文件的 glob 模式。您仍然可以查看这些文件，
-  // 但无法编辑它们。这对于生成的文件或外部依赖项很有用。
+  // Globs to match files that will be opened as read-only. You can still view these files,
+  // but cannot edit them. This is useful for generated files or external dependencies.
   "read_only_files": [],
-  // Git 装订线行为配置。
+  // Git gutter behavior configuration.
   "git": {
-    // 全局开关，用于启用或禁用所有 git 集成功能。
-    // 如果设置为 true，则禁用所有 git 集成功能。
-    // 如果设置为 false，下面的各个 git 集成功能将独立启用或禁用。
+    // Global switch to enable or disable all git integration features.
+    // If set to true, disables all git integration features.
+    // If set to false, individual git integration features below will be independently enabled or disabled.
     "disable_git": false,
-    // 是否启用 git 状态跟踪。
+    // Whether to enable git status tracking.
     "enable_status": true,
-    // 是否启用 git 差异显示。
+    // Whether to enable git diff display.
     "enable_diff": true,
-    // 控制是否显示 git 装订线。可取 2 个值：
-    // 1. 显示装订线
+    // Control whether the git gutter is shown. May take 2 values:
+    // 1. Show the gutter
     //      "git_gutter": "tracked_files"
-    // 2. 隐藏装订线
+    // 2. Hide the gutter
     //      "git_gutter": "hide"
     "git_gutter": "tracked_files",
-    /// 设置更改反映在 git 装订线中的防抖阈值（毫秒）。
+    /// Sets the debounce threshold (in milliseconds) after which changes are reflected in the git gutter.
     ///
-    /// 默认值：0
+    /// Default: 0
     "gutter_debounce": 0,
-    // 控制是否在当前聚焦的行中内联显示 git blame 信息。
+    // Control whether the git blame information is shown inline,
+    // in the currently focused line.
     "inline_blame": {
       "enabled": true,
-      // 设置显示内联 blame 信息的延迟。
-      // 每次光标移动时延迟都会重新开始。
+      // Sets a delay after which the inline blame information is shown.
+      // Delay is restarted with every cursor movement.
       "delay_ms": 0,
-      // 源行末尾与内联 blame 开始之间的填充量，以 em 宽度为单位。
+      // The amount of padding between the end of the source line and the start
+      // of the inline blame in units of em widths.
       "padding": 7,
-      // 是否在同一行显示 git 提交摘要。
+      // Whether or not to display the git commit summary on the same line.
       "show_commit_summary": false,
-      // 显示内联 blame 信息的最小列号
+      // The minimum column number to show the inline blame information at
       "min_column": 0,
     },
     "blame": {
       "show_avatar": true,
     },
-    // 控制分支选择器中显示哪些信息。
+    // Control which information is shown in the branch picker.
     "branch_picker": {
       "show_author_name": true,
     },
-    // git 块在编辑器中的视觉显示方式。
-    // 此设置可取两个值：
+    // How git hunks are displayed visually in the editor.
+    // This setting can take two values:
     //
-    // 1. 未暂存的块填充显示，已暂存的块空心显示：
+    // 1. Show unstaged hunks filled and staged hunks hollow:
     //    "hunk_style": "staged_hollow"
-    // 2. 未暂存的块空心显示，已暂存的块填充显示：
+    // 2. Show unstaged hunks hollow and staged hunks filled:
     //    "hunk_style": "unstaged_hollow"
     "hunk_style": "staged_hollow",
-    // git 视图中应先显示名称还是路径。
-    // "path_style": "file_name_first" 或 "file_path_first"
+    // Should the name or path be displayed first in the git view.
+    // "path_style": "file_name_first" or "file_path_first"
     "path_style": "file_name_first",
-    // 创建 git 工作树的目录，相对于仓库工作目录。
+    // Directory where git worktrees are created, relative to the repository
+    // working directory.
     //
-    // 当解析的目录在项目根目录之外时，
-    // 项目的目录名会自动附加，以便
-    // 同级仓库不会冲突。例如，使用默认的
-    // "../worktrees" 和位于 ~/code/zed 的项目，工作树
-    // 创建在 ~/code/worktrees/zed/ 下。
+    // When the resolved directory is outside the project root, the
+    // project's directory name is automatically appended so that
+    // sibling repos don't collide. For example, with the default
+    // "../worktrees" and a project at ~/code/zed, worktrees are
+    // created under ~/code/worktrees/zed/.
     //
-    // 当解析的目录在项目根目录内时，不会
-    // 添加额外组件（它已经是项目范围的）。
+    // When the resolved directory is inside the project root, no
+    // extra component is added (it's already project-scoped).
     //
-    // 示例：
-    //   "../worktrees" — ~/code/worktrees/<project>/ (默认)
+    // Examples:
+    //   "../worktrees" — ~/code/worktrees/<project>/ (default)
     //   ".git/zed-worktrees" — <project>/.git/zed-worktrees/
     //   "my-worktrees" — <project>/my-worktrees/
     //
-    // 尾部斜杠将被忽略。
+    // Trailing slashes are ignored.
     "worktree_directory": "../worktrees",
   },
-  // 自定义 Git 托管提供商列表。
+  // The list of custom Git hosting providers.
   "git_hosting_providers": [
     // {
     //   "provider": "github",
@@ -1502,22 +1534,22 @@
     //   "base_url": "https://code.big-corp.com"
     // }
   ],
-  // direnv 配置加载方式的配置。可取 2 个值：
-  // 1. 直接使用 `direnv export json` 加载 direnv 配置。
+  // Configuration for how direnv configuration should be loaded. May take 2 values:
+  // 1. Load direnv configuration using `direnv export json` directly.
   //      "load_direnv": "direct"
-  // 2. 通过 shell 钩子加载 direnv 配置，适用于 POSIX shell 和 fish。
+  // 2. Load direnv configuration through the shell hook, works for POSIX shells and fish.
   //      "load_direnv": "shell_hook"
-  // 3. 完全不加载 direnv 配置。
+  // 3. Don't load direnv configuration at all.
   //      "load_direnv": "disabled"
   "load_direnv": "direct",
   "edit_predictions": {
-    // 使用哪个编辑预测提供商。
+    // Which edit prediction provider to use.
     "provider": "zed",
-    // 表示应禁用编辑预测的文件的 glob 模式列表。
-    // 已包含合理的默认 glob 列表。
-    // 添加到此列表的任何内容将与默认列表合并。
-    // Glob 相对于工作树根目录匹配，
-    // 除非以斜杠 (/) 或 Windows 中的等效符号开头。
+    // A list of globs representing files that edit predictions should be disabled for.
+    // There's a sensible default list of globs already included.
+    // Any addition to this list will be merged with the default list.
+    // Globs are matched relative to the worktree root,
+    // except when starting with a slash (/) or equivalent in Windows.
     "disabled_globs": [
       "**/.env*",
       "**/*.pem",
@@ -1526,18 +1558,18 @@
       "**/*.crt",
       "**/.dev.vars",
       "**/secrets.yml",
-      "**/.zed/settings.json", // zed 项目设置
-      "/**/zed/settings.json", // zed 用户设置
+      "**/.zed/settings.json", // zed project settings
+      "/**/zed/settings.json", // zed user settings
       "/**/zed/keymap.json",
     ],
-    // 何时在缓冲区中显示编辑预测预览。
-    // 此设置有两个可能的值：
-    // 1. 当没有语言服务器补全可用时内联显示预测。
+    // When to show edit predictions previews in buffer.
+    // This setting takes two possible values:
+    // 1. Display predictions inline when there are no language server completions available.
     //     "mode": "eager"
-    // 2. 仅在按住修饰键（默认为 alt）时内联显示预测。
+    // 2. Display predictions inline only when holding a modifier key (alt by default).
     //     "mode": "subtle"
     "mode": "eager",
-    // Copilot 特定设置
+    // Copilot-specific settings
     // "copilot": {
     //   "enterprise_uri": "",
     //   "proxy": "",
@@ -1555,13 +1587,6 @@
       "model": "codestral-latest",
       "max_tokens": 150,
     },
-    "sweep": {
-      // 启用后，Sweep 不会存储编辑预测的输入或输出。
-      // 关闭后，Sweep 可能会收集缓冲区内容、
-      // 诊断、文件路径、仓库名称和生成的预测，
-      // 以改进服务。
-      "privacy_mode": false,
-    },
     "ollama": {
       "api_url": "http://localhost:11434",
       "model": "qwen2.5-coder:7b-base",
@@ -1574,43 +1599,43 @@
       "prompt_format": "infer",
       "max_output_tokens": 64,
     },
-    // 在代理面板中编辑文本线程时是否启用编辑预测。
-    // 如果全局禁用，此设置无效。
+    // Whether edit predictions are enabled when editing text threads in the agent panel.
+    // This setting has no effect if globally disabled.
     "enabled_in_text_threads": true,
   },
-  // 日记特定设置
+  // Settings specific to journaling
   "journal": {
-    // 存储日记条目的目录路径
+    // The path of the directory where journal entries are stored
     "path": "~",
-    // 以什么格式显示小时
-    // 可取 2 个值：
+    // What format to display the hours in
+    // May take 2 values:
     // 1. hour12
     // 2. hour24
     "hour_format": "hour12",
   },
-  // 状态栏相关设置。
+  // Status bar-related settings.
   "status_bar": {
-    // 是否显示状态栏。
+    // Whether to show the status bar.
     "experimental.show": true,
-    // 是否在状态栏中显示活动语言按钮。
+    // Whether to show the active language button in the status bar.
     "active_language_button": true,
-    // 是否在状态栏中显示光标位置按钮。
+    // Whether to show the cursor position button in the status bar.
     "cursor_position_button": true,
-    // 是否在状态栏中显示活动行尾按钮。
+    // Whether to show active line endings button in the status bar.
     "line_endings_button": false,
-    // 控制何时在状态栏中显示活动编码。
+    // Control when to show the active encoding in the status bar.
     "active_encoding_button": "non_utf8",
   },
-  // 终端特定设置
+  // Settings specific to the terminal
   "terminal": {
-    // 打开终端时使用什么 shell。可取 3 个值：
-    // 1. 使用 /etc/passwd 中系统默认的终端配置
+    // What shell to use when opening a terminal. May take 3 values:
+    // 1. Use the system's default terminal configuration in /etc/passwd
     //      "shell": "system"
-    // 2. 一个程序：
+    // 2. A program:
     //      "shell": {
     //        "program": "sh"
     //      }
-    // 3. 带参数的程序：
+    // 3. A program with arguments:
     //     "shell": {
     //         "with_arguments": {
     //           "program": "/bin/bash",
@@ -1618,239 +1643,245 @@
     //         }
     //     }
     "shell": "system",
-    // 终端面板停靠的位置。可以是 `left`、`right`、`bottom`。
+    // Where to dock terminals panel. Can be `left`, `right`, `bottom`.
     "dock": "bottom",
-    // 终端停靠在左侧或右侧时的默认宽度。
+    // Default width when the terminal is docked to the left or right.
     "default_width": 640,
-    // 终端停靠在底部时的默认高度。
+    // Default height when the terminal is docked to the bottom.
     "default_height": 320,
-    // 启动终端时使用什么工作目录。
-    // 可取 5 个值：
-    // 1. 使用当前文件的目录，回退到项目
-    //    目录，然后是工作区中的第一个项目。
+    // What working directory to use when launching the terminal.
+    // May take 5 values:
+    // 1. Use the current file's directory, falling back to the project
+    //    directory, then the first project in the workspace.
     //      "working_directory": "current_file_directory"
-    // 2. 使用当前文件的项目目录。如果不成功则
-    //    回退到第一个项目目录策略
+    // 2. Use the current file's project directory. Fallback to the
+    //    first project directory strategy if unsuccessful
     //      "working_directory": "current_project_directory"
-    // 3. 使用此工作区中第一个项目的目录
+    // 3. Use the first project in this workspace's directory
     //      "working_directory": "first_project_directory"
-    // 4. 始终使用此平台的用户主目录（如果能找到）
+    // 4. Always use this platform's home directory (if we can find it)
     //     "working_directory": "always_home"
-    // 5. 始终使用特定目录。此值将被 shell 展开。
-    //    如果此路径不是有效目录，终端将默认为
-    //    此平台的用户主目录（如果能找到）
+    // 5. Always use a specific directory. This value will be shell expanded.
+    //    If this path is not a valid directory the terminal will default to
+    //    this platform's home directory  (if we can find it)
     //      "working_directory": {
     //        "always": {
     //          "directory": "~/zed/projects/"
     //        }
     //      }
     "working_directory": "current_project_directory",
-    // 设置终端中光标闪烁行为。
-    // 可取 3 个值：
-    //  1. 从不闪烁光标，忽略终端模式
+    // Set the cursor blinking behavior in the terminal.
+    // May take 3 values:
+    //  1. Never blink the cursor, ignoring the terminal mode
     //         "blinking": "off",
-    //  2. 默认光标闪烁关闭，但允许终端设置闪烁
+    //  2. Default the cursor blink to off, but allow the terminal to
+    //     set blinking
     //         "blinking": "terminal_controlled",
-    //  3. 始终闪烁光标，忽略终端模式
+    //  3. Always blink the cursor, ignoring the terminal mode
     //         "blinking": "on",
     "blinking": "terminal_controlled",
-    // 终端的默认光标形状。
-    //  1. 包围下一个字符的块
+    // Default cursor shape for the terminal.
+    //  1. A block that surrounds the following character
     //     "block"
-    //  2. 垂直线
+    //  2. A vertical bar
     //     "bar"
-    //  3. 沿着下一个字符的下划线
+    //  3. An underline / underscore that runs along the following character
     //     "underline"
-    //  4. 围绕下一个字符绘制的方框
+    //  4. A box drawn around the following character
     //     "hollow"
     //
-    // 默认值："block"
+    // Default: "block"
     "cursor_shape": "block",
-    // 设置默认是否激活备用滚动模式 (代码: ?1007)。
-    // 备用滚动模式在备用屏幕中（例如运行 vim 或 less 等应用程序时）
-    // 将鼠标滚动事件转换为上/下按键。终端仍可以设置和取消此模式。
-    // 可取 2 个值：
-    //  1. 默认开启备用滚动模式
+    // Set whether Alternate Scroll mode (code: ?1007) is active by default.
+    // Alternate Scroll mode converts mouse scroll events into up / down key
+    // presses when in the alternate screen (e.g. when running applications
+    // like vim or  less). The terminal can still set and unset this mode.
+    // May take 2 values:
+    //  1. Default alternate scroll mode to on
     //         "alternate_scroll": "on",
-    //  2. 默认关闭备用滚动模式
+    //  2. Default alternate scroll mode to off
     //         "alternate_scroll": "off",
     "alternate_scroll": "on",
-    // 设置 option 键是否表现为 meta 键。
-    // 可取 2 个值：
-    //  1. 依赖平台对 option 键的默认处理，在 macOS 上
-    //     这意味着生成某些 unicode 字符
+    // Set whether the option key behaves as the meta key.
+    // May take 2 values:
+    //  1. Rely on default platform handling of option key, on macOS
+    //     this means generating certain unicode characters
     //         "option_as_meta": false,
-    //  2. 使 option 键表现为 'meta' 键，例如用于 emacs
+    //  2. Make the option keys behave as a 'meta' key, e.g. for emacs
     //         "option_as_meta": true,
     "option_as_meta": false,
-    // 在终端中选择文本是否自动复制到系统剪贴板。
+    // Whether or not selecting text in the terminal will automatically
+    // copy to the system clipboard.
     "copy_on_select": false,
-    // 复制到剪贴板后是否保持文本选择。
+    // Whether to keep the text selection after copying it to the clipboard.
     "keep_selection_on_copy": true,
-    // 是否在状态栏中显示终端按钮
+    // Whether to show the terminal button in the status bar
     "button": true,
-    // 添加到此列表的任何键值对将被添加到终端的
-    // 环境中。使用 `:` 分隔多个值。
+    // Any key-value pairs added to this list will be added to the terminal's
+    // environment. Use `:` to separate multiple values.
     "env": {
       // "KEY": "value1:value2"
     },
-    // 设置终端的行高。
-    // 可取 3 个值：
-    //  1. 使用适合阅读的行高，1.618
+    // Set the terminal's line height.
+    // May take 3 values:
+    //  1. Use a line height that's comfortable for reading, 1.618
     //         "line_height": "comfortable"
-    //  2. 使用标准行高，1.3。此选项对 TUI 很有用，
-    //      特别是如果它们使用方框字符
+    //  2. Use a standard line height, 1.3. This option is useful for TUIs,
+    //      particularly if they use box characters
     //         "line_height": "standard",
-    //  3. 使用自定义行高。
+    //  3. Use a custom line height.
     //         "line_height": {
     //           "custom": 2
     //         },
     "line_height": "standard",
-    // 如果在终端的工作目录中（由 working_directory 设置解析）
-    // 找到 Python 虚拟环境，则激活它。设置为 "off" 以禁用此行为。
+    // Activate the python virtual environment, if one is found, in the
+    // terminal's working directory (as resolved by the working_directory
+    // setting). Set this to "off" to disable this behavior.
     "detect_venv": {
       "on": {
-        // 相对于当前工作目录搜索虚拟环境的默认目录。
-        // 我们建议在项目设置中覆盖此设置，而不是全局设置。
+        // Default directories to search for virtual environments, relative
+        // to the current working directory. We recommend overriding this
+        // in your project's settings, rather than globally.
         "directories": [".env", "env", ".venv", "venv"],
-        // 也可以是 `csh`、`fish`、`nushell` 和 `power_shell`
+        // Can also be `csh`, `fish`, `nushell` and `power_shell`
         "activate_script": "default",
-        // 激活 Conda 环境时首选的 Conda 管理器。
-        // 值："auto"、"conda"、"mamba"、"micromamba"
-        // 默认值："auto"
+        // Preferred Conda manager to use when activating Conda environments.
+        // Values: "auto", "conda", "mamba", "micromamba"
+        // Default: "auto"
         "conda_manager": "auto",
       },
     },
     "toolbar": {
-      // 是否在工具栏的面包屑中显示终端标题。
-      // 仅在终端标题不为空时显示。
+      // Whether to display the terminal title in its toolbar's breadcrumbs.
+      // Only shown if the terminal title is not empty.
       //
-      // 终端中运行的 shell 需要配置为发出标题。
-      // 示例：`echo -e "\e]2;New Title\007";`
+      // The shell running in the terminal needs to be configured to emit the title.
+      // Example: `echo -e "\e]2;New Title\007";`
       "breadcrumbs": false,
     },
-    // 滚动条相关设置
+    // Scrollbar-related settings
     "scrollbar": {
-      // 何时在终端中显示滚动条。
-      // 此设置可取五个值：
+      // When to show the scrollbar in the terminal.
+      // This setting can take five values:
       //
-      // 1. null (默认)：继承编辑器设置
-      // 2. 如果有重要信息则显示滚动条，或
-      //    遵循系统配置的行为：
+      // 1. null (default): Inherit editor settings
+      // 2. Show the scrollbar if there's important information or
+      //    follow the system's configured behavior (default):
       //   "auto"
-      // 3. 匹配系统配置的行为：
+      // 3. Match the system's configured behavior:
       //    "system"
-      // 4. 始终显示滚动条：
+      // 4. Always show the scrollbar:
       //    "always"
-      // 5. 从不显示滚动条：
+      // 5. Never show the scrollbar:
       //    "never"
       "show": null,
     },
-    // 设置终端的字体大小。如果不包含此选项，
-    // 终端将默认匹配缓冲区的字体大小。
+    // Set the terminal's font size. If this option is not included,
+    // the terminal will default to matching the buffer's font size.
     // "font_size": 15,
-    // 设置终端的字体族。如果不包含此选项，
-    // 终端将默认匹配缓冲区的字体族。
+    // Set the terminal's font family. If this option is not included,
+    // the terminal will default to matching the buffer's font family.
     // "font_family": ".ZedMono",
-    // 设置终端的字体回退。如果不包含此选项，
-    // 终端将默认匹配缓冲区的字体回退。
-    // 这将与平台的默认字体回退合并
+    // Set the terminal's font fallbacks. If this option is not included,
+    // the terminal will default to matching the buffer's font fallbacks.
+    // This will be merged with the platform's default font fallbacks
     // "font_fallbacks": ["FiraCode Nerd Fonts"],
-    // 编辑器字体的粗细，使用 100 到 900 的标准 CSS 单位。
+    // The weight of the editor font in standard CSS units from 100 to 900.
     "font_weight": 400,
-    // 设置终端滚动缓冲区的最大行数。
-    // 默认值：10_000，最大值：100_000（所有更大的值将被视为 100_000），0 禁用滚动。
-    // 现有终端在重新创建之前不会应用此更改。
+    // Sets the maximum number of lines in the terminal's scrollback buffer.
+    // Default: 10_000, maximum: 100_000 (all bigger values set will be treated as 100_000), 0 disables the scrolling.
+    // Existing terminals will not pick up this change until they are recreated.
     "max_scroll_history_lines": 10000,
-    // 终端中滚动速度的乘数。
+    // The multiplier for scrolling speed in the terminal.
     "scroll_multiplier": 1.0,
-    // 前景色和背景色之间的最小 APCA 感知对比度。
-    // APCA（可访问感知对比度算法）比 WCAG 2.x 更准确，
-    // 特别是对于深色模式。值范围从 0 到 106。
+    // The minimum APCA perceptual contrast between foreground and background colors.
+    // APCA (Accessible Perceptual Contrast Algorithm) is more accurate than WCAG 2.x,
+    // especially for dark mode. Values range from 0 to 106.
     //
-    // 基于 APCA 可读性标准 (ARC) 青铜简单模式：
+    // Based on APCA Readability Criterion (ARC) Bronze Simple Mode:
     // https://readtech.org/ARC/tests/bronze-simple-mode/
-    // - 0：无对比度调整
-    // - 45：大型流畅文本的最小值 (36px+)
-    // - 60：其他内容文本的最小值
-    // - 75：正文文本的最小值
-    // - 90：正文文本的首选值
+    // - 0: No contrast adjustment
+    // - 45: Minimum for large fluent text (36px+)
+    // - 60: Minimum for other content text
+    // - 75: Minimum for body text
+    // - 90: Preferred for body text
     //
-    // 大多数终端主题的 APCA 值为 40-70。
-    // 值为 45 可保留彩色主题同时确保可读性。
+    // Most terminal themes have APCA values of 40-70.
+    // A value of 45 preserves colorful themes while ensuring legibility.
     "minimum_contrast": 45,
-    // 用于识别超链接导航路径的正则表达式。支持可选的命名捕获
-    // 组 `path`、`line`、`column` 和 `link`。如果这些都不存在，整个匹配
-    // 就是超链接目标。如果存在 `path`，它是超链接目标，以及 `line`
-    // 和 `column`（如果存在）。`link` 可用于自定义终端中哪些文本是
-    // 超链接的一部分。如果 `link` 不存在，使用整个匹配的文本。如果 `line` 和
-    // `column` 不存在，使用默认的内置行和列后缀处理，
-    // 解析 `line:column` 和 `(line,column)` 变体。默认值处理 Python
-    // 诊断和常见路径、行、列语法。这可以扩展或替换以
-    // 处理特定场景。例如，要启用对 rust 输出中包含空格的
-    // 路径的超链接支持，
+    // Regexes used to identify paths for hyperlink navigation. Supports optional named capture
+    // groups `path`, `line`, `column`, and `link`. If none of these are present, the entire match
+    // is the hyperlink target. If `path` is present, it is the hyperlink target, along with `line`
+    // and `column` if present. `link` may be used to customize what text in terminal is part of the
+    // hyperlink. If `link` is not present, the text of the entire match is used. If `line` and
+    // `column` are not present, the default built-in line and column suffix processing is used
+    // which parses `line:column` and `(line,column)` variants. The default value handles Python
+    // diagnostics and common path, line, column syntaxes. This can be extended or replaced to
+    // handle specific scenarios. For example, to enable support for hyperlinking paths which
+    // contain spaces in rust output,
     //
     // [
     //   "\\s+(-->|:::|at) (?<link>(?<path>.+?))(:$|$)",
     //   "\\s+(Compiling|Checking|Documenting) [^(]+\\((?<link>(?<path>.+))\\)"
     // ],
     //
-    // 可以使用。处理在第一个有匹配的正则表达式处停止，即使没有产生链接
-    // （当光标不在超链接文本上时就是这种情况）。为了最佳
-    // 性能，建议按从最常见到最不常见的顺序排列正则表达式。为了
-    // 可读性和文档，每个正则表达式可以是字符串数组，这些字符串被收集
-    // 成一个多行正则表达式字符串，用于终端路径超链接检测。
+    // could be used. Processing stops at the first regex with a match, even if no link is
+    // produced which is the case when the cursor is not over the hyperlinked text. For best
+    // performance it is recommended to order regexes from most common to least common. For
+    // readability and documentation, each regex may be an array of strings which are collected
+    // into one multi-line regex string for use in terminal path hyperlink detection.
     "path_hyperlink_regexes": [
-      // Python 风格诊断
+      // Python-style diagnostics
       "File \"(?<path>[^\"]+)\", line (?<line>[0-9]+)",
-      // 常见路径语法，带有可选的行、列、描述、尾随标点，或
-      // 周围符号或引号
+      // Common path syntax with optional line, column, description, trailing punctuation, or
+      // surrounding symbols or quotes
       [
         "(?x)",
         "(?<path>",
         "    (",
-        "        # 多字符路径：第一个字符（不是开分隔符、空格或制表符绘制字符）",
+        "        # multi-char path: first char (not opening delimiter, space, or box drawing char)",
         "        [^({\\[<\"'`\\ \\u2500-\\u257F]",
-        "        # 中间字符：非空格，冒号/括号仅在不后跟数字/括号/空格时",
+        "        # middle chars: non-space, and colon/paren only if not followed by digit/paren/space",
         "        ([^\\ :(]|[:(][^0-9()\\ ])*",
-        "        # 最后一个字符：不是闭分隔符或冒号",
+        "        # last char: not closing delimiter or colon",
         "        [^()}\\]>\"'`.,;:\\ ]",
         "    |",
-        "        # 单字符路径：不是分隔符、标点、空格或制表符绘制字符",
+        "        # single-char path: not delimiter, punctuation, space, or box drawing char",
         "        [^(){}\\[\\]<>\"'`.,;:\\ \\u2500-\\u257F]",
         "    )",
-        "    # 可选的行/列后缀（包含在路径中用于 PathWithPosition::parse_str）",
+        "    # optional line/column suffix (included in path for PathWithPosition::parse_str)",
         "    (:+[0-9]+(:[0-9]+)?|:?\\([0-9]+([,:]?[0-9]+)?\\))?",
         ")",
       ],
     ],
-    // 悬停和 Cmd-click 路径超链接发现的超时时间（毫秒）。指定
-    // 超时为 `0` 将禁用终端中的路径超链接。
+    // Timeout for hover and Cmd-click path hyperlink discovery in milliseconds. Specifying a
+    // timeout of `0` will disable path hyperlinking in terminal.
     "path_hyperlink_timeout_ms": 1,
-    // 是否在终端面板图标上显示打开终端计数的徽章。
+    // Whether to show a badge on the terminal panel icon with the count of open terminals.
     "show_count_badge": false,
   },
   "code_actions_on_format": {},
-  // 运行任务相关设置。
+  // Settings related to running tasks.
   "tasks": {
     "variables": {},
     "enabled": true,
-    // 优先使用 LSP 任务而不是 Zed 语言扩展任务。
-    // 如果由于错误/超时或正常执行而没有返回 LSP 任务，
-    // 将改为使用 Zed 语言扩展任务。
+    // Use LSP tasks over Zed language extension ones.
+    // If no LSP tasks are returned due to error/timeout or regular execution,
+    // Zed language extension tasks will be used instead.
     //
-    // 其他 Zed 任务仍会显示：
-    // * 来自任一任务配置文件的 Zed 任务
-    // * 来自历史记录的 Zed 任务（例如，之前生成过一次性任务）
+    // Other Zed tasks will still be shown:
+    // * Zed task from either of the task config file
+    // * Zed task from history (e.g. one-off task was spawned before)
     //
-    // 默认值：true
+    // Default: true
     "prefer_lsp": true,
   },
-  // 一个对象，其键是语言名称，值是应使用
-  // 这些语言的文件名或扩展名数组。
+  // An object whose keys are language names, and whose values
+  // are arrays of filenames or extensions of files that should
+  // use those languages.
   //
-  // 例如，将 `foo.notjs` 等文件视为 JavaScript，
-  // 将 `Embargo.lock` 视为 TOML：
+  // For example, to treat files like `foo.notjs` as JavaScript,
+  // and `Embargo.lock` as TOML:
   //
   // {
   //   "JavaScript": ["notjs"],
@@ -1867,88 +1898,89 @@
     "Markdown": [".rules", ".cursorrules", ".windsurfrules", ".clinerules"],
     "Shell Script": [".env.*"],
   },
-  // 安装语言服务器和 Copilot 时使用哪个版本的 Node.js 和 NPM 的设置。
+  // Settings for which version of Node.js and NPM to use when installing
+  // language servers and Copilot.
   //
-  // 注意：更改此设置目前需要重启 Zed。
+  // Note: changing this setting currently requires restarting Zed.
   "node": {
-    // 默认情况下，Zed 会在您的 `$PATH` 中查找 `node` 和 `npm`，如果
-    // 它们的版本足够新，就使用现有的可执行文件。将此设置为 `true`
-    // 以阻止此行为，并强制 Zed 始终下载并安装自己的
-    // Node 版本。
+    // By default, Zed will look for `node` and `npm` on your `$PATH`, and use the
+    // existing executables if their version is recent enough. Set this to `true`
+    // to prevent this, and force Zed to always download and install its own
+    // version of Node.
     "ignore_system_version": false,
-    // 您也可以指定 Node 和 NPM 的替代路径。如果您指定
-    // `path` 但不指定 `npm_path`，Zed 将假设 `npm` 位于
-    // `${path}/../npm`。
+    // You can also specify alternative paths to Node and NPM. If you specify
+    // `path`, but not `npm_path`, Zed will assume that `npm` is located at
+    // `${path}/../npm`.
     "path": null,
     "npm_path": null,
   },
-  // Zed 应在启动时自动安装的扩展。
+  // The extensions that Zed should automatically install on startup.
   //
-  // 如果您不想要这些扩展中的任何一个，请将此字段添加到您的设置
-  // 并将值更改为 `false`。
+  // If you don't want any of these extensions, add this field to your settings
+  // and change the value to `false`.
   "auto_install_extensions": {
     "html": true,
   },
-  // 授予扩展的能力。
+  // The capabilities granted to extensions.
   //
-  // 此列表可以自定义以限制扩展能够执行的操作。
+  // This list can be customized to restrict what extensions are able to do.
   "granted_extension_capabilities": [
     { "kind": "process:exec", "command": "*", "args": ["**"] },
     { "kind": "download_file", "host": "*", "path": ["**"] },
     { "kind": "npm:install", "package": "*" },
   ],
-  // 控制如何处理此语言的补全。
+  // Controls how completions are processed for this language.
   "completions": {
-    // 控制如何完成单词。
-    // 对于大型文档，可能不会获取所有单词用于补全。
+    // Controls how words are completed.
+    // For large documents, not all words may be fetched for completion.
     //
-    // 可取 3 个值：
+    // May take 3 values:
     // 1. "enabled"
-    //   始终获取文档的单词用于补全以及 LSP 补全。
+    //   Always fetch document's words for completions along with LSP completions.
     // 2. "fallback"
-    //   仅当 LSP 响应错误或超时时，使用文档的单词显示补全。
+    //   Only if LSP response errors or times out, use document's words to show completions.
     // 3. "disabled"
-    //   从不获取或完成文档的单词用于补全。
-    //   （基于单词的补全仍可通过单独的编辑器命令查询）
+    //   Never fetch or complete document's words for completions.
+    //   (Word-based completions can still be queried via a separate action)
     //
-    // 默认值：fallback
+    // Default: fallback
     "words": "fallback",
-    // 自动触发基于单词的补全所需的最小字符数。
-    // 在该值之前，仍可以通过相应的编辑器命令手动触发基于单词的补全。
+    // Minimum number of characters required to automatically trigger word-based completions.
+    // Before that value, it's still possible to trigger the words-based completion manually with the corresponding editor command.
     //
-    // 默认值：3
+    // Default: 3
     "words_min_length": 3,
-    // 是否获取 LSP 补全。
+    // Whether to fetch LSP completions or not.
     //
-    // 默认值：true
+    // Default: true
     "lsp": true,
-    // 获取 LSP 补全时，确定等待特定服务器响应的时间。
-    // 设置为 0 时，无限期等待。
+    // When fetching LSP completions, determines how long to wait for a response of a particular server.
+    // When set to 0, waits indefinitely.
     //
-    // 默认值：0
+    // Default: 0
     "lsp_fetch_timeout_ms": 0,
-    // 控制接受 LSP 补全时要替换的范围。
+    // Controls what range to replace when accepting LSP completions.
     //
-    // 当 LSP 服务器给出 `InsertReplaceEdit` 补全时，它们提供两个范围：`insert` 和 `replace`。通常，`insert`
-    // 包含光标前的单词前缀，`replace` 包含整个单词。
+    // When LSP servers give an `InsertReplaceEdit` completion, they provides two ranges: `insert` and `replace`. Usually, `insert`
+    // contains the word prefix before your cursor and `replace` contains the whole word.
     //
-    // 实际上，此设置只是更改 Zed 是使用接收到的 `insert` 还是 `replace` 范围，因此结果可能
-    // 因底层 LSP 服务器而异。
+    // Effectively, this setting just changes whether Zed will use the received range for `insert` or `replace`, so the results may
+    // differ depending on the underlying LSP server.
     //
-    // 可能的值：
+    // Possible values:
     // 1. "insert"
-    //   替换光标前的文本，使用 LSP 规范中描述的 `insert` 范围。
+    //   Replaces text before the cursor, using the `insert` range described in the LSP specification.
     // 2. "replace"
-    //   替换光标前后的文本，使用 LSP 规范中描述的 `replace` 范围。
+    //   Replaces text before and after the cursor, using the `replace` range described in the LSP specification.
     // 3. "replace_subsequence"
-    //   如果要替换的文本是补全文本的子序列，则行为类似于 `"replace"`，
-    //   否则类似于 `"insert"`。
+    //   Behaves like `"replace"` if the text that would be replaced is a subsequence of the completion text,
+    //   and like `"insert"` otherwise.
     // 4. "replace_suffix"
-    //   如果光标后的文本是补全的后缀，则行为类似于 `"replace"`，否则
-    //   类似于 `"insert"`。
+    //   Behaves like `"replace"` if the text after the cursor is a suffix of the completion, and like
+    //   `"insert"` otherwise.
     "lsp_insert_mode": "replace_suffix",
   },
-  // 特定语言的不同设置。
+  // Different settings for specific languages.
   "languages": {
     "Astro": {
       "language_servers": ["astro-language-server", "..."],
@@ -2178,7 +2210,7 @@
       "language_servers": ["zls", "..."],
     },
   },
-  // 特定语言模型的不同设置。
+  // Different settings for specific language models.
   "language_models": {
     "anthropic": {
       "api_url": "https://api.anthropic.com",
@@ -2221,99 +2253,99 @@
     "zed.dev": {},
   },
   "session": {
-    // 重启时是否恢复未保存的缓冲区。
+    // Whether or not to restore unsaved buffers on restart.
     //
-    // 如果为 true，关闭应用程序时不会提示用户
-    // 保存/丢弃脏文件。
+    // If this is true, user won't be prompted whether to save/discard
+    // dirty files when closing the application.
     //
-    // 默认值：true
+    // Default: true
     "restore_unsaved_buffers": true,
-    // 是否跳过工作树信任检查。
-    // 受信任时，项目设置会自动同步，
-    // 语言和 MCP 服务器会自动下载并启动。
+    // Whether or not to skip worktree trust checks.
+    // When trusted, project settings are synchronized automatically,
+    // language and MCP servers are downloaded and started automatically.
     //
-    // 默认值：false
+    // Default: false
     "trust_all_worktrees": false,
   },
-  // Zed 的 Prettier 集成设置。
-  // 允许启用/禁用使用 Prettier 格式化
-  // 并配置默认 Prettier，当未找到项目级 Prettier 安装时使用。
+  // Zed's Prettier integration settings.
+  // Allows to enable/disable formatting with Prettier
+  // and configure default Prettier, used when no project-level Prettier installation is found.
   "prettier": {
-    // 为任何给定语言启用或禁用使用 Prettier 格式化。
+    // Enables or disables formatting with Prettier for any given language.
     "allowed": false,
-    // 强制 Prettier 集成在格式化该语言的文件时使用特定的解析器名称。
+    // Forces Prettier integration to use a specific parser name when formatting files with the language.
     "plugins": [],
-    // 默认 Prettier 选项，格式与 package.json 中的 Prettier 部分相同。
-    // 如果项目通过其 package.json 安装 Prettier，这些选项将被忽略。
+    // Default Prettier options, in the format as in package.json section for Prettier.
+    // If project installs Prettier via its package.json, these options will be ignored.
     // "trailingComma": "es5",
     // "tabWidth": 4,
     // "semi": false,
     // "singleQuote": true
-    // 强制 Prettier 集成在设置为非空字符串时
-    // 在格式化该语言的文件时使用特定的解析器名称。
+    // Forces Prettier integration to use a specific parser name when formatting files with the language
+    // when set to a non-empty string.
     "parser": "",
   },
-  // JSX 标签自动关闭设置。
+  // Settings for auto-closing of JSX tags.
   "jsx_tag_auto_close": {
     "enabled": true,
   },
-  // LSP 特定设置。
+  // LSP Specific settings.
   "lsp": {
-    // 在此处将 LSP 名称指定为键。
+    // Specify the LSP name as a key here.
     // "rust-analyzer": {
-    //     // rust-analyzer 集成的特殊标志，使用服务器提供的任务
+    //     // A special flag for rust-analyzer integration, to use server-provided tasks
     //     enable_lsp_tasks": true,
-    //     // 这些初始化选项会合并到 Zed 的默认值中
+    //     // These initialization options are merged into Zed's defaults
     //     "initialization_options": {
     //         "check": {
-    //             "command": "clippy" // rust-analyzer.check.command (默认: "check")
+    //             "command": "clippy" // rust-analyzer.check.command (default: "check")
     //         }
     //     }
     // }
   },
-  // DAP 特定设置。
+  // DAP Specific settings.
   "dap": {
-    // 在此处将 DAP 名称指定为键。
+    // Specify the DAP name as a key here.
     "CodeLLDB": {
       "env": {
         "RUST_LOG": "info",
       },
     },
   },
-  // 通用语言服务器设置。
+  // Common language server settings.
   "global_lsp_settings": {
-    // 是否在状态栏中显示 LSP 服务器按钮。
+    // Whether to show the LSP servers button in the status bar.
     "button": true,
-    // 等待语言服务器响应的最长时间，以秒为单位。
-    // 值为 0 表示不应用超时。
+    // The maximum amount of time to wait for responses from language servers, in seconds.
+    // A value of 0 will result in no timeout being applied.
     //
-    // 默认值：120
+    // Default: 120
     "request_timeout": 120,
     "notifications": {
-      // 自动关闭语言服务器通知的超时时间（毫秒）。
-      // 设置为 0 以禁用自动关闭。
+      // Timeout in milliseconds for automatically dismissing language server notifications.
+      // Set to 0 to disable auto-dismiss.
       "dismiss_timeout_ms": 5000,
     },
-    // 高亮语义标记的规则。用户定义的规则会添加到默认
-    // 规则之前（可通过"显示默认语义标记规则"查看），因此它们优先。
+    // Rules for highlighting semantic tokens. User-defined rules are prepended to the default
+    // rules (viewable via "Show Default Semantic Token Rules"), so they take precedence.
     //
-    // 每个 `rule` 具有以下属性：
-    // - `token_type`：要自定义的 LSP 语义标记类型。如果省略，规则匹配所有标记类型。
-    // - `token_modifiers`：要匹配的 LSP 语义标记修饰符列表。所有修饰符必须存在
-    //    才能匹配。
-    // - `style`：来自当前语法主题的样式列表。使用找到的第一个样式。任何
-    //    下面的设置会覆盖该样式。
-    // - `foreground_color`：用于标记类型的前景色，十六进制格式（例如 "#ff0000"）。
-    // - `background_color`：用于标记类型的背景色，十六进制格式。
-    // - `underline`：布尔值或颜色用于下划线，十六进制格式。如果为 `true`，则标记将用文本颜色下划线。
-    // - `strikethrough`：布尔值或颜色用于删除线，十六进制格式。如果为 `true`，则标记将用文本颜色删除线。
-    // - `font_weight`：之一 "normal"、"bold"。
-    // - `font_style`：之一 "normal"、"italic"。
+    // Each `rule` has the following properties:
+    // - `token_type`: The LSP semantic token type to customize. If omitted, the rule matches all token types.
+    // - `token_modifiers`: A list of LSP semantic token modifiers to match. All modifiers must be present
+    //    to match.
+    // - `style`: A list of styles from the current syntax theme to use. The first style found is used. Any
+    //    settings below override that style.
+    // - `foreground_color`: The foreground color to use for the token type, in hex format (e.g., "#ff0000").
+    // - `background_color`: The background color to use for the token type, in hex format.
+    // - `underline`: A boolean or color to underline with, in hex format. If `true`, then the token will be underlined with the text color.
+    // - `strikethrough`: A boolean or color to strikethrough with, in hex format. If `true`, then the token have a strikethrough with the text color.
+    // - `font_weight`: One of "normal", "bold".
+    // - `font_style`: One of "normal", "italic".
     //
-    // 标记的第一个匹配规则被应用。因为用户定义的规则被添加到
-    // 默认规则之前，可以通过添加一个匹配它的空规则来完全禁用标记。
+    // The first matching rule for a token is applied. Because user-defined rules are prepended to the
+    // default rules, a token can be entirely disabled by adding an empty rule that matches it.
     //
-    // 示例：以红色和粗体高亮未解析的引用：
+    // Example: Highlight unresolved references in red and bold:
     // "semantic_token_rules": [
     //   {
     //     "token_type": "unresolvedReference",
@@ -2322,35 +2354,35 @@
     //   }
     // ]
     //
-    // 默认规则可通过 "zed: show default semantic token rules" 操作查看。
+    // Default rules are viewable via the "zed: show default semantic token rules" action.
     "semantic_token_rules": [],
   },
-  // Jupyter 设置
+  // Jupyter settings
   "jupyter": {
     "enabled": true,
     "kernel_selections": {},
-    // 将语言名称指定为键，内核名称指定为值。
+    // Specify the language name as the key and the kernel name as the value.
     // "kernel_selections": {
     //    "python": "conda-base"
     //    "typescript": "deno"
     // }
   },
-  // REPL 设置。
+  // REPL settings.
   "repl": {
-    // REPL 滚动缓冲区中保留的最大列数。
-    // 限制在 [20, 512] 范围内。
+    // Maximum number of columns to keep in REPL's scrollback buffer.
+    // Clamped with [20, 512] range.
     "max_columns": 128,
-    // REPL 滚动缓冲区中保留的最大行数。
-    // 限制在 [4, 256] 范围内。
+    // Maximum number of lines to keep in REPL's scrollback buffer.
+    // Clamped with [4, 256] range.
     "max_lines": 32,
-    // 滚动前显示的最大输出行数。
-    // 设置为 0 以禁用输出高度限制。
+    // Maximum number of lines of output to display before scrolling.
+    // Set to 0 to disable output height limits.
     "output_max_height_lines": 0,
-    // 缩放图像前显示的最大输出列数。
-    // 设置为 0 以禁用输出宽度限制。
+    // Maximum number of columns of output to display before scaling images.
+    // Set to 0 to disable output width limits.
     "output_max_width_columns": 0,
   },
-  // Vim 设置
+  // Vim settings
   "vim": {
     "default_mode": "normal",
     "toggle_relative_line_numbers": false,
@@ -2359,51 +2391,51 @@
     "gdefault": false,
     "highlight_on_yank_duration": 200,
     "custom_digraphs": {},
-    // 每种模式的光标形状。
-    // 形状可以是以下之一："block"、"bar"、"underline"、"hollow"。
+    // Cursor shape for each mode.
+    // The shape can be one of the following: "block", "bar", "underline", "hollow".
     "cursor_shape": {
       "normal": "block",
       "replace": "underline",
       "visual": "block",
-      // 设置为 "inherit" 以使用编辑器的 cursor_shape。
+      // Set to "inherit" to use the editor's cursor_shape.
       "insert": "inherit",
     },
   },
-  // Which-key 弹出窗口设置
+  // Which-key popup settings
   "which_key": {
-    // 是否在按住组合键时显示 which-key 弹出窗口。
+    // Whether to show the which-key popup when holding down key combinations.
     "enabled": false,
-    // 显示 which-key 弹出窗口前的延迟（毫秒）。
+    // Delay in milliseconds before showing the which-key popup.
     "delay_ms": 1000,
   },
-  // 要连接的服务器。如果设置了环境变量
-  // ZED_SERVER_URL，它将覆盖此设置。
+  // The server to connect to. If the environment variable
+  // ZED_SERVER_URL is set, it will override this setting.
   "server_url": "https://zed.dev",
-  // 使用 Zed Preview 时使用的设置覆盖。
-  // 主要对管理多个 Zed 实例的开发者有用。
+  // Settings overrides to use when using Zed Preview.
+  // Mostly useful for developers who are managing multiple instances of Zed.
   "preview": {
     // "theme": "Andromeda"
   },
-  // 使用 Zed Nightly 时使用的设置覆盖。
-  // 主要对管理多个 Zed 实例的开发者有用。
+  // Settings overrides to use when using Zed Nightly.
+  // Mostly useful for developers who are managing multiple instances of Zed.
   "nightly": {
     // "theme": "Andromeda"
   },
-  // 使用 Zed Stable 时使用的设置覆盖。
-  // 主要对管理多个 Zed 实例的开发者有用。
+  // Settings overrides to use when using Zed Stable.
+  // Mostly useful for developers who are managing multiple instances of Zed.
   "stable": {
     // "theme": "Andromeda"
   },
-  // 使用 Zed Dev 时使用的设置覆盖。
-  // 主要对管理多个 Zed 实例的开发者有用。
+  // Settings overrides to use when using Zed Dev.
+  // Mostly useful for developers who are managing multiple instances of Zed.
   "dev": {
     // "theme": "Andromeda"
   },
-  // 使用 Linux 时使用的设置覆盖。
+  // Settings overrides to use when using Linux.
   "linux": {},
-  // 使用 macOS 时使用的设置覆盖。
+  // Settings overrides to use when using macOS.
   "macos": {},
-  // 使用 Windows 时使用的设置覆盖。
+  // Settings overrides to use when using Windows.
   "windows": {
     "languages": {
       "PHP": {
@@ -2411,38 +2443,38 @@
       },
     },
   },
-  // 是否在行指示器中显示完整标签还是短标签
+  // Whether to show full labels in line indicator or short ones
   //
-  // 值：
+  // Values:
   //   - `short`: "2 s, 15 l, 32 c"
   //   - `long`: "2 selections, 15 lines, 32 characters"
-  // 默认值：long
+  // Default: long
   "line_indicator_format": "long",
-  // 设置要使用的代理。代理协议由 URI 方案指定。
+  // Set a proxy to use. The proxy protocol is specified by the URI scheme.
   //
-  // 支持的 URI 方案：`http`、`https`、`socks4`、`socks4a`、`socks5`、
-  // `socks5h`。未指定方案时将使用 `http`。
+  // Supported URI scheme: `http`, `https`, `socks4`, `socks4a`, `socks5`,
+  // `socks5h`. `http` will be used when no scheme is specified.
   //
-  // 默认不使用代理，或 Zed 将尝试从环境变量获取代理设置。
-  // 如果某些主机不应通过代理，
-  // 设置 `no_proxy` 环境变量并提供逗号分隔的列表。
+  // By default no proxy will be used, or Zed will try get proxy settings from
+  // environment variables. If certain hosts should not be proxied,
+  // set the `no_proxy` environment variable and provide a comma-separated list.
   //
-  // 示例：
+  // Examples:
   //   - "proxy": "socks5h://localhost:10808"
   //   - "proxy": "http://127.0.0.1:10809"
   "proxy": "",
-  // 设置命令面板的别名。
-  // 当输入的查询是此对象的键时，将使用该值代替。
+  // Set to configure aliases for the command palette.
+  // When typing a query which is a key of this object, the value will be used instead.
   //
-  // 示例：
+  // Examples:
   // {
   //   "W": "workspace::Save"
   // }
   "command_aliases": {},
-  // ssh_connections 是 ssh 连接的数组。
-  // 您可以从命令面板中的 `project: Open Remote` 配置这些。
-  // Zed 的 ssh 支持也会从您的 ~/.ssh 中提取配置。
-  // 示例：
+  // ssh_connections is an array of ssh connections.
+  // You can configure these from `project: Open Remote` in the command palette.
+  // Zed's ssh support will pull configuration from your ~/.ssh too.
+  // Examples:
   // [
   //   {
   //     "host": "example-box",
@@ -2455,22 +2487,22 @@
   //   }
   // ]
   "ssh_connections": [],
-  // 是否读取 ~/.ssh/config 作为 ssh 连接源。
+  // Whether to read ~/.ssh/config for ssh connection sources.
   "read_ssh_config": true,
-  // 所有上下文服务器工具调用的默认超时时间（秒）。
-  // 各个服务器可以在其配置中覆盖此设置。
-  // 示例：
+  // Default timeout in seconds for all context server tool calls.
+  // Individual servers can override this in their configuration.
+  // Examples:
   // "context_servers": {
   //   "my-stdio-server": {
   //     "command": "/path/to/server",
-  //     "timeout": 120  // 覆盖：此服务器为 2 分钟
+  //     "timeout": 120  // Override: 2 minutes for this server
   //   },
   // }
-  // 默认值：60
+  // Default: 60
   "context_server_timeout": 60,
-  // 配置代理使用的上下文服务器。
+  // Configures context servers for use by the agent.
   "context_servers": {},
-  // 配置代理面板中可用的代理服务器。
+  // Configures agent servers available in the agent panel.
   "agent_servers": {},
   "debugger": {
     "stepping_granularity": "line",
@@ -2481,10 +2513,10 @@
     "format_dap_log_messages": true,
     "button": true,
   },
-  // 配置任意数量的设置配置文件，当从
-  // `settings profile selector: toggle` 选择时，
-  // 临时应用于您现有的用户设置之上。
-  // 示例：
+  // Configures any number of settings profiles that are temporarily applied on
+  // top of your existing user settings when selected from
+  // `settings profile selector: toggle`.
+  // Examples:
   // "profiles": {
   //   "Presenting": {
   //     "agent_ui_font_size": 20.0,
@@ -2502,9 +2534,9 @@
   // }
   "profiles": {},
 
-  // 日志作用域到所需日志级别的映射。
-  // 用于过滤嘈杂的日志或启用更详细的日志记录。
+  // A map of log scopes to the desired log level.
+  // Useful for filtering out noisy logs or enabling more verbose logging.
   //
-  // 示例：{"log": {"client": "warn"}}
+  // Example: {"log": {"client": "warn"}}
   "log": {},
 }
