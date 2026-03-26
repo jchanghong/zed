@@ -7,7 +7,7 @@ $PSNativeCommandUseErrorActionPreference = $true
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $env:ZED_WORKSPACE = $ScriptDir
 
-# Check RELEASE_CHANNEL file
+# Check and update RELEASE_CHANNEL file to stable
 $releaseChannelPath = "$env:ZED_WORKSPACE\crates\zed\RELEASE_CHANNEL"
 if (-not (Test-Path $releaseChannelPath)) {
     Write-Host "Error: RELEASE_CHANNEL file not found at $releaseChannelPath" -ForegroundColor Red
@@ -16,12 +16,12 @@ if (-not (Test-Path $releaseChannelPath)) {
 
 $releaseChannel = (Get-Content $releaseChannelPath -Raw).Trim()
 if ($releaseChannel -ne "stable") {
-    Write-Host "Error: RELEASE_CHANNEL is '$releaseChannel', but 'stable' is required" -ForegroundColor Red
-    Write-Host "Please update $releaseChannelPath to 'stable' before building" -ForegroundColor Yellow
-    exit 1
+    Write-Host "Current RELEASE_CHANNEL is '$releaseChannel', switching to 'stable' for release build" -ForegroundColor Yellow
+    Set-Content -Path $releaseChannelPath -Value "stable" -NoNewline
+    Write-Host "RELEASE_CHANNEL updated to: stable" -ForegroundColor Green
+} else {
+    Write-Host "RELEASE_CHANNEL verified: stable" -ForegroundColor Green
 }
-
-Write-Host "RELEASE_CHANNEL verified: stable" -ForegroundColor Green
 
 # Clean the entire target directory
 $targetDir = "$env:ZED_WORKSPACE\target"
