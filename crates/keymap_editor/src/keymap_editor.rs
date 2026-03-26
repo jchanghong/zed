@@ -1131,7 +1131,7 @@ impl KeymapEditor {
             base_button_style(index, IconName::Warning)
                 .icon_color(Color::Warning)
                 .disabled(true)
-                .tooltip(Tooltip::text("This action is unbound"))
+                .tooltip(Tooltip::text("此操作未绑定"))
         } else if self.filter_state != FilterState::Conflicts
             && let Some(conflict) = conflict
         {
@@ -1201,7 +1201,7 @@ impl KeymapEditor {
                 })
                 .when(
                     self.show_hover_menus && !self.context_menu_deployed(),
-                    |this| this.tooltip(Tooltip::for_action_title("Edit Keybinding", &EditBinding)),
+                    |this| this.tooltip(Tooltip::for_action_title("编辑快捷键", &EditBinding)),
                 )
                 .on_click(cx.listener(move |this, _, window, cx| {
                     this.select_index(index, None, window, cx);
@@ -2317,14 +2317,14 @@ impl Render for KeymapEditor {
                                                             log::error!("Unexpected override from the {} keymap", conflict.override_source.name());
                                                             None
                                                         }
-                                                    }.map(|source| format!("This keybinding is overridden by the '{}' binding from {}.", binding.action().humanized_name, source))
+                                                    }.map(|source| format!("此快捷键被来自 {} 的 '{}' 绑定覆盖。", binding.action().humanized_name, source))
                                                 }).unwrap_or_else(|| "This binding is overridden.".to_string());
 
                                                 row.tooltip(Tooltip::text(context))
                                             },
                                         )
                                         .when(is_unbound_by_unbind, |row| {
-                                            row.tooltip(Tooltip::text("This action is unbound"))
+                                            row.tooltip(Tooltip::text("此操作未绑定"))
                                         }),
                                 )
                                 .border_2()

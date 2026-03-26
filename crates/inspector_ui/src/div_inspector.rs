@@ -540,7 +540,7 @@ impl Render for DivInspector {
                             .child(
                                 h_flex()
                                     .justify_between()
-                                    .child(Label::new("Rust Style").size(LabelSize::Large))
+                                    .child(Label::new("Rust 样式").size(LabelSize::Large))
                                     .child(
                                         IconButton::new("reset-style", IconName::Eraser)
                                             .tooltip(Tooltip::text("Reset style"))
@@ -554,7 +554,7 @@ impl Render for DivInspector {
                     .child(
                         v_flex()
                             .gap_2()
-                            .child(Label::new("JSON Style").size(LabelSize::Large))
+                            .child(Label::new("JSON 样式").size(LabelSize::Large))
                             .child(div().h_128().child(json_style_editor.clone()))
                             .when_some(self.json_style_error.as_ref(), |this, last_error| {
                                 this.child(
@@ -587,7 +587,7 @@ fn render_layout_state(inspector_state: &DivInspectorState, cx: &App) -> Div {
             div()
                 .id("content-size")
                 .text_ui(cx)
-                .tooltip(Tooltip::text("Size of the element's children"))
+                .tooltip(Tooltip::text("元素子项的尺寸"))
                 .child(
                     if inspector_state.content_size != inspector_state.bounds.size {
                         format!("Content size: {}", inspector_state.content_size)

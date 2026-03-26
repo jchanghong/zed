@@ -3856,7 +3856,7 @@ impl GitPanel {
                     Toast => this.icon(ToastIcon::new(IconName::GitBranchAlt).color(Color::Muted)),
                     ToastWithLog { output } => this
                         .icon(ToastIcon::new(IconName::GitBranchAlt).color(Color::Muted))
-                        .action("View Log", move |window, cx| {
+                        .action("查看日志", move |window, cx| {
                             let output = output.clone();
                             let output =
                                 format!("stdout:\n{}\nstderr:\n{}", output.stdout, output.stderr);
@@ -6437,7 +6437,7 @@ pub(crate) fn show_error_toast(
             let workspace_weak = cx.weak_entity();
             let toast = StatusToast::new(format!("git {} failed", action), cx, |this, _cx| {
                 this.icon(ToastIcon::new(IconName::XCircle).color(Color::Error))
-                    .action("View Log", move |window, cx| {
+                    .action("查看日志", move |window, cx| {
                         let message = message.clone();
                         let action = action.clone();
                         workspace_weak

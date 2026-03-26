@@ -195,19 +195,19 @@ impl Component for StatusToast {
             cx,
             |this, _cx| {
                 this.icon(ToastIcon::new(IconName::XCircle).color(Color::Error))
-                    .action("More Info", |_, _| {})
+                    .action("更多信息", |_, _| {})
             },
         );
 
         let warning_example = StatusToast::new("You have outdated settings", cx, |this, _cx| {
             this.icon(ToastIcon::new(IconName::Warning).color(Color::Warning))
-                .action("More Info", |_, _| {})
+                .action("更多信息", |_, _| {})
         });
 
         let pr_example =
             StatusToast::new("`zed/new-notification-system` created!", cx, |this, _cx| {
                 this.icon(ToastIcon::new(IconName::GitBranchAlt).color(Color::Muted))
-                    .action("Open Pull Request", |_, cx| {
+                    .action("打开 Pull Request", |_, cx| {
                         cx.open_url("https://github.com/")
                     })
             });

@@ -123,7 +123,7 @@ pub fn open_rules_library(
             cx.open_window(
                 WindowOptions {
                     titlebar: Some(TitlebarOptions {
-                        title: Some("Rules Library".into()),
+                        title: Some("规则库".into()),
                         appears_transparent: true,
                         traffic_light_position: Some(point(px(12.0), px(12.0))),
                     }),
@@ -205,7 +205,7 @@ impl PickerDelegate for RulePickerDelegate {
     }
 
     fn no_matches_text(&self, _window: &mut Window, _cx: &mut App) -> Option<SharedString> {
-        Some("No rules found matching your search.".into())
+        Some("未找到与搜索匹配的规则。".into())
     }
 
     fn selected_index(&self) -> usize {
@@ -230,7 +230,7 @@ impl PickerDelegate for RulePickerDelegate {
     }
 
     fn placeholder_text(&self, _window: &mut Window, _cx: &mut App) -> Arc<str> {
-        "Search…".into()
+        "搜索…".into()
     }
 
     fn update_matches(
@@ -266,7 +266,7 @@ impl PickerDelegate for RulePickerDelegate {
                     let mut filtered_entries = Vec::new();
 
                     if !built_in_rules.is_empty() {
-                        filtered_entries.push(RulePickerEntry::Header("Built-in Rules".into()));
+                        filtered_entries.push(RulePickerEntry::Header("内置规则".into()));
 
                         for rule in built_in_rules {
                             filtered_entries.push(RulePickerEntry::Rule(rule));
@@ -276,7 +276,7 @@ impl PickerDelegate for RulePickerDelegate {
                     }
 
                     if !default_rules.is_empty() {
-                        filtered_entries.push(RulePickerEntry::Header("Default Rules".into()));
+                        filtered_entries.push(RulePickerEntry::Header("默认规则".into()));
 
                         for rule in default_rules {
                             filtered_entries.push(RulePickerEntry::Rule(rule));
@@ -342,10 +342,10 @@ impl PickerDelegate for RulePickerDelegate {
     ) -> Option<Self::ListItem> {
         match self.filtered_entries.get(ix)? {
             RulePickerEntry::Header(title) => {
-                let tooltip_text = if title.as_ref() == "Built-in Rules" {
-                    "Built-in rules are those included out of the box with Zed."
+                let tooltip_text = if title.as_ref() == "内置规则" {
+                    "内置规则是 Zed 自带的规则。"
                 } else {
-                    "Default Rules are attached by default with every new thread."
+                    "默认规则会在每个新线程中自动附加。"
                 };
 
                 Some(
@@ -378,7 +378,7 @@ impl PickerDelegate for RulePickerDelegate {
                         .spacing(ListItemSpacing::Sparse)
                         .toggle_state(selected)
                         .child(
-                            Label::new(rule.title.clone().unwrap_or("Untitled".into()))
+                            Label::new(rule.title.clone().unwrap_or("未命名".into()))
                                 .truncate()
                                 .mr_10(),
                         )
@@ -387,7 +387,7 @@ impl PickerDelegate for RulePickerDelegate {
                                 .toggle_state(true)
                                 .icon_color(Color::Accent)
                                 .icon_size(IconSize::Small)
-                                .tooltip(Tooltip::text("Remove from Default Rules"))
+                                .tooltip(Tooltip::text("从默认规则中移除"))
                                 .on_click(cx.listener(move |_, _, _, cx| {
                                     cx.emit(RulePickerEvent::ToggledDefault { prompt_id })
                                 }))
@@ -399,7 +399,7 @@ impl PickerDelegate for RulePickerDelegate {
                                         IconButton::new("delete-rule", IconName::Trash)
                                             .icon_color(Color::Muted)
                                             .icon_size(IconSize::Small)
-                                            .tooltip(Tooltip::text("Delete Rule"))
+                                            .tooltip(Tooltip::text("删除规则"))
                                             .on_click(cx.listener(move |_, _, _, cx| {
                                                 cx.emit(RulePickerEvent::Deleted { prompt_id })
                                             })),
@@ -416,15 +416,13 @@ impl PickerDelegate for RulePickerDelegate {
                                             })
                                             .map(|this| {
                                                 if default {
-                                                    this.tooltip(Tooltip::text(
-                                                        "Remove from Default Rules",
-                                                    ))
+                                                    this.tooltip(Tooltip::text("从默认规则中移除"))
                                                 } else {
                                                     this.tooltip(move |_window, cx| {
                                                         Tooltip::with_meta(
-                                                            "Add to Default Rules",
+                                                            "添加到默认规则",
                                                             None,
-                                                            "Always included in every thread.",
+                                                            "始终包含在每个线程中。",
                                                             cx,
                                                         )
                                                     })
@@ -729,7 +727,7 @@ impl RulesLibrary {
                     Ok(rule) => {
                         let title_editor = cx.new(|cx| {
                             let mut editor = Editor::single_line(window, cx);
-                            editor.set_placeholder_text("Untitled", window, cx);
+                            editor.set_placeholder_text("未命名", window, cx);
                             editor.set_text(rule_metadata.title.unwrap_or_default(), window, cx);
                             if prompt_id.is_built_in() {
                                 editor.set_read_only(true);
@@ -854,11 +852,11 @@ impl RulesLibrary {
             let confirmation = window.prompt(
                 PromptLevel::Warning,
                 &format!(
-                    "Are you sure you want to delete {}",
-                    metadata.title.unwrap_or("Untitled".into())
+                    "确定要删除 {} 吗？",
+                    metadata.title.unwrap_or("未命名".into())
                 ),
                 None,
-                &["Delete", "Cancel"],
+                &["删除", "取消"],
                 cx,
             );
 
@@ -890,7 +888,7 @@ impl RulesLibrary {
         cx: &mut Context<Self>,
     ) {
         if let Some(rule) = self.rule_editors.get(&prompt_id) {
-            const DUPLICATE_SUFFIX: &str = " copy";
+            const DUPLICATE_SUFFIX: &str = " 副本";
             let title_to_duplicate = rule.title_editor.read(cx).text(cx);
             let existing_titles = self
                 .rule_editors
@@ -1146,7 +1144,7 @@ impl RulesLibrary {
                             .child(
                                 IconButton::new("new-rule", IconName::Plus)
                                     .tooltip(move |_window, cx| {
-                                        Tooltip::for_action("New Rule", &NewRule, cx)
+                                        Tooltip::for_action("新建规则", &NewRule, cx)
                                     })
                                     .on_click(|_, window, cx| {
                                         window.dispatch_action(Box::new(NewRule), cx);
@@ -1156,7 +1154,7 @@ impl RulesLibrary {
                 } else {
                     this.child(
                         h_flex().p_1().w_full().child(
-                            Button::new("new-rule", "New Rule")
+                            Button::new("new-rule", "新建规则")
                                 .full_width()
                                 .style(ButtonStyle::Outlined)
                                 .start_icon(
@@ -1225,7 +1223,7 @@ impl RulesLibrary {
 
     fn render_duplicate_rule_button(&self) -> impl IntoElement {
         IconButton::new("duplicate-rule", IconName::BookCopy)
-            .tooltip(move |_window, cx| Tooltip::for_action("Duplicate Rule", &DuplicateRule, cx))
+            .tooltip(move |_window, cx| Tooltip::for_action("复制规则", &DuplicateRule, cx))
             .on_click(|_, window, cx| {
                 window.dispatch_action(Box::new(DuplicateRule), cx);
             })
@@ -1239,7 +1237,7 @@ impl RulesLibrary {
                 IconButton::new("restore-default", IconName::RotateCcw)
                     .tooltip(move |_window, cx| {
                         Tooltip::for_action(
-                            "Restore to Default Content",
+                            "恢复为默认内容",
                             &RestoreDefaultContent,
                             cx,
                         )
@@ -1259,13 +1257,13 @@ impl RulesLibrary {
                     .when(default, |this| this.icon_color(Color::Accent))
                     .map(|this| {
                         if default {
-                            this.tooltip(Tooltip::text("Remove from Default Rules"))
+                            this.tooltip(Tooltip::text("从默认规则中移除"))
                         } else {
                             this.tooltip(move |_window, cx| {
                                 Tooltip::with_meta(
-                                    "Add to Default Rules",
+                                    "添加到默认规则",
                                     None,
-                                    "Always included in every thread.",
+                                    "始终包含在每个线程中。",
                                     cx,
                                 )
                             })
@@ -1278,7 +1276,7 @@ impl RulesLibrary {
             .child(self.render_duplicate_rule_button())
             .child(
                 IconButton::new("delete-rule", IconName::Trash)
-                    .tooltip(move |_window, cx| Tooltip::for_action("Delete Rule", &DeleteRule, cx))
+                    .tooltip(move |_window, cx| Tooltip::for_action("删除规则", &DeleteRule, cx))
                     .on_click(|_, window, cx| {
                         window.dispatch_action(Box::new(DeleteRule), cx);
                     }),
@@ -1338,10 +1336,10 @@ impl RulesLibrary {
                                                 .flex_shrink_0()
                                                 .tooltip(move |_window, cx| {
                                                     Tooltip::with_meta(
-                                                        "Token Estimation",
+                                                        "Token 估算",
                                                         None,
                                                         format!(
-                                                            "Model: {}",
+                                                            "模型：{}",
                                                             model
                                                                 .as_ref()
                                                                 .map(|model| model.name().0)
@@ -1352,7 +1350,7 @@ impl RulesLibrary {
                                                 })
                                                 .child(
                                                     Label::new(format!(
-                                                        "{} tokens",
+                                                        "{} 个 Token",
                                                         label_token_count
                                                     ))
                                                     .color(Color::Muted),

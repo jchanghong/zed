@@ -1063,7 +1063,7 @@ pub fn into_bedrock(
         tool_spec.push(BedrockTool::ToolSpec(
             BedrockToolSpec::builder()
                 .name("_placeholder")
-                .description("Placeholder tool to satisfy Bedrock API requirements when conversation history contains tool usage")
+                .description("在对话历史包含工具使用时用于满足 Bedrock API 要求的占位工具")
                 .input_schema(BedrockToolInputSchema::Json(value_to_aws_document(
                     &serde_json::json!({"type": "object", "properties": {}}),
                 )))

@@ -240,7 +240,7 @@ impl TitleBar {
                                 .occlude()
                                 .tooltip({
                                     let login = collaborator.user.github_login.clone();
-                                    Tooltip::text(format!("Follow {login}"))
+                                    Tooltip::text(format!("跟随 {login}"))
                                 }),
                         )
                     }))
@@ -392,7 +392,7 @@ impl TitleBar {
                 .child(
                     IconButton::new("leave-call", IconName::Exit)
                         .style(ButtonStyle::Subtle)
-                        .tooltip(Tooltip::text("Leave Call"))
+                        .tooltip(Tooltip::text("离开通话"))
                         .icon_size(IconSize::Small)
                         .on_click(move |_, _window, cx| {
                             ActiveCall::global(cx)
@@ -430,23 +430,6 @@ impl TitleBar {
                 .on_click(move |_, window, cx| {
                     window.dispatch_action(Box::new(ShowCallStats), cx);
                 })
-                .into_any_element(),
-        );
-        children.push(
-            h_flex()
-                .gap_1()
-                .child(
-                    IconButton::new("leave-call", IconName::Exit)
-                        .style(ButtonStyle::Subtle)
-                        .tooltip(Tooltip::text("离开通话"))
-                        .icon_size(IconSize::Small)
-                        .on_click(move |_, _window, cx| {
-                            ActiveCall::global(cx)
-                                .update(cx, |call, cx| call.hang_up(cx))
-                                .detach_and_log_err(cx);
-                        }),
-                )
-                .child(Divider::vertical().color(DividerColor::Border))
                 .into_any_element(),
         );
 

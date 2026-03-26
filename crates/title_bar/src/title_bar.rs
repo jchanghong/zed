@@ -1262,37 +1262,6 @@ impl TitleBar {
                 })
                 .into()
             })
-            .map(|this| {
-                if is_signed_in && TitleBarSettings::get_global(cx).show_user_picture {
-                    let avatar =
-                        user_avatar
-                            .clone()
-                            .map(|avatar| Avatar::new(avatar))
-                            .map(|avatar| {
-                                if show_update_badge {
-                                    avatar.indicator(
-                                        div()
-                                            .absolute()
-                                            .bottom_0()
-                                            .right_0()
-                                            .child(Indicator::dot().color(Color::Accent)),
-                                    )
-                                } else {
-                                    avatar
-                                }
-                            });
-                    this.trigger_with_tooltip(
-                        ButtonLike::new("user-menu").children(avatar),
-                        Tooltip::text("切换用户菜单"),
-                    )
-                } else {
-                    this.trigger_with_tooltip(
-                        IconButton::new("user-menu", IconName::ChevronDown)
-                            .icon_size(IconSize::Small),
-                        Tooltip::text("切换用户菜单"),
-                    )
-                }
-            })
             .anchor(gpui::Corner::TopRight)
     }
 }

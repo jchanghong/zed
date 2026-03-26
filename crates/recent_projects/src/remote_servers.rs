@@ -1936,7 +1936,7 @@ impl RemoteServerProjects {
                                         .start_slot(
                                             Icon::new(IconName::XCircle).color(Color::Error),
                                         )
-                                        .child(Label::new("Error Creating Dev Container:"))
+                                        .child(Label::new("创建 Dev Container 时出错："))
                                         .child(Label::new(message).buffer_font(cx)),
                                 ),
                             ),

@@ -2545,7 +2545,7 @@ impl ThreadView {
                 IconButton::new("dismiss-plan", IconName::Close)
                     .icon_size(IconSize::XSmall)
                     .shape(ui::IconButtonShape::Square)
-                    .tooltip(Tooltip::text("Clear plan"))
+                    .tooltip(Tooltip::text("清除计划"))
                     .on_click(cx.listener(|this, _, _, cx| {
                         this.thread.update(cx, |thread, cx| thread.clear_plan(cx));
                         cx.stop_propagation();
@@ -7940,7 +7940,7 @@ impl ThreadView {
                         .child(Label::new("有新版本可用").size(LabelSize::Small)),
                 )
                 .child(
-                    Button::new("update-button", format!("Update to v{}", version))
+                    Button::new("update-button", format!("更新到 v{}", version))
                         .label_size(LabelSize::Small)
                         .style(ButtonStyle::Tinted(TintColor::Accent))
                         .on_click(move |_, window, cx| {

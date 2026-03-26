@@ -234,7 +234,7 @@ impl Render for EditPredictionButton {
                                 }),
                             move |_window, cx| {
                                 Tooltip::with_meta(
-                                    "Edit Prediction",
+                                    "编辑预测",
                                     Some(&ToggleMenu),
                                     tooltip_meta,
                                     cx,
@@ -313,7 +313,7 @@ impl Render for EditPredictionButton {
                                 };
 
                                 Tooltip::with_meta(
-                                    "Edit Prediction",
+                                    "编辑预测",
                                     Some(&ToggleMenu),
                                     tooltip_meta,
                                     cx,
@@ -450,8 +450,8 @@ impl Render for EditPredictionButton {
                                 "Disabled For This File"
                             };
 
-                            Tooltip::with_meta(
-                                "Edit Prediction",
+                                Tooltip::with_meta(
+                                    "编辑预测",
                                 Some(&ToggleMenu),
                                 description,
                                 cx,
@@ -655,7 +655,7 @@ impl EditPredictionButton {
         let fs = self.fs.clone();
         let line_height = window.line_height();
 
-        menu = menu.header("Show Edit Predictions For");
+        menu = menu.header("为以下启用编辑预测");
 
         let language_state = self.language.as_ref().map(|language| {
             (
@@ -665,7 +665,7 @@ impl EditPredictionButton {
         });
 
         if let Some(editor_focus_handle) = self.editor_focus_handle.clone() {
-            let entry = ContextMenuEntry::new("This Buffer")
+            let entry = ContextMenuEntry::new("此缓冲区")
                 .toggleable(IconPosition::Start, self.editor_show_predictions)
                 .action(Box::new(editor::actions::ToggleEditPrediction))
                 .handler(move |window, cx| {
@@ -682,7 +682,7 @@ impl EditPredictionButton {
                         entry
                             .disabled(true)
                             .documentation_aside(DocumentationSide::Left, move |_cx| {
-                                Label::new(format!("Edit predictions cannot be toggled for this buffer because they are disabled for {}", language.name()))
+                                Label::new(format!("无法为此缓冲区切换编辑预测,因为已为 {} 禁用", language.name()))
                                     .into_any_element()
                             })
                     );
@@ -715,7 +715,7 @@ impl EditPredictionButton {
         let settings = AllLanguageSettings::get_global(cx);
 
         let globally_enabled = settings.show_edit_predictions(None, cx);
-        let entry = ContextMenuEntry::new("All Files")
+        let entry = ContextMenuEntry::new("所有文件")
             .toggleable(IconPosition::Start, globally_enabled)
             .action(workspace::ToggleEditPrediction.boxed_clone())
             .handler(|window, cx| {
@@ -730,12 +730,12 @@ impl EditPredictionButton {
 
         menu = menu
                 .separator()
-                .header("Display Modes")
+                .header("显示模式")
                 .item(
                     ContextMenuEntry::new("Eager")
                         .toggleable(IconPosition::Start, eager_mode)
                         .documentation_aside(DocumentationSide::Left, move |_| {
-                            Label::new("Display predictions inline when there are no language server completions available.").into_any_element()
+                            Label::new("当无语言服务器补全时,内联显示预测").into_any_element()
                         })
                         .handler({
                             let fs = fs.clone();
@@ -753,7 +753,7 @@ impl EditPredictionButton {
                     ContextMenuEntry::new("Subtle")
                         .toggleable(IconPosition::Start, subtle_mode)
                         .documentation_aside(DocumentationSide::Left, move |_| {
-                            Label::new("Display predictions inline only when holding a modifier key (alt by default).").into_any_element()
+                            Label::new("仅在按住修饰键时内联显示预测(默认为 Alt)").into_any_element()
                         })
                         .handler({
                             let fs = fs.clone();
@@ -786,7 +786,7 @@ impl EditPredictionButton {
                     };
 
                     menu = menu.item(
-                        ContextMenuEntry::new("Training Data Collection")
+                        ContextMenuEntry::new("训练数据收集")
                             .toggleable(IconPosition::Start, data_collection.is_enabled())
                             .icon(icon_name)
                             .icon_color(icon_color)
@@ -806,7 +806,7 @@ impl EditPredictionButton {
                                         Color::Muted,
                                     ),
                                     (false, true) => (
-                                        "Project not identified as open source. No data captured.",
+                                        "项目未识别为开源。未捕获数据。",
                                         Color::Muted,
                                         IconName::Close,
                                         Color::Muted,
@@ -860,7 +860,7 @@ impl EditPredictionButton {
 
                     if is_collecting && !is_open_source {
                         menu = menu.item(
-                            ContextMenuEntry::new("No data captured.")
+                            ContextMenuEntry::new("未捕获数据")
                                 .disabled(true)
                                 .icon(IconName::Close)
                                 .icon_color(Color::Error)
@@ -872,7 +872,7 @@ impl EditPredictionButton {
         }
 
         menu = menu.item(
-            ContextMenuEntry::new("Configure Excluded Files")
+            ContextMenuEntry::new("配置排除文件")
                 .icon(IconName::LockOutlined)
                 .icon_color(Color::Muted)
                 .documentation_aside(DocumentationSide::Left, |_| {
@@ -897,7 +897,7 @@ impl EditPredictionButton {
                     }
                 }),
         ).item(
-            ContextMenuEntry::new("View Docs")
+            ContextMenuEntry::new("查看文档")
                 .icon(IconName::FileGeneric)
                 .icon_color(Color::Muted)
                 .handler(move |_, cx| {
@@ -918,7 +918,7 @@ impl EditPredictionButton {
                     edit_prediction_types::EditPredictionIconSet::new(IconName::ZedPredict)
                 });
             menu = menu.item(
-                ContextMenuEntry::new("This file is excluded.")
+                ContextMenuEntry::new("此文件已被排除")
                     .disabled(true)
                     .icon(icons.disabled)
                     .icon_size(IconSize::Small),
@@ -947,8 +947,8 @@ impl EditPredictionButton {
                 .when(
                     cx.has_flag::<PredictEditsRatePredictionsFeatureFlag>(),
                     |this| {
-                        this.action("Capture Prediction Example", CaptureExample.boxed_clone())
-                            .action("Rate Predictions", RatePredictions.boxed_clone())
+                        this.action("捕获预测示例", CaptureExample.boxed_clone())
+                            .action("评价预测", RatePredictions.boxed_clone())
                     },
                 );
         }
@@ -983,7 +983,7 @@ impl EditPredictionButton {
 
             menu.separator()
                 .item(
-                    ContextMenuEntry::new("Copilot: Next Edit Suggestions")
+                    ContextMenuEntry::new("Copilot: 下一步编辑建议")
                         .toggleable(IconPosition::Start, next_edit_suggestions)
                         .handler({
                             let fs = self.fs.clone();
@@ -1007,7 +1007,7 @@ impl EditPredictionButton {
                     "Go to Copilot Settings",
                     OpenBrowser { url: settings_url }.boxed_clone(),
                 )
-                .action("Sign Out", copilot::SignOut.boxed_clone())
+                .action("退出登录", copilot::SignOut.boxed_clone())
         })
     }
 
@@ -1052,7 +1052,7 @@ impl EditPredictionButton {
                             .max_w_64()
                             .h(rems_from_px(148.))
                             .child(render_zeta_tab_animation(cx))
-                            .child(Label::new("Edit Prediction"))
+                            .child(Label::new("编辑预测"))
                             .child(
                                 Label::new(description)
                                     .color(Color::Muted)
@@ -1101,7 +1101,7 @@ impl EditPredictionButton {
                 if mercury_payment_required {
                     menu = menu
                         .header("Mercury")
-                        .item(ContextMenuEntry::new("Free tier limit reached").disabled(true))
+                        .item(ContextMenuEntry::new("已达到免费层级限制").disabled(true))
                         .item(
                             ContextMenuEntry::new(
                                 "Upgrade to a paid plan to continue using the service",
@@ -1164,7 +1164,7 @@ impl EditPredictionButton {
                     menu = menu
                         .custom_entry(
                             |_window, _cx| {
-                                Label::new("Your GitHub account is less than 30 days old.")
+                                Label::new("您的 GitHub 账户创建时间不足 30 天")
                                     .size(LabelSize::Small)
                                     .color(Color::Warning)
                                     .into_any_element()
@@ -1184,7 +1184,7 @@ impl EditPredictionButton {
                     menu = menu
                         .custom_entry(
                             |_window, _cx| {
-                                Label::new("You have an outstanding invoice")
+                                Label::new("您有未支付的账单")
                                     .size(LabelSize::Small)
                                     .color(Color::Warning)
                                     .into_any_element()
@@ -1264,7 +1264,7 @@ impl EditPredictionButton {
             }
 
             menu = menu.separator().item(
-                ContextMenuEntry::new("Configure Providers")
+                ContextMenuEntry::new("配置提供者")
                     .icon(IconName::Settings)
                     .icon_position(IconPosition::Start)
                     .icon_color(Color::Muted)

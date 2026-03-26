@@ -921,7 +921,7 @@ impl ConfigureContextServerModal {
                             .color(Color::Muted),
                     )
                     .child(
-                        Label::new("Authenticate to connect this server")
+                        Label::new("请先认证以连接此服务器")
                             .size(LabelSize::Small)
                             .color(Color::Muted),
                     ),

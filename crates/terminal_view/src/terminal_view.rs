@@ -508,17 +508,17 @@ impl TerminalView {
             .is_some_and(|text| !text.is_empty());
         let context_menu = ContextMenu::build(window, cx, |menu, _, _| {
             menu.context(self.focus_handle.clone())
-                .action("New Terminal", Box::new(NewTerminal::default()))
+                .action("新建终端", Box::new(NewTerminal::default()))
                 .separator()
                 .action("Copy", Box::new(Copy))
                 .action("Paste", Box::new(Paste))
-                .action("Select All", Box::new(SelectAll))
+                .action("全选", Box::new(SelectAll))
                 .action("Clear", Box::new(Clear))
                 .when(assistant_enabled, |menu| {
                     menu.separator()
-                        .action("Inline Assist", Box::new(InlineAssist::default()))
+                        .action("内联辅助", Box::new(InlineAssist::default()))
                         .when(has_selection, |menu| {
-                            menu.action("Add to Agent Thread", Box::new(AddSelectionToThread))
+                            menu.action("添加到 Agent 线程", Box::new(AddSelectionToThread))
                         })
                 })
                 .separator()
@@ -964,7 +964,7 @@ impl TerminalView {
                 .size(ButtonSize::Compact)
                 .icon_color(Color::Default)
                 .shape(ui::IconButtonShape::Square)
-                .tooltip(move |_window, cx| Tooltip::for_action("Rerun task", &RerunTask, cx))
+                .tooltip(move |_window, cx| Tooltip::for_action("重新运行任务", &RerunTask, cx))
                 .on_click(move |_, window, cx| {
                     window.dispatch_action(Box::new(terminal_rerun_override(&task_id)), cx);
                 }),
@@ -1307,7 +1307,7 @@ impl Item for TerminalView {
                     .child(Label::new(title.clone()))
                     .child(h_flex().flex_grow().child(Divider::horizontal()))
                     .child(
-                        Label::new(format!("Process ID (PID): {}", pid))
+                        Label::new(format!("进程 ID (PID): {}", pid))
                             .color(Color::Muted)
                             .size(LabelSize::Small),
                     )

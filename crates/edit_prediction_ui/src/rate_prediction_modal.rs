@@ -452,7 +452,7 @@ impl RatePredictionsModal {
                     editor.set_show_wrap_guides(false, cx);
                     editor.set_show_indent_guides(false, cx);
                     editor.set_show_edit_predictions(Some(false), window, cx);
-                    editor.set_placeholder_text("Add your feedback…", window, cx);
+                    editor.set_placeholder_text("添加你的反馈…", window, cx);
                     editor.set_completion_provider(Some(Rc::new(FeedbackCompletionProvider)));
                     if focus {
                         cx.focus_self(window);
@@ -745,7 +745,7 @@ impl RatePredictionsModal {
                                             .size(IconSize::Small)
                                             .color(Color::Success),
                                     )
-                                    .child(Label::new("Rated completion.").color(Color::Muted)),
+                                    .child(Label::new("已评价补全。").color(Color::Muted)),
                             )
                         } else if active_prediction.prediction.edits.is_empty() {
                             Some(
@@ -755,7 +755,7 @@ impl RatePredictionsModal {
                                             .size(IconSize::Small)
                                             .color(Color::Warning),
                                     )
-                                    .child(Label::new("No edits produced.").color(Color::Muted)),
+                                    .child(Label::new("未生成任何编辑。").color(Color::Muted)),
                             )
                         } else {
                             Some(label_container)
@@ -764,7 +764,7 @@ impl RatePredictionsModal {
                             h_flex()
                                 .gap_1()
                                 .child(
-                                    Button::new("bad", "Bad Prediction")
+                                    Button::new("bad", "不佳预测")
                                         .start_icon(Icon::new(IconName::ThumbsDown).size(IconSize::Small))
                                         .disabled(rated || feedback_empty)
                                         .when(feedback_empty, |this| {
@@ -788,7 +788,7 @@ impl RatePredictionsModal {
                                         })),
                                 )
                                 .child(
-                                    Button::new("good", "Good Prediction")
+                                    Button::new("good", "良好预测")
                                         .start_icon(Icon::new(IconName::ThumbsUp).size(IconSize::Small))
                                         .disabled(rated)
                                         .key_binding(KeyBinding::for_action_in(
@@ -916,7 +916,7 @@ impl Render for RatePredictionsModal {
                             .border_color(border_color)
                             .child(Icon::new(icons.base).size(IconSize::Small))
                             .child(
-                                Label::new("From most recent to oldest")
+                                Label::new("从最新到最旧")
                                     .color(Color::Muted)
                                     .size(LabelSize::Small),
                             )

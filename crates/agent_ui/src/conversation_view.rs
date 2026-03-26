@@ -594,9 +594,7 @@ impl ConversationView {
             && agent.clone().downcast::<NativeAgentServer>().is_none()
         {
             return ServerState::LoadError {
-                error: LoadError::Other(
-                    "External agents are not yet supported in shared projects.".into(),
-                ),
+                error: LoadError::Other("共享项目尚不支持外部代理。".into()),
                 session_id: resume_session_id.clone(),
             };
         }
@@ -661,7 +659,7 @@ impl ConversationView {
                         )
                     } else {
                         Task::ready(Err(anyhow!(LoadError::Other(
-                            "Loading or resuming sessions is not supported by this agent.".into()
+                            "此代理不支持加载或恢复会话。".into()
                         ))))
                     }
                 })
@@ -1110,16 +1108,16 @@ impl ConversationView {
                 .active_view()
                 .and_then(|v| v.read(cx).thread.read(cx).title())
                 .unwrap_or_else(|| DEFAULT_THREAD_TITLE.into()),
-            ServerState::Loading(_) => "Loading…".into(),
+            ServerState::Loading(_) => "加载中…".into(),
             ServerState::LoadError { error, .. } => match error {
                 LoadError::Unsupported { .. } => {
-                    format!("Upgrade {}", self.agent.agent_id()).into()
+                    format!("升级 {}", self.agent.agent_id()).into()
                 }
                 LoadError::FailedToInstall(_) => {
-                    format!("Failed to Install {}", self.agent.agent_id()).into()
+                    format!("安装 {} 失败", self.agent.agent_id()).into()
                 }
-                LoadError::Exited { .. } => format!("{} Exited", self.agent.agent_id()).into(),
-                LoadError::Other(_) => format!("Error Loading {}", self.agent.agent_id()).into(),
+                LoadError::Exited { .. } => format!("{} 已退出", self.agent.agent_id()).into(),
+                LoadError::Other(_) => format!("加载 {} 出错", self.agent.agent_id()).into(),
             },
         }
     }
@@ -1318,8 +1316,7 @@ impl ConversationView {
                 }
                 if !is_subagent {
                     let model_or_agent_name = self.current_model_name(cx);
-                    let notification_message =
-                        format!("{} refused to respond to this request", model_or_agent_name);
+                    let notification_message = format!("{} 拒绝响应此请求", model_or_agent_name);
                     self.notify_with_sound(&notification_message, IconName::Warning, window, cx);
                 }
             }
@@ -1330,12 +1327,7 @@ impl ConversationView {
                     });
                 }
                 if !is_subagent {
-                    self.notify_with_sound(
-                        "Agent stopped due to an error",
-                        IconName::Warning,
-                        window,
-                        cx,
-                    );
+                    self.notify_with_sound("代理因错误已停止", IconName::Warning, window, cx);
                 }
             }
             AcpThreadEvent::LoadError(error) => {
@@ -1394,8 +1386,8 @@ impl ConversationView {
                     .iter()
                     .any(|method| method.id().0.as_ref() == "claude-login")
                 {
-                    available_commands.push(acp::AvailableCommand::new("login", "Authenticate"));
-                    available_commands.push(acp::AvailableCommand::new("logout", "Authenticate"));
+                    available_commands.push(acp::AvailableCommand::new("login", "认证"));
+                    available_commands.push(acp::AvailableCommand::new("logout", "认证"));
                 }
 
                 let has_commands = !available_commands.is_empty();
@@ -1642,7 +1634,7 @@ impl ConversationView {
         cx: &mut App,
     ) -> Task<Result<()>> {
         let Some(terminal_panel) = workspace.read(cx).panel::<TerminalPanel>(cx) else {
-            return Task::ready(Err(anyhow!("Terminal panel is unavailable")));
+            return Task::ready(Err(anyhow!("终端面板不可用")));
         };
 
         window.spawn(cx, async move |cx| {
@@ -1843,7 +1835,7 @@ impl ConversationView {
         if pending_auth_method.is_some() {
             return Callout::new()
                 .icon(IconName::Info)
-                .title(format!("Authenticating to {}…", agent_display_name))
+                .title(format!("正在对 {} 进行认证…", agent_display_name))
                 .actions_slot(
                     Icon::new(IconName::ArrowCircle)
                         .size(IconSize::Small)
@@ -1856,7 +1848,7 @@ impl ConversationView {
 
         Callout::new()
             .icon(IconName::Info)
-            .title(format!("Authenticate to {}", agent_display_name))
+            .title(format!("对 {} 进行认证", agent_display_name))
             .when(auth_methods.len() == 1, |this| {
                 this.actions_slot(auth_buttons())
             })
@@ -1977,17 +1969,17 @@ impl ConversationView {
                 return self.render_unsupported(path, current_version, minimum_version, window, cx);
             }
             LoadError::FailedToInstall(msg) => (
-                "Failed to Install",
+                "安装失败",
                 msg.into(),
                 Some(self.create_copy_button(msg.to_string()).into_any_element()),
             ),
             LoadError::Exited { status } => (
-                "Failed to Launch",
-                format!("Server exited with status {status}").into(),
+                "启动失败",
+                format!("服务器以状态 {status} 退出").into(),
                 None,
             ),
             LoadError::Other(msg) => (
-                "Failed to Launch",
+                "启动失败",
                 msg.into(),
                 Some(self.create_copy_button(msg.to_string()).into_any_element()),
             ),
@@ -2011,15 +2003,12 @@ impl ConversationView {
         cx: &mut Context<Self>,
     ) -> AnyElement {
         let (heading_label, description_label) = (
-            format!("Upgrade {} to work with Zed", self.agent.agent_id()),
+            format!("升级 {} 以适配 Zed", self.agent.agent_id()),
             if version.is_empty() {
-                format!(
-                    "Currently using {}, which does not report a valid --version",
-                    path,
-                )
+                format!("当前使用 {}，但未报告有效的 --version", path)
             } else {
                 format!(
-                    "Currently using {}, which is only version {} (need at least {minimum_version})",
+                    "当前使用 {}，其版本仅为 {}（至少需要 {minimum_version}）",
                     path, version
                 )
             },
@@ -2561,14 +2550,14 @@ fn loading_contents_spinner(size: IconSize) -> AnyElement {
 
 fn placeholder_text(agent_name: &str, has_commands: bool) -> String {
     if agent_name == agent::ZED_AGENT_ID.as_ref() {
-        format!("Message the {} — @ to include context", agent_name)
+        format!("向 {} 发送消息 — @ 添加上下文", agent_name)
     } else if has_commands {
         format!(
-            "Message {} — @ to include context, / for commands",
+            "向 {} 发送消息 — @ 添加上下文，/ 使用命令",
             agent_name
         )
     } else {
-        format!("Message {} — @ to include context", agent_name)
+        format!("向 {} 发送消息 — @ 添加上下文", agent_name)
     }
 }
 
@@ -2620,7 +2609,7 @@ impl Render for ConversationView {
                     .flex_1()
                     .when(v2_flag, |this| {
                         this.size_full().items_center().justify_center().child(
-                            Label::new("Loading…").color(Color::Muted).with_animation(
+                            Label::new("加载中…").color(Color::Muted).with_animation(
                                 "loading-agent-label",
                                 Animation::new(Duration::from_secs(2))
                                     .repeat()
@@ -3030,7 +3019,7 @@ pub(crate) mod tests {
             let title = view.title(cx);
             assert_eq!(
                 title.as_ref(),
-                "Error Loading Codex CLI",
+                "加载 Codex CLI 出错",
                 "Tab title should show the agent name with an error prefix"
             );
             match &view.server_state {

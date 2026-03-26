@@ -606,7 +606,7 @@ impl Render for ConfigurationView {
                     List::new()
                         .child(
                             ListBulletItem::new("")
-                                .child(Label::new("Sign in and get your key at"))
+                                .child(Label::new("登录并在此获取你的 key"))
                                 .child(ButtonLink::new(
                                     "OpenCode Zen Console",
                                     "https://opencode.ai/zen",
@@ -638,7 +638,7 @@ impl Render for ConfigurationView {
         };
 
         if self.load_credentials_task.is_some() {
-            div().child(Label::new("Loading credentials...")).into_any()
+            div().child(Label::new("正在加载凭据...")).into_any()
         } else {
             v_flex().size_full().child(api_key_section).into_any()
         }

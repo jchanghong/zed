@@ -784,7 +784,7 @@ impl Render for ExecutionView {
             ExecutionStatus::Queued => Label::new("排队中...")
                 .color(Color::Muted)
                 .into_any_element(),
-            ExecutionStatus::KernelErrored(error) => Label::new(format!("Kernel error: {}", error))
+            ExecutionStatus::KernelErrored(error) => Label::new(format!("Kernel 错误: {}", error))
                 .color(Color::Error)
                 .into_any_element(),
         };

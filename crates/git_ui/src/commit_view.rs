@@ -1096,7 +1096,7 @@ impl Render for CommitViewToolbar {
 
                     IconButton::new("view_on_provider", icon)
                         .icon_size(IconSize::Small)
-                        .tooltip(Tooltip::text(format!("View on {}", provider_name)))
+                        .tooltip(Tooltip::text(format!("在 {} 上查看", provider_name)))
                         .on_click(move |_, _, cx| cx.open_url(&url))
                 }))
             })

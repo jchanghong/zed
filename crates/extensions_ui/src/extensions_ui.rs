@@ -367,7 +367,7 @@ impl ExtensionsPage {
 
             let query_editor = cx.new(|cx| {
                 let mut input = Editor::single_line(window, cx);
-                input.set_placeholder_text("Search extensions...", window, cx);
+                input.set_placeholder_text("搜索扩展...", window, cx);
                 if let Some(id) = focus_extension_id {
                     input.set_text(format!("id:{id}"), window, cx);
                 }
@@ -1467,7 +1467,7 @@ impl ExtensionsPage {
     fn render_acp_registry_upsell(&self, cx: &mut Context<Self>) -> impl IntoElement {
         let registry_url = zed_urls::acp_registry_blog(cx);
 
-        let view_registry = Button::new("view_registry", "View Registry")
+        let view_registry = Button::new("view_registry", "查看注册表")
             .style(ButtonStyle::Tinted(ui::TintColor::Warning))
             .on_click({
                 let registry_url = registry_url.clone();
@@ -1480,7 +1480,7 @@ impl ExtensionsPage {
                     window.dispatch_action(Box::new(zed_actions::AcpRegistry), cx)
                 }
             });
-        let open_registry_button = Button::new("open_registry", "Learn More")
+        let open_registry_button = Button::new("open_registry", "了解更多")
             .end_icon(
                 Icon::new(IconName::ArrowUpRight)
                     .size(IconSize::Small)
@@ -1522,7 +1522,7 @@ impl ExtensionsPage {
         vim: bool,
         cx: &mut Context<Self>,
     ) -> impl IntoElement {
-        let docs_url_button = Button::new("open_docs", "View Documentation")
+        let docs_url_button = Button::new("open_docs", "查看文档")
             .end_icon(Icon::new(IconName::ArrowUpRight).size(IconSize::Small))
             .on_click({
                 move |_event, _window, cx| {
@@ -1553,7 +1553,7 @@ impl ExtensionsPage {
                                         h_flex()
                                             .pl_1()
                                             .gap_1()
-                                            .child(Label::new("Enable Vim mode"))
+                                            .child(Label::new("启用 Vim 模式"))
                                             .child(
                                                 Switch::new(
                                                     "enable-vim",
@@ -1729,7 +1729,7 @@ impl Render for ExtensionsPage {
                             .justify_between()
                             .child(Headline::new("Extensions").size(HeadlineSize::Large))
                             .child(
-                                Button::new("install-dev-extension", "Install Dev Extension")
+                                Button::new("install-dev-extension", "安装开发扩展")
                                     .style(ButtonStyle::Outlined)
                                     .size(ButtonSize::Medium)
                                     .on_click(|_event, window, cx| {

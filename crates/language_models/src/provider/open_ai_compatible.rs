@@ -548,7 +548,7 @@ impl Render for ConfigurationView {
                                 .start_icon(Icon::new(IconName::Undo).size(IconSize::Small))
                                 .layer(ElevationIndex::ModalSurface)
                                 .when(env_var_set, |this| {
-                                    this.tooltip(Tooltip::text(format!("To reset your API key, unset the {env_var_name} environment variable.")))
+                                    this.tooltip(Tooltip::text(format!("要重置 API key，请取消设置 {env_var_name} 环境变量。")))
                                 })
                                 .on_click(cx.listener(|this, _, window, cx| this.reset_api_key(window, cx))),
                         ),

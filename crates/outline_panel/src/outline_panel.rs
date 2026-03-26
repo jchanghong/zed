@@ -727,7 +727,7 @@ impl OutlinePanel {
         cx.new(|cx| {
             let filter_editor = cx.new(|cx| {
                 let mut editor = Editor::single_line(window, cx);
-                editor.set_placeholder_text("Search buffer symbols…", window, cx);
+                editor.set_placeholder_text("搜索缓冲区符号…", window, cx);
                 editor
             });
             let filter_update_subscription = cx.subscribe_in(
@@ -4671,7 +4671,7 @@ impl OutlinePanel {
                             window.keystroke_text_for(&workspace::ToggleRightDock)
                         }
                     };
-                    Label::new(format!("Toggle Panel With {keystroke}")).color(Color::Muted)
+                    Label::new(format!("使用 {keystroke} 切换面板")).color(Color::Muted)
                 }))
         } else {
             let list_contents = {

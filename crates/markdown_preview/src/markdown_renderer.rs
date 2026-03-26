@@ -809,7 +809,7 @@ fn render_mermaid_diagram(
                             .max_w_full()
                             .with_fallback(|| {
                                 div()
-                                    .child(Label::new("Failed to load mermaid diagram"))
+                                    .child(Label::new("无法加载 Mermaid 图表"))
                                     .into_any_element()
                             }),
                     ),
@@ -838,7 +838,7 @@ fn render_mermaid_diagram(
                             .max_w_full()
                             .with_fallback(|| {
                                 div()
-                                    .child(Label::new("Failed to load mermaid diagram"))
+                                    .child(Label::new("无法加载 Mermaid 图表"))
                                     .into_any_element()
                             }),
                     )
@@ -858,7 +858,7 @@ fn render_mermaid_diagram(
             .bg(cx.code_block_background_color)
             .rounded_sm()
             .child(
-                Label::new("Rendering mermaid diagram...")
+                Label::new("正在渲染 Mermaid 图表...")
                     .color(Color::Muted)
                     .with_animation(
                         "mermaid-loading-pulse",

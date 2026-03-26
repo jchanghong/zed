@@ -174,7 +174,7 @@ impl Render for AcpOnboardingModal {
                                     .size(IconSize::Small)
                                     .color(Color::Muted),
                             )
-                            .child(Label::new("New Gemini CLI Thread").size(LabelSize::Small)),
+                            .child(Label::new("新建 Gemini CLI 线程").size(LabelSize::Small)),
                     )
                     .child(illustration_element(true, 0.3))
                     .child(illustration_element(false, 0.15)),
