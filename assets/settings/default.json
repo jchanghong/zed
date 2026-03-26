@@ -765,6 +765,8 @@
     // 是否在项目面板中的文件名旁显示错误和警告计数徽章。
     "diagnostic_badges": false,
     // 是否在项目面板中启用拖放操作。
+    "git_status_indicator": false,
+    // 是否在项目面板中启用拖放操作。
     "drag_and_drop": true,
     // 当窗口中只打开一个文件夹时是否隐藏根条目；
     // 这也会影响文件路径在文件查找器历史记录中的显示方式。
@@ -923,6 +925,8 @@
     "button": true,
     // 代理面板停靠的位置。可以是 'left'、'right' 或 'bottom'。
     "dock": "right",
+    // 代理面板在侧边栏中的位置。可以是 'left'、'right' 或 'follow_agent'。
+    "sidebar_side": "follow_agent",
     // 代理面板停靠在左侧或右侧时的默认宽度。
     "default_width": 640,
     // 代理面板停靠在底部时的默认高度。
@@ -1321,6 +1325,11 @@
   "hard_tabs": false,
   // 一个制表符应占用的列数。
   "tab_size": 4,
+  // 从文件开头和结尾各搜索多少行来查找 modeline。
+  // Modeline 包含编辑器指令（例如 vim/emacs 设置），用于为特定文件配置编辑器行为。
+  //
+  // 设为 0 可禁用 modeline 支持。
+  "modeline_lines": 5,
   // 所有语言默认首选的调试器。
   "debuggers": [],
   // 是否在编辑器中启用单词差异高亮。
@@ -1547,8 +1556,8 @@
       "max_tokens": 150,
     },
     "sweep": {
-      // 启用时，Sweep 不会存储编辑预测的输入或输出。
-      // 禁用时，Sweep 可能会收集数据，包括缓冲区内容、
+      // 启用后，Sweep 不会存储编辑预测的输入或输出。
+      // 关闭后，Sweep 可能会收集缓冲区内容、
       // 诊断、文件路径、仓库名称和生成的预测，
       // 以改进服务。
       "privacy_mode": false,
@@ -1983,6 +1992,9 @@
       "remove_trailing_whitespace_on_save": false,
       "ensure_final_newline_on_save": false,
     },
+    "EEx": {
+      "language_servers": ["elixir-ls", "!expert", "!next-ls", "!lexical", "..."],
+    },
     "Elixir": {
       "language_servers": ["elixir-ls", "!expert", "!next-ls", "!lexical", "..."],
     },
@@ -2009,7 +2021,7 @@
         "allowed": true,
       },
     },
-    "HEEX": {
+    "HEEx": {
       "language_servers": ["elixir-ls", "!expert", "!next-ls", "!lexical", "..."],
     },
     "HTML": {

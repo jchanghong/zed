@@ -3,7 +3,6 @@ use edit_prediction::{
     ApiKeyState,
     mercury::{MERCURY_CREDENTIALS_URL, mercury_api_token},
     open_ai_compatible::{open_ai_compatible_api_token, open_ai_compatible_api_url},
-    sweep_ai::{SWEEP_CREDENTIALS_URL, sweep_api_token},
 };
 use edit_prediction_ui::{get_available_providers, set_completion_provider};
 use gpui::{Entity, ScrollHandle, prelude::*};
@@ -47,30 +46,6 @@ pub(crate) fn render_edit_prediction_setup_page(
         ),
         Some(
             render_api_key_provider(
-                IconName::SweepAi,
-                "Sweep",
-                ApiKeyDocs::Link {
-                    dashboard_url: "https://app.sweep.dev/".into(),
-                },
-                sweep_api_token(cx),
-                |_cx| SWEEP_CREDENTIALS_URL,
-                Some(
-                    settings_window
-                        .render_sub_page_items_section(
-                            sweep_settings().iter().enumerate(),
-                            true,
-                            window,
-                            cx,
-                        )
-                        .into_any_element(),
-                ),
-                window,
-                cx,
-            )
-            .into_any_element(),
-        ),
-        Some(
-            render_api_key_provider(
                 IconName::AiMistral,
                 "Codestral",
                 ApiKeyDocs::Link {
@@ -97,9 +72,9 @@ pub(crate) fn render_edit_prediction_setup_page(
         Some(
             render_api_key_provider(
                 IconName::AiOpenAiCompat,
-                "OpenAI Compatible API",
+                "OpenAI 兼容 API",
                 ApiKeyDocs::Custom {
-                    message: "API Key 会以 Authorization: Bearer {key} 的形式发送。".into(),
+                    message: "API 密钥会以 Authorization: Bearer {key} 的形式发送。".into(),
                 },
                 open_ai_compatible_api_token(cx),
                 |cx| open_ai_compatible_api_url(cx),
@@ -269,15 +244,15 @@ fn render_api_key_provider(
                     .label_color(Color::Muted),
             )
             .child(
-                Label::new("以生成 API Key。")
+                Label::new("以生成 API 密钥。")
                     .size(LabelSize::Small)
                     .color(Color::Muted),
             ),
     };
     let configured_card_label = if is_from_env_var {
-        "API Key 已在环境变量中设置"
+        "API 密钥已在环境变量中设置"
     } else {
-        "API Key 已配置"
+        "API 密钥已配置"
     };
 
     let container = if has_key {
@@ -289,7 +264,7 @@ fn render_api_key_provider(
                 .when_some(env_var_name, |this, env_var_name| {
                     this.when(is_from_env_var, |this| {
                         this.tooltip_label(format!(
-                            "要重置 API Key，请取消设置 {} 环境变量。",
+                            "要重置 API 密钥，请取消设置 {} 环境变量。",
                             env_var_name
                         ))
                     })
@@ -310,7 +285,7 @@ fn render_api_key_provider(
                         .w_full()
                         .min_w_0()
                         .max_w_1_2()
-                        .child(Label::new("API Key"))
+                        .child(Label::new("API 密钥"))
                         .child(description)
                         .when_some(env_var_name, |this, env_var_name| {
                             this.child({
@@ -345,39 +320,6 @@ fn render_api_key_provider(
     })
 }
 
-fn sweep_settings() -> Box<[SettingsPageItem]> {
-    Box::new([SettingsPageItem::SettingItem(SettingItem {
-        title: "隐私模式",
-        description: "启用后，Sweep 不会存储编辑预测的输入或输出。关闭后，Sweep 可能会收集缓冲区内容、诊断信息、文件路径和生成的预测等数据，用于改进服务。",
-        field: Box::new(SettingField {
-            pick: |settings| {
-                settings
-                    .project
-                    .all_languages
-                    .edit_predictions
-                    .as_ref()?
-                    .sweep
-                    .as_ref()?
-                    .privacy_mode
-                    .as_ref()
-            },
-            write: |settings, value| {
-                settings
-                    .project
-                    .all_languages
-                    .edit_predictions
-                    .get_or_insert_default()
-                    .sweep
-                    .get_or_insert_default()
-                    .privacy_mode = value;
-            },
-            json_path: Some("edit_predictions.sweep.privacy_mode"),
-        }),
-        metadata: None,
-        files: USER,
-    })])
-}
-
 fn render_ollama_provider(
     settings_window: &SettingsWindow,
     window: &mut Window,
@@ -404,7 +346,7 @@ fn render_ollama_provider(
 fn ollama_settings() -> Box<[SettingsPageItem]> {
     Box::new([
         SettingsPageItem::SettingItem(SettingItem {
-            title: "API URL",
+            title: "API 地址",
             description: "你的 Ollama 服务器基础 URL。",
             field: Box::new(SettingField {
                 pick: |settings| {
@@ -535,8 +477,8 @@ fn ollama_settings() -> Box<[SettingsPageItem]> {
 fn open_ai_compatible_settings() -> Box<[SettingsPageItem]> {
     Box::new([
         SettingsPageItem::SettingItem(SettingItem {
-            title: "API URL",
-            description: "你的 OpenAI Compatible API 服务器 completions API 的 URL。",
+            title: "API 地址",
+            description: "你的 OpenAI 兼容 API 服务器 completions API 地址。",
             field: Box::new(SettingField {
                 pick: |settings| {
                     settings
@@ -569,7 +511,7 @@ fn open_ai_compatible_settings() -> Box<[SettingsPageItem]> {
         }),
         SettingsPageItem::SettingItem(SettingItem {
             title: "模型",
-            description: "传递给 OpenAI Compatible API 服务器的模型字符串。",
+            description: "传递给 OpenAI 兼容 API 服务器的模型字符串。",
             field: Box::new(SettingField {
                 pick: |settings| {
                     settings
@@ -666,8 +608,8 @@ fn open_ai_compatible_settings() -> Box<[SettingsPageItem]> {
 fn codestral_settings() -> Box<[SettingsPageItem]> {
     Box::new([
         SettingsPageItem::SettingItem(SettingItem {
-            title: "API URL",
-            description: "Codestral 使用的 API URL。",
+            title: "API 地址",
+            description: "Codestral 使用的 API 地址。",
             field: Box::new(SettingField {
                 pick: |settings| {
                     settings

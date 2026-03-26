@@ -2546,9 +2546,7 @@ impl ConversationView {
         task.detach_and_log_err(cx);
 
         if let Some(store) = SidebarThreadMetadataStore::try_global(cx) {
-            store
-                .update(cx, |store, cx| store.delete(session_id.clone(), cx))
-                .detach_and_log_err(cx);
+            store.update(cx, |store, cx| store.delete(session_id.clone(), cx));
         }
     }
 }
@@ -3627,7 +3625,7 @@ pub(crate) mod tests {
         C: 'static + AgentConnection + Send + Clone,
     {
         fn logo(&self) -> ui::IconName {
-            ui::IconName::Ai
+            ui::IconName::ZedAgent
         }
 
         fn agent_id(&self) -> AgentId {

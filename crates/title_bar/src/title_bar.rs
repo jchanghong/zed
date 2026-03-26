@@ -27,9 +27,9 @@ use client::{Client, UserStore, zed_urls};
 use cloud_api_types::Plan;
 
 use gpui::{
-    Action, AnyElement, App, Context, Corner, Element, Empty, Entity, Focusable,
-    InteractiveElement, IntoElement, MouseButton, ParentElement, Render,
-    StatefulInteractiveElement, Styled, Subscription, WeakEntity, Window, actions, div,
+    Action, AnyElement, App, Context, Corner, Element, Entity, Focusable, InteractiveElement,
+    IntoElement, MouseButton, ParentElement, Render, StatefulInteractiveElement, Styled,
+    Subscription, WeakEntity, Window, actions, div,
 };
 use onboarding_banner::OnboardingBanner;
 use project::{Project, git_store::GitStoreEvent, trusted_worktrees::TrustedWorktrees};
@@ -81,7 +81,8 @@ pub fn init(cx: &mut App) {
         let Some(window) = window else {
             return;
         };
-        let item = cx.new(|cx| TitleBar::new("title-bar", workspace, window, cx));
+        let multi_workspace = workspace.multi_workspace().cloned();
+        let item = cx.new(|cx| TitleBar::new("title-bar", workspace, multi_workspace, window, cx));
         workspace.set_titlebar_item(item.into(), window, cx);
 
         workspace.register_action(|workspace, _: &SimulateUpdateAvailable, _window, cx| {
@@ -161,6 +162,19 @@ pub struct TitleBar {
 
 impl Render for TitleBar {
     fn render(&mut self, window: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
+        if self.multi_workspace.is_none() {
+            if let Some(mw) = self
+                .workspace
+                .upgrade()
+                .and_then(|ws| ws.read(cx).multi_workspace().cloned())
+            {
+                self.multi_workspace = Some(mw.clone());
+                self.platform_titlebar.update(cx, |titlebar, _cx| {
+                    titlebar.set_multi_workspace(mw);
+                });
+            }
+        }
+
         let title_bar_settings = *TitleBarSettings::get_global(cx);
         let button_layout = title_bar_settings.button_layout;
 
@@ -258,7 +272,6 @@ impl Render for TitleBar {
                     user.is_none() && TitleBarSettings::get_global(cx).show_sign_in,
                     |this| this.child(self.render_sign_in_button(cx)),
                 )
-                .child(self.render_organization_menu_button(cx))
                 .when(TitleBarSettings::get_global(cx).show_user_menu, |this| {
                     this.child(self.render_user_menu_button(cx))
                 })
@@ -307,6 +320,7 @@ impl TitleBar {
     pub fn new(
         id: impl Into<ElementId>,
         workspace: &Workspace,
+        multi_workspace: Option<WeakEntity<MultiWorkspace>>,
         window: &mut Window,
         cx: &mut Context<Self>,
     ) -> Self {
@@ -372,9 +386,9 @@ impl TitleBar {
 
         let banner = cx.new(|cx| {
             OnboardingBanner::new(
-                "ACP Claude Code Onboarding",
+                "ACP Claude Code 引导",
                 IconName::AiClaude,
-                "Claude Agent",
+                "Claude 代理",
                 Some("介绍：".into()),
                 zed_actions::agent::OpenClaudeAgentOnboardingModal.boxed_clone(),
                 cx,
@@ -384,52 +398,19 @@ impl TitleBar {
         });
 
         let update_version = cx.new(|cx| UpdateVersion::new(cx));
-        let platform_titlebar = cx.new(|cx| PlatformTitleBar::new(id, cx));
-
-        // Set up observer to sync sidebar state from MultiWorkspace to PlatformTitleBar.
-        {
-            let platform_titlebar = platform_titlebar.clone();
-            let window_handle = window.window_handle();
-            cx.spawn(async move |this: WeakEntity<TitleBar>, cx| {
-                let Some(multi_workspace_handle) = window_handle.downcast::<MultiWorkspace>()
-                else {
-                    return;
-                };
-
-                let _ = cx.update(|cx| {
-                    let Ok(multi_workspace) = multi_workspace_handle.entity(cx) else {
-                        return;
-                    };
-
-                    let is_open = multi_workspace.read(cx).sidebar_open();
-                    platform_titlebar.update(cx, |titlebar, cx| {
-                        titlebar.set_workspace_sidebar_open(is_open, cx);
-                    });
-
-                    let platform_titlebar = platform_titlebar.clone();
-                    let subscription = cx.observe(&multi_workspace, move |mw, cx| {
-                        let is_open = mw.read(cx).sidebar_open();
-                        platform_titlebar.update(cx, |titlebar, cx| {
-                            titlebar.set_workspace_sidebar_open(is_open, cx);
-                        });
-                    });
-
-                    if let Some(this) = this.upgrade() {
-                        this.update(cx, |this, _| {
-                            this._subscriptions.push(subscription);
-                            this.multi_workspace = Some(multi_workspace.downgrade());
-                        });
-                    }
-                });
-            })
-            .detach();
-        }
+        let platform_titlebar = cx.new(|cx| {
+            let mut titlebar = PlatformTitleBar::new(id, cx);
+            if let Some(mw) = multi_workspace.clone() {
+                titlebar = titlebar.with_multi_workspace(mw);
+            }
+            titlebar
+        });
 
         let mut this = Self {
             platform_titlebar,
             application_menu,
             workspace: workspace.weak_handle(),
-            multi_workspace: None,
+            multi_workspace,
             project,
             user_store,
             client,
@@ -541,7 +522,7 @@ impl TitleBar {
             ),
             RemoteConnectionOptions::Wsl(_) => (None, "远程项目", IconName::Linux),
             RemoteConnectionOptions::Docker(_dev_container_connection) => {
-                (None, "Dev Container", IconName::Box)
+                (None, "开发容器", IconName::Box)
             }
             #[cfg(any(test, feature = "test-support"))]
             RemoteConnectionOptions::Mock(_) => (None, "模拟远程项目", IconName::Server),
@@ -550,18 +531,18 @@ impl TitleBar {
         let nickname = nickname.unwrap_or_else(|| host.clone());
 
         let (indicator_color, meta) = match self.project.read(cx).remote_connection_state(cx)? {
-            remote::ConnectionState::Connecting => (Color::Info, format!("Connecting to: {host}")),
-            remote::ConnectionState::Connected => (Color::Success, format!("Connected to: {host}")),
+            remote::ConnectionState::Connecting => (Color::Info, format!("正在连接：{host}")),
+            remote::ConnectionState::Connected => (Color::Success, format!("已连接：{host}")),
             remote::ConnectionState::HeartbeatMissed => (
                 Color::Warning,
-                format!("Connection attempt to {host} missed. Retrying..."),
+                format!("尝试连接 {host} 未响应，正在重试..."),
             ),
             remote::ConnectionState::Reconnecting => (
                 Color::Warning,
-                format!("Lost connection to {host}. Reconnecting..."),
+                format!("与 {host} 的连接已断开，正在重连..."),
             ),
             remote::ConnectionState::Disconnected => {
-                (Color::Error, format!("Disconnected from {host}"))
+                (Color::Error, format!("已与 {host} 断开连接"))
             }
         };
 
@@ -700,7 +681,7 @@ impl TitleBar {
                 .label_size(LabelSize::Small)
                 .tooltip(move |_, cx| {
                     let tooltip_title = format!(
-                        "{} is sharing this project. Click to follow.",
+                        "{} 正在共享此项目。点击以关注。",
                         host_user.github_login
                     );
 
@@ -736,7 +717,13 @@ impl TitleBar {
             "打开最近项目".to_string()
         };
 
-        let is_sidebar_open = self.platform_titlebar.read(cx).is_workspace_sidebar_open();
+        let is_sidebar_open = self
+            .multi_workspace
+            .as_ref()
+            .and_then(|mw| mw.upgrade())
+            .map(|mw| mw.read(cx).sidebar_open())
+            .unwrap_or(false)
+            && PlatformTitleBar::is_multi_workspace_enabled(cx);
 
         let is_threads_list_view_active = self
             .multi_workspace
@@ -1090,110 +1077,80 @@ impl TitleBar {
             })
     }
 
-    pub fn render_organization_menu_button(&mut self, cx: &mut Context<Self>) -> AnyElement {
-        let Some(organization) = self.user_store.read(cx).current_organization() else {
-            return Empty.into_any_element();
-        };
-
-        PopoverMenu::new("organization-menu")
-            .anchor(Corner::TopRight)
-            .menu({
-                let user_store = self.user_store.clone();
-                move |window, cx| {
-                    ContextMenu::build(window, cx, |mut menu, _window, cx| {
-                        menu = menu.header("组织").separator();
-
-                        let current_organization = user_store.read(cx).current_organization();
-
-                        for organization in user_store.read(cx).organizations() {
-                            let organization = organization.clone();
-                            let plan = user_store.read(cx).plan_for_organization(&organization.id);
-
-                            let is_current =
-                                current_organization
-                                    .as_ref()
-                                    .is_some_and(|current_organization| {
-                                        current_organization.id == organization.id
-                                    });
-
-                            menu = menu.custom_entry(
-                                {
-                                    let organization = organization.clone();
-                                    move |_window, _cx| {
-                                        h_flex()
-                                            .w_full()
-                                            .gap_1()
-                                            .child(
-                                                div()
-                                                    .flex_none()
-                                                    .when(!is_current, |parent| parent.invisible())
-                                                    .child(Icon::new(IconName::Check)),
-                                            )
-                                            .child(
-                                                h_flex()
-                                                    .w_full()
-                                                    .gap_3()
-                                                    .justify_between()
-                                                    .child(Label::new(&organization.name))
-                                                    .child(PlanChip::new(
-                                                        plan.unwrap_or(Plan::ZedFree),
-                                                    )),
-                                            )
-                                            .into_any_element()
-                                    }
-                                },
-                                {
-                                    let user_store = user_store.clone();
-                                    let organization = organization.clone();
-                                    move |_window, cx| {
-                                        user_store.update(cx, |user_store, cx| {
-                                            user_store
-                                                .set_current_organization(organization.clone(), cx);
-                                        });
-                                    }
-                                },
-                            );
-                        }
-
-                        menu
-                    })
-                    .into()
-                }
-            })
-            .trigger_with_tooltip(
-                Button::new("organization-menu", &organization.name)
-                    .selected_style(ButtonStyle::Tinted(TintColor::Accent))
-                    .label_size(LabelSize::Small),
-                Tooltip::text("切换组织菜单"),
-            )
-            .anchor(gpui::Corner::TopRight)
-            .into_any_element()
-    }
-
     pub fn render_user_menu_button(&mut self, cx: &mut Context<Self>) -> impl Element {
-        let show_update_badge = self.update_version.read(cx).show_update_in_menu_bar();
+        let show_update_button = self.update_version.read(cx).show_update_in_menu_bar();
 
-        let user_store = self.user_store.read(cx);
-        let user = user_store.current_user();
+        let user_store = self.user_store.clone();
+        let user_store_read = user_store.read(cx);
+        let user = user_store_read.current_user();
 
         let user_avatar = user.as_ref().map(|u| u.avatar_uri.clone());
         let user_login = user.as_ref().map(|u| u.github_login.clone());
 
         let is_signed_in = user.is_some();
 
-        let has_subscription_period = user_store.subscription_period().is_some();
-        let plan = user_store.plan().filter(|_| {
+        let has_subscription_period = user_store_read.subscription_period().is_some();
+        let plan = user_store_read.plan().filter(|_| {
             // Since the user might be on the legacy free plan we filter based on whether we have a subscription period.
             has_subscription_period
         });
 
-        PopoverMenu::new("user-menu")
-            .anchor(Corner::TopRight)
-            .menu(move |window, cx| {
-                ContextMenu::build(window, cx, |menu, _, _cx| {
-                    let user_login = user_login.clone();
+        let has_organization = user_store_read.current_organization().is_some();
 
+        let current_organization = user_store_read.current_organization();
+        let business_organization = current_organization
+            .as_ref()
+            .filter(|organization| !organization.is_personal);
+        let organizations: Vec<_> = user_store_read
+            .organizations()
+            .iter()
+            .map(|org| {
+                let plan = user_store_read.plan_for_organization(&org.id);
+                (org.clone(), plan)
+            })
+            .collect();
+
+        let show_user_picture = TitleBarSettings::get_global(cx).show_user_picture;
+
+        let trigger = if is_signed_in && show_user_picture {
+            let avatar = user_avatar.map(|avatar| Avatar::new(avatar)).map(|avatar| {
+                if show_update_button {
+                    avatar.indicator(
+                        div()
+                            .absolute()
+                            .bottom_0()
+                            .right_0()
+                            .child(Indicator::dot().color(Color::Accent)),
+                    )
+                } else {
+                    avatar
+                }
+            });
+
+            ButtonLike::new("user-menu").child(
+                h_flex()
+                    .when_some(business_organization, |this, organization| {
+                        this.gap_2()
+                            .child(Label::new(&organization.name).size(LabelSize::Small))
+                    })
+                    .children(avatar),
+            )
+        } else {
+            ButtonLike::new("user-menu")
+                .child(Icon::new(IconName::ChevronDown).size(IconSize::Small))
+        };
+
+        PopoverMenu::new("user-menu")
+            .trigger(trigger)
+            .menu(move |window, cx| {
+                let user_login = user_login.clone();
+                let current_organization = current_organization.clone();
+                let organizations = organizations.clone();
+                let user_store = user_store.clone();
+
+                ContextMenu::build(window, cx, |menu, _, _cx| {
                     menu.when(is_signed_in, |this| {
+                        let user_login = user_login.clone();
                         this.custom_entry(
                             move |_window, _cx| {
                                 let user_login = user_login.clone().unwrap_or_default();
@@ -1211,7 +1168,7 @@ impl TitleBar {
                         )
                         .separator()
                     })
-                    .when(show_update_badge, |this| {
+                    .when(show_update_button, |this| {
                         this.custom_entry(
                             move |_window, _cx| {
                                 h_flex()
@@ -1231,6 +1188,58 @@ impl TitleBar {
                             },
                         )
                         .separator()
+                    })
+                    .when(has_organization, |this| {
+                        let mut this = this.header("组织");
+
+                        for (organization, plan) in &organizations {
+                            let organization = organization.clone();
+                            let plan = *plan;
+
+                            let is_current =
+                                current_organization
+                                    .as_ref()
+                                    .is_some_and(|current_organization| {
+                                        current_organization.id == organization.id
+                                    });
+
+                            this = this.custom_entry(
+                                {
+                                    let organization = organization.clone();
+                                    move |_window, _cx| {
+                                        h_flex()
+                                            .w_full()
+                                            .gap_4()
+                                            .justify_between()
+                                            .child(
+                                                h_flex()
+                                                    .gap_1()
+                                                    .child(Label::new(&organization.name))
+                                                    .when(is_current, |this| {
+                                                        this.child(
+                                                            Icon::new(IconName::Check)
+                                                                .color(Color::Accent),
+                                                        )
+                                                    }),
+                                            )
+                                            .child(PlanChip::new(plan.unwrap_or(Plan::ZedFree)))
+                                            .into_any_element()
+                                    }
+                                },
+                                {
+                                    let user_store = user_store.clone();
+                                    let organization = organization.clone();
+                                    move |_window, cx| {
+                                        user_store.update(cx, |user_store, cx| {
+                                            user_store
+                                                .set_current_organization(organization.clone(), cx);
+                                        });
+                                    }
+                                },
+                            );
+                        }
+
+                        this.separator()
                     })
                     .action("设置", zed_actions::OpenSettings.boxed_clone())
                     .action("键位映射", Box::new(zed_actions::OpenKeymap))

@@ -1,5 +1,6 @@
 use crate::{
     language_model_selector::{LanguageModelSelector, language_model_selector},
+    mention_set::load_external_image_from_path,
     ui::ModelSelectorTooltip,
 };
 use anyhow::Result;
@@ -894,7 +895,7 @@ impl TextThreadEditor {
                         |_, _, _, _| Empty.into_any_element(),
                     )
                     .with_metadata(CreaseMetadata {
-                        icon_path: SharedString::from(IconName::Ai.path()),
+                        icon_path: SharedString::from(IconName::ZedAgent.path()),
                         label: "思考过程".into(),
                     }),
                 );
@@ -1380,9 +1381,9 @@ impl TextThreadEditor {
                 format!(
                     "{} copied to clipboard.",
                     if is_code_block {
-                        "Code block"
+                        "代码块"
                     } else {
-                        "Selection"
+                        "选区"
                     }
                 ),
             )
@@ -1900,26 +1901,12 @@ impl TextThreadEditor {
             }
         }
 
+        let default_image_name: SharedString = "Image".into();
         for path in paths {
-            let Ok(content) = std::fs::read(path) else {
+            let Some((image, _)) = load_external_image_from_path(&path, &default_image_name) else {
                 continue;
             };
-            let Ok(format) = image::guess_format(&content) else {
-                continue;
-            };
-            images.push(gpui::Image::from_bytes(
-                match format {
-                    image::ImageFormat::Png => gpui::ImageFormat::Png,
-                    image::ImageFormat::Jpeg => gpui::ImageFormat::Jpeg,
-                    image::ImageFormat::WebP => gpui::ImageFormat::Webp,
-                    image::ImageFormat::Gif => gpui::ImageFormat::Gif,
-                    image::ImageFormat::Bmp => gpui::ImageFormat::Bmp,
-                    image::ImageFormat::Tiff => gpui::ImageFormat::Tiff,
-                    image::ImageFormat::Ico => gpui::ImageFormat::Ico,
-                    _ => continue,
-                },
-                content,
-            ));
+            images.push(image);
         }
 
         // Respect entry priority order — if the first entry is text, the source
@@ -2122,7 +2109,7 @@ impl TextThreadEditor {
                     Color::Error,
                     token_count,
                     max_token_count,
-                    Some("Token Limit Reached"),
+                    Some("Token 限额已达"),
                 ),
                 TokenState::HasMoreTokens {
                     max_token_count,
@@ -2256,7 +2243,7 @@ impl TextThreadEditor {
         let provider_icon = active_provider
             .as_ref()
             .map(|p| p.icon())
-            .unwrap_or(IconOrSvg::Icon(IconName::Ai));
+            .unwrap_or(IconOrSvg::Icon(IconName::ZedAgent));
 
         let (color, icon) = if self.language_model_selector_menu_handle.is_deployed() {
             (Color::Accent, IconName::ChevronUp)
@@ -2325,7 +2312,7 @@ impl TextThreadEditor {
     }
 
     fn render_payment_required_error(&self, cx: &mut Context<Self>) -> AnyElement {
-        const ERROR_MESSAGE: &str = "Free tier exceeded. Subscribe and add payment to continue using Zed LLMs. You'll be billed at cost for tokens used.";
+        const ERROR_MESSAGE: &str = "已超出免费额度。请订阅并添加付款方式以继续使用 Zed LLM。所用 Token 将按成本计费。";
 
         v_flex()
             .gap_0p5()
